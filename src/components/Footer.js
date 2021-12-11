@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";

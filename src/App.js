@@ -3,6 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Footer } from "./components/Footer";
+import { About } from "./components/about/about";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -33,13 +35,6 @@ const Cursos = () => {
   return (
     <div>
       <p>Aqui iran los cursos ofertados</p>
-    </div>
-  );
-};
-const About = () => {
-  return (
-    <div>
-      <p>Aqui ira la información de los cursos</p>
     </div>
   );
 };
