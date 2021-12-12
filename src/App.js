@@ -15,6 +15,8 @@ function App() {
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacto" element={<Contacto />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </header>
       <Footer />
@@ -42,6 +44,22 @@ const Contacto = () => {
   return (
     <div>
       <p>Aqui ira la información de contacto</p>
+    </div>
+  );
+};
+
+const Login = () => {
+  return (
+    <div>
+      <p>Aqui ira el inicio de sesion</p>
+    </div>
+  );
+};
+
+const Registro = () => {
+  return (
+    <div>
+      <p>Aqui ira el Registro en la aplicacion</p>
     </div>
   );
 };

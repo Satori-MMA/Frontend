@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
 import { Link } from "react-router-dom";
-
+import { Button} from 'react-bootstrap';
 
 export const NavigationBar = () => {
   return (
@@ -20,6 +20,7 @@ export const NavigationBar = () => {
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">
@@ -35,7 +36,14 @@ export const NavigationBar = () => {
               Contacto
             </Nav.Link>
           </Nav>
+          <Nav>
+            <Button  href="/login" variant="outline-success m-2">Iniciar Sesion</Button>
+            <Button  href="/registro" variant="outline-success m-2">Registrar</Button>
+          </Nav>          
+          
         </Navbar.Collapse>
+
+
       </Container>
     </Navbar>
   );
