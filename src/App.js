@@ -5,7 +5,6 @@ import { NavigationBar } from "./components/NavigationBar";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 function App() {
   return (
     <Router className="App">
@@ -22,6 +21,7 @@ function App() {
     </Router>
   );
 }
+
 
 const Home = () => {
   return (
