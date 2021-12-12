@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
+import { Login } from "./components/login/login";
 import { useQuery } from "@apollo/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ALL_USERS from "./graphql/users/ALL_USERS";
@@ -70,13 +71,6 @@ const Contacto = () => {
   );
 };
 
-const Login = () => {
-  return (
-    <div>
-      <p>Aqui ira el inicio de sesion</p>
-    </div>
-  );
-};
 
 const Registro = () => {
   return (
