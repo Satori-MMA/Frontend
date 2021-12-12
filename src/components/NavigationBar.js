@@ -37,8 +37,9 @@ export const NavigationBar = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button  href="/login" variant="outline-success m-2">Iniciar Sesion</Button>
-            <Button  href="/registro" variant="outline-success m-2">Registrar</Button>
+            <Button  as={Link} to="/login"  variant="outline-success m-2">Iniciar Sesion</Button>
+
+            <Button  as={Link} to="/registro" variant="outline-success m-2">Registrar</Button>
           </Nav>          
           
         </Navbar.Collapse>
