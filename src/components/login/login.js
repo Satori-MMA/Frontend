@@ -53,7 +53,7 @@ export const Login = () => {
                                 &ensp;
                                 Iniciar Sesion con Google
                             </Button>
-                            <Button variant="link">Olvide mi contraseña</Button>
+                            <Button className="button-login" variant="link">Olvide mi contraseña</Button>
                         </Form>
                     </Col>
                 </Row>
