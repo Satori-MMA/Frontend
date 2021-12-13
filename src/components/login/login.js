@@ -1,13 +1,13 @@
 import { Row, Col, Container, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-
+import { AiFillGoogleCircle } from "react-icons/ai";
 export const Login = () => {
     return (
         <>
             <Container>
-                <Row className="pt-5 text-center">
-                    <Col lg={5} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+                <Row>
+                    <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
                         <Form>
                             <Row className="icon-user">
                                 <FaUserCircle color="royalblue" size={150} />
@@ -48,6 +48,9 @@ export const Login = () => {
                                 </Col>
                             </Row>
                             <Button variant="primary" type="submit">
+                                
+                                <AiFillGoogleCircle size={40} />
+                                &ensp;
                                 Iniciar Sesion con Google
                             </Button>
                             <Button variant="link">Olvide mi contraseña</Button>
