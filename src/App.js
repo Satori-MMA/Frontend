@@ -43,9 +43,8 @@ const Cursos = () => {
 const Contacto = () => {
   return (
     <div>
-      <p>Aqui ira la información de contacto</p>
-    </div>
-  );
+      <p>Aqui iran la informacion de contacto</p>
+    </div>  );
 };
 
 const Login = () => {

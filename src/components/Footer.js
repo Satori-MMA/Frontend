@@ -31,16 +31,15 @@ export const Footer = () => {
             <p className="mb-5">
               <b>SIGUENOS EN:</b>
             </p>
-            <a className="m-1" href="https://www.facebook.com/Roninsatorimma/">
+            <a className="m-1" href="https://www.facebook.com/Roninsatorimma/" target="_blank" rel="noopener noreferrer">
               <BsFacebook size="25%" />
             </a>
-            <a className="m-1" href="https://www.instagram.com/roninsatorimma/">
+            <a className="m-1" href="https://www.instagram.com/roninsatorimma/" target="_blank" rel="noopener noreferrer">
               <BsInstagram size="25%" />
             </a>
             <a
               className="m-1"
-              href="https://www.youtube.com/channel/UCQPDBalc7BAUIfUOKtrh48w"
-            >
+              href="https://www.youtube.com/channel/UCQPDBalc7BAUIfUOKtrh48w" target="_blank" rel="noopener noreferrer">
               <BsYoutube size="25%" />
             </a>
           </Col>
