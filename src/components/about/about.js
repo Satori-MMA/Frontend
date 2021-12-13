@@ -59,7 +59,7 @@ export const About = () => {
         <Row xs={1} sm={2} lg={3}>
           <Col>
             <Divider />
-            <h3 className="text-center" >BRAZILIAN JIU JITSU</h3>
+            <h3 className="text-center">BRAZILIAN JIU JITSU</h3>
             <p>
               El BJJ es un arte marcial, deporte de combate, y un sistema de
               autodefensa que se centra en el agarre y especialmente en la lucha
@@ -124,42 +124,66 @@ export const About = () => {
             posible en su proceso de aprendizaje.
           </p>
         </Row>
-        <Row className="m-3 mb-0">
+        <Row className="m-3 mb-0" xs={1} sm={1} md={2} lg={2}>
           <Col>
-          <h3 className="text-center mt-2">Jesus Fernando Pinzon</h3>
-            <p>30 años de experiencia en practica de artes marciales y 15 años de experiencia como instructor de artes marciales</p>
-            <p>Cinturón negro en taekwondo, cinturón negro primer dan en wing tsun, cinturón purpura en Jiu jitsu tradicional, cinturón purpura en Brazilian jiu-jitsu, cinturón azul de judo, cinturón marrón de Kung fu Wushu e  instructor en defensa personal</p>            
-            <p>Participacion en competencias nacionales e internacionales, en paises como Ecuador y Panama</p>
+            <h3 className="text-center mt-2">Jesus Fernando Pinzon</h3>
+            <p>
+              30 años de experiencia en practica de artes marciales y 15 años de
+              experiencia como instructor de artes marciales
+            </p>
+            <p>
+              Cinturón negro en taekwondo, cinturón negro primer dan en wing
+              tsun, cinturón purpura en Jiu jitsu tradicional, cinturón purpura
+              en Brazilian jiu-jitsu, cinturón azul de judo, cinturón marrón de
+              Kung fu Wushu e instructor en defensa personal
+            </p>
+            <p>
+              Participacion en competencias nacionales e internacionales, en
+              paises como Ecuador y Panama
+            </p>
           </Col>
           <Col className="text-center">
             <img
-            alt="Instructor 1: Jesus Fernando Pinzon" 
-            title="Instructor 1: Jesus Fernando Pinzon" 
-            width="80%" height="auto" 
-            src={instructor1} 
+              alt="Instructor 1: Jesus Fernando Pinzon"
+              title="Instructor 1: Jesus Fernando Pinzon"
+              width="80%"
+              height="auto"
+              src={instructor1}
             />
-          <p></p>
-          <i>"Si no te exiges al máximo nunca sabrás cuál es tu límite"</i>
+            <p></p>
+            <i>"Si no te exiges al máximo nunca sabrás cuál es tu límite"</i>
           </Col>
         </Row>
         <br></br>
-        <Divider/>
-        <Row className="m-3">
+        <Divider />
+        <Row className="m-3" xs={1} sm={1} md={2} lg={2}>
           <Col className="text-center">
-           <img
-            alt="Instructor 2: Brayan Andres Pinzon"
-            title="Instructor 2: Brayan Andres Pinzon"
-            width="80%" height="auto" 
-            src={instructor2} 
+            <img
+              alt="Instructor 2: Brayan Andres Pinzon"
+              title="Instructor 2: Brayan Andres Pinzon"
+              width="80%"
+              height="auto"
+              src={instructor2}
             />
             <p></p>
-            <i>"La diferencia entre lo que tienes y lo que quieres es lo que haces"</i>
+            <i>
+              "La diferencia entre lo que tienes y lo que quieres es lo que
+              haces"
+            </i>
           </Col>
           <Col>
             <h3 className="text-center mt-2">Brayan Andres Pinzon</h3>
-            <p>8 años de experiencia en practica de artes marciales y 1 año de experiencia como instructor artes marciales</p>
-            <p>Experiencia en artes marciales como boxeo, muay thai, jiu-jitsu, judo y grappling.</p>
-            <p>Conocimiento sobre defensa personal y acondicionamiento fisico.</p>
+            <p>
+              8 años de experiencia en practica de artes marciales y 1 año de
+              experiencia como instructor artes marciales
+            </p>
+            <p>
+              Experiencia en artes marciales como boxeo, muay thai, jiu-jitsu,
+              judo y grappling.
+            </p>
+            <p>
+              Conocimiento sobre defensa personal y acondicionamiento fisico.
+            </p>
           </Col>
         </Row>
       </Container>
