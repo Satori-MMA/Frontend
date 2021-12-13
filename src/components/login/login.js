@@ -38,16 +38,16 @@ export const Login = () => {
                             </Form.Group>
 
                             <Row className="p-2" xs={1} sm={1} lg={2}>
-                                <Col className="mb-4 p-2">
-                                    <Button variant="primary" type="submit" class="btn">
+                                <Col className="p-2">
+                                    <Button className="button-login" variant="primary" type="submit" >
                                         Iniciar Sesion
                                     </Button>
                                 </Col>
-                                <Col className="mb-4 p-2">
-                                    <Button variant="success">Registrarse</Button>
+                                <Col className="p-2">
+                                    <Button className="button-login" variant="success">Registrarse</Button>
                                 </Col>
                             </Row>
-                            <Button variant="primary" type="submit">
+                            <Button className="button-login" variant="primary" type="submit">
                                 
                                 <AiFillGoogleCircle size={40} />
                                 &ensp;
