@@ -9,6 +9,7 @@ import { useQuery } from "@apollo/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ALL_USERS from "./graphql/users/ALL_USERS";
 import { Container, ListGroup, Spinner } from "react-bootstrap";
+import { Contacto } from "./components/contacto/Contacto";
 function App() {
   return (
     <Router className="App">
@@ -63,13 +64,6 @@ const Cursos = () => {
     </div>
   );
 };
-const Contacto = () => {
-  return (
-    <div>
-      <p>Aqui iran la informacion de contacto</p>
-    </div>  );
-};
-
 
 const Registro = () => {
   return (
