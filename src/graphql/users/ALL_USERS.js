@@ -2,12 +2,15 @@ import { gql } from "@apollo/client";
 
 const ALL_USERS = gql`
   query {
-    allUsers {
+    users {
       edges {
         node {
-          email
+          id
           firstName
-          lastName
+          archived
+          verified
+          email
+          secondaryEmail
         }
       }
     }
