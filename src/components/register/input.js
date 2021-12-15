@@ -1,40 +1,44 @@
-import React from 'react';
-import "./inputStyle.css"
-import { Col } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Col} from "react-bootstrap";
+import { LeyendaError,Label,Input,ValidationIcon,GroupInput } from "./inputDinamicStyle";
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+const InputComponent = ({ state,changeState,label, name, placeholder, type, errorLabel,regularExpresion }) => {
 
-const validInput = (input) => {
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-    let isValid = true;
-    if (format.test(input)) {
-        isValid = false;
+    const handleInputChange = (e) => {
+        changeState({...state,field:e.target.value});
     }
-    return isValid;
-}
-const handleInputChange = (e) => {
-    if (!validInput(e.target.value)) {
-        if (e.target.name === "name") {
-            console.log('caracter invalido')
-        }
-    } else {
-        if (e.target.name === "name") {
-            console.log('caracter valido')
+    const validate = () =>{
+        if(regularExpresion){
+            if(regularExpresion.test(state.field)){
+                changeState({...state, valid:'true'});
+            }else{
+                changeState({...state, valid:'false'});
+            }
         }
     }
-
-}
-const Input = ({ label, name, placeholder, type }) => {
     return (
-        <Col className='form-group'>
-            <label>{label}<span className='text-danger'>*</span></label>
-            <input
+        <Col className='form-group' >
+            <Label>{label}<span className='text-danger'>*</span></Label>
+            <GroupInput>
+            <Input
                 className='form-control'
                 type={type}
                 name={name}
+                value={state.field}
                 required
                 onChange={handleInputChange}
+                onKeyUp={validate}
+                onBlur={validate}
+                valid = {state.valid}
                 placeholder={placeholder} />
+                <ValidationIcon
+					icon={state.valid === 'true' ? faCheckCircle : faTimesCircle}
+					valid={state.valid}
+				/>
+                </GroupInput>
+            <LeyendaError valid={state.valid}><span></span>{errorLabel}</LeyendaError>
         </Col>
     );
 }
 
-export default Input;
+export default InputComponent;
