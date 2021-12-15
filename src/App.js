@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
+import { Register } from "./components/register/register"
 import { Login } from "./components/login/login";
 import { useQuery } from "@apollo/client";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,7 +21,7 @@ function App() {
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route path="/registro" element={<Registro />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </header>
@@ -65,11 +66,4 @@ const Cursos = () => {
   );
 };
 
-const Registro = () => {
-  return (
-    <div>
-      <p>Aqui ira el Registro en la aplicacion</p>
-    </div>
-  );
-};
 export default App;
