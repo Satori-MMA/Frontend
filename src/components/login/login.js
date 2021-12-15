@@ -8,7 +8,7 @@ export const Login = () => {
             <Container>
                 <Row>
                     <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
-                        <Form>
+                        <Form className="form-border">
                             <Row className="icon-user">
                                 <FaUserCircle color="royalblue" size={150} />
                             </Row>

@@ -48,7 +48,7 @@ export const Contacto = () => {
 
       <Row className="text-center">
         <h1>
-          Tambien Nos Pudes contactar por cualquiera de nuestras redes sociales
+          Tambien nos puedes contactar por cualquiera de nuestras redes sociales
         </h1>
       </Row>
       <Row className="text-center" xs={1} sm={3} lg={3}>
