@@ -5,7 +5,7 @@ import logo from "../Assets/Logo2.png";
 
 export const Footer = () => {
   return (
-    <div className="bg-dark text-light">
+    <div className="bg-ourBlack text-light">
       <Container>
         <Row className="pt-3 text-center ">
           <Col sm className="mb-4">

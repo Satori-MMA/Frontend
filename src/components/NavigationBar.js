@@ -5,7 +5,7 @@ import { Button} from 'react-bootstrap';
 
 export const NavigationBar = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="ourBlack" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <div className="d-flex align-items-center">
@@ -19,7 +19,7 @@ export const NavigationBar = () => {
             Ronin Satori MMA
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle className="button-toggle" aria-controls="basic-navbar-nav" />
         
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -37,9 +37,9 @@ export const NavigationBar = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button  as={Link} to="/login"  variant="outline-success m-2">Iniciar Sesion</Button>
+            <Button className="button-main" as={Link} to="/login"  variant="outline-success m-2">Iniciar Sesion</Button>
 
-            <Button  as={Link} to="/register" variant="outline-success m-2">Registrar</Button>
+            <Button  className="button-main"as={Link} to="/register" variant="outline-success m-2">Registrar</Button>
           </Nav>          
           
         </Navbar.Collapse>

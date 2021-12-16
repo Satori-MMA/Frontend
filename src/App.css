@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  
 }
 
 .App-logo {
@@ -30,7 +29,7 @@
 }
 
 .Justify-Text {
-  text-align: justify; 
+  text-align: justify;
 }
 
 .carousel-caption {
@@ -44,6 +43,7 @@
   color: #fff;
   text-align: center;
 }
+
 
 @keyframes App-logo-spin {
   from {

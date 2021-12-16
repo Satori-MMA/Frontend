@@ -38,7 +38,7 @@ export const Home = () => {
               <h1>Centro de Entrenamiento</h1>
               <h3>SATORI MMA PASTO</h3>
               <p>Guerreros dentro dentro y fuera del tatami</p>
-              <Button as={Link} to="/login" variant="success m-2 mt-3">
+              <Button className="button-secondary" as={Link} to="/login" variant="success m-2 mt-3">
                 Entrena Con Nosotros
               </Button>
             </Carousel.Caption>
@@ -54,7 +54,7 @@ export const Home = () => {
               <h1>Centro de Entrenamiento</h1>
               <h3>SATORI MMA PASTO</h3>
               <p>Guerreros dentro dentro y fuera del tatami</p>
-              <Button as={Link} to="/login" variant="success m-2 mt-3">
+              <Button className="button-secondary" as={Link} to="/login" variant="success m-2 mt-3">
                 Entrena Con Nosotros
               </Button>
             </Carousel.Caption>
@@ -70,7 +70,7 @@ export const Home = () => {
               <h1>Centro de Entrenamiento</h1>
               <h3>SATORI MMA PASTO</h3>
               <p>Guerreros dentro dentro y fuera del tatami</p>
-              <Button as={Link} to="/login" variant="success m-2 mt-3">
+              <Button className="button-secondary" as={Link} to="/login" variant="success m-2 mt-3">
                 Entrena Con Nosotros
               </Button>
             </Carousel.Caption>
@@ -86,7 +86,7 @@ export const Home = () => {
               <h1>Centro de Entrenamiento</h1>
               <h3>SATORI MMA PASTO</h3>
               <p>Guerreros dentro dentro y fuera del tatami</p>
-              <Button as={Link} to="/login" variant="success m-2 mt-3">
+              <Button className="button-secondary" as={Link} to="/login" variant="outline-success m-2 mt-3">
                 Entrena Con Nosotros
               </Button>
             </Carousel.Caption>
@@ -97,7 +97,7 @@ export const Home = () => {
       <Divider />
 
       {/* Seccion de Informacion */}
-      <Row className="m-3" xs={1} sm={2} lg={3}>
+      <Row className="text-white m-3" xs={1} sm={2} lg={3}>
         <Col>
           <Divider />
           <h1 className="text-center">BIENVENIDOS</h1>

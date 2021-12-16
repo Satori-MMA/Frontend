@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 .button-login {
   color: white;
@@ -19,6 +18,34 @@ body {
   opacity: 0.8;
 }
 
+.button-main {
+  color: #e5383b !important;
+  border-color: #e5383b !important;
+}
+
+.button-main:hover {
+  color: #fff !important;
+  background-color: #e5383b !important;
+  border-color: #e5383b !important;
+}
+
+.button-main:focus{
+  box-shadow: 0 0 0 .25rem rgba(229, 56, 59,.5) !important;
+}
+
+.button-secondary {
+  color: #fff !important;
+  background-color: #e5383b !important;
+  border-color: #e5383b !important;
+}
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28229, 56, 59%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.button-toggle {
+  color: #e5383b !important;
+  border-color: #e5383b !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -28,6 +55,25 @@ code {
   border-radius: 5px;
   padding: 25px;
 }
-.icon-user{
+.icon-user {
   padding: 25px;
+}
+
+.bg-ourBlack {
+  background-color: #0b090a;
+}
+
+.bg-ourGray {
+  background-color: #161a1d;
+}
+
+.text-white {
+  color: #f5f3f4;
+}
+
+.text-carnelian {
+  color: #ba181b;
+}
+.text-imperialRed {
+  color: #e5383b;
 }

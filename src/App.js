@@ -1,30 +1,32 @@
+import { Container, ListGroup, Spinner } from "react-bootstrap";
 import logo from "./Assets/LogoPNG.png";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
 import { Home } from "./components/home/home";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
-import { Register } from "./components/register/register"
+import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
 import { useQuery } from "@apollo/client";
-import "bootstrap/dist/css/bootstrap.min.css";
 import ALL_USERS from "./graphql/users/ALL_USERS";
-import { Container, ListGroup, Spinner } from "react-bootstrap";
 import { Contacto } from "./components/contacto/Contacto";
 function App() {
   return (
     <Router className="App">
       <NavigationBar />
-      <header className="App-header">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cursos" element={<Cursos />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+      <header className="">
+        <Container fluid className="bg-ourGray pb-3 pt-3">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cursos" element={<Cursos />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Container>
       </header>
       <Footer />
     </Router>
