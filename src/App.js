@@ -2,6 +2,7 @@ import logo from "./Assets/LogoPNG.png";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavigationBar } from "./components/NavigationBar";
+import { Home } from "./components/home/home";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
 import { Register } from "./components/register/register"
@@ -30,24 +31,24 @@ function App() {
   );
 }
 
-const Home = () => {
-  const { data, loading } = useQuery(ALL_USERS);
-  return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Ejemplo fetching</p>
-      <Container>
-        {loading ? (
-          <center>
-            <Spinner animation="border" variant="danger" />
-          </center>
-        ) : (
-          <ListUsers users={data.users} />
-        )}
-      </Container>
-    </div>
-  );
-};
+// const Home = () => {
+//   const { data, loading } = useQuery(ALL_USERS);
+//   return (
+//     <div>
+//       <img src={logo} className="App-logo" alt="logo" />
+//       <p>Ejemplo fetching</p>
+//       <Container>
+//         {loading ? (
+//           <center>
+//             <Spinner animation="border" variant="danger" />
+//           </center>
+//         ) : (
+//           <ListUsers users={data.users} />
+//         )}
+//       </Container>
+//     </div>
+//   );
+// };
 
 const ListUsers = ({ users }) => {
   return (
