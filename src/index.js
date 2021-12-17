@@ -13,7 +13,7 @@ import {
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: "https://apisatori.herokuapp.com/api/graphql",
+    uri: "https://apisatori.herokuapp.com/graphql",
   }),
 });
 ReactDOM.render(
