@@ -1,6 +1,7 @@
 import { Container, Form, InputGroup, Button } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import { RiLockPasswordFill, RiMailFill, RiPhoneFill } from "react-icons/ri";
+import { RiMailFill, RiPhoneFill } from "react-icons/ri";
+import { COLORS } from "../utilities/color";
 
 export const FormContacto = () => {
   return (
@@ -8,20 +9,25 @@ export const FormContacto = () => {
       <Form>
         <Form.Group className="mb-3" controlId="formContactName">
           <InputGroup>
-            <InputGroup.Text>
-              <FaUserCircle color="royalblue" size={30} />
+            <InputGroup.Text className="bg-ourBlack border-carnelian">
+              <FaUserCircle color={COLORS.carnelian} size={30} />
             </InputGroup.Text>
-            <Form.Control type="txt" placeholder="Ingrese su nombre" />
+            <Form.Control
+              type="txt"
+              className="bg-cultured border-line-carnelian"
+              placeholder="Ingrese su nombre"
+            />
           </InputGroup>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formContactEmail">
           <InputGroup>
-            <InputGroup.Text>
-              <RiMailFill color="royalblue" size={30} />
+            <InputGroup.Text className="bg-ourBlack border-carnelian">
+              <RiMailFill color={COLORS.carnelian} size={30} />
             </InputGroup.Text>
             <Form.Control
               type="email"
+              className="bg-cultured border-line-carnelian"
               placeholder="Ingrese su correo electronico"
             />
           </InputGroup>
@@ -29,12 +35,13 @@ export const FormContacto = () => {
 
         <Form.Group className="mb-3" controlId="formContactPhone">
           <InputGroup>
-            <InputGroup.Text>
-              <RiPhoneFill color="royalblue" size={30} />
+            <InputGroup.Text className="bg-ourBlack border-carnelian">
+              <RiPhoneFill color={COLORS.carnelian} size={30} />
             </InputGroup.Text>
 
             <Form.Control
               type="number"
+              className="bg-cultured border-line-carnelian"
               placeholder="Ingrese su número de telefono"
             />
           </InputGroup>
@@ -42,10 +49,14 @@ export const FormContacto = () => {
 
         <Form.Group className="mb-3" controlId="formContactComment">
           <Form.Label>Comentario</Form.Label>
-          <Form.Control as="textarea" rows={3} />
+          <Form.Control
+            className="bg-cultured border-line-carnelian"
+            as="textarea"
+            rows={3}
+          />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+        <Button className="button-main" type="submit">
+          Enviar
         </Button>
       </Form>
     </Container>

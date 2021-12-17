@@ -1,7 +1,6 @@
 import { Row, Col, Container, Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import logo from "../../Assets/LogoPNG.png";
 import Carrusel2 from "../../Assets/Foto1.jpg";
 import Carrusel3 from "../../Assets/Foto3.jpg";
 import Carrusel1 from "../../Assets/Foto4.jpg";
@@ -12,7 +11,6 @@ import informacion3 from "../../Assets/Foto6.jpg";
 import imgWhatsapp from "../../Assets/whatsapp1.png";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
 import Carousel from "react-bootstrap/Carousel";
-import { RiHardDrive2Line } from "react-icons/ri";
 
 const Divider = () => {
   return (

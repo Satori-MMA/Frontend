@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import logo from "../Assets/Logo2.png";
+import { COLORS } from "./utilities/color";
 
 export const Footer = () => {
   return (
@@ -10,7 +11,7 @@ export const Footer = () => {
         <Row className="pt-3 text-center ">
           <Col sm className="mb-4">
             <p>
-              <b> CONTACTANOS</b>
+              <b className="text-imperialRed"> CONTACTANOS</b>
               <br /> <br />
               Diagonal 16D #6E-80 <br />
               Villa Olímpica, Pasto <br />
@@ -21,7 +22,7 @@ export const Footer = () => {
           </Col>
           <Col sm className="mb-4">
             <p>
-              <b>Satori MMA</b>
+              <b className="text-imperialRed">Satori MMA</b>
             </p>
             <Link to="/">
               <img alt="Logo Satori" src={logo} width="150rm" height="auto" />
@@ -29,18 +30,31 @@ export const Footer = () => {
           </Col>
           <Col sm>
             <p className="mb-5">
-              <b>SIGUENOS EN:</b>
+              <b className="text-imperialRed">SIGUENOS EN:</b>
             </p>
-            <a className="m-1" href="https://www.facebook.com/Roninsatorimma/" target="_blank" rel="noopener noreferrer">
-              <BsFacebook size="25%" />
-            </a>
-            <a className="m-1" href="https://www.instagram.com/roninsatorimma/" target="_blank" rel="noopener noreferrer">
-              <BsInstagram size="25%" />
+            <a
+              className="m-1"
+              href="https://www.facebook.com/Roninsatorimma/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsFacebook size="25%" color={COLORS.carnelian} />
             </a>
             <a
               className="m-1"
-              href="https://www.youtube.com/channel/UCQPDBalc7BAUIfUOKtrh48w" target="_blank" rel="noopener noreferrer">
-              <BsYoutube size="25%" />
+              href="https://www.instagram.com/roninsatorimma/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsInstagram size="25%" color={COLORS.carnelian} />
+            </a>
+            <a
+              className="m-1"
+              href="https://www.youtube.com/channel/UCQPDBalc7BAUIfUOKtrh48w"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsYoutube size="25%" color={COLORS.carnelian} />
             </a>
           </Col>
         </Row>

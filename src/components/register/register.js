@@ -1,10 +1,9 @@
-import { Row, Form, Col, Container, Button, Alert } from "react-bootstrap";
+import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import { useState } from "react";
 import "./register.css";
 import { ErrorMessage } from "./inputDinamicStyle";
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { validate } from "graphql";
 import Input from "./input";
 
 
@@ -134,8 +133,8 @@ export const Register = () => {
                     <b>Error:</b> Por favor rellena el formulario correctamente.
                   </p>
                 </ErrorMessage>}
-                <Col mb-4="true">
-                  <Button className="btn btn-primary width-100" id="register" type="submit">Registrarse</Button>
+                <Col className="text-center" mb-4="true">
+                  <Button className="btn btn-outline-success button-main width-100" id="register" type="submit">Registrarse</Button>
                 </Col>
               </Row>
             </Form>

@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col} from "react-bootstrap";
 import { LeyendaError,Label,Input,ValidationIcon,GroupInput } from "./inputDinamicStyle";
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';

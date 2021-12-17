@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
 import { Link } from "react-router-dom";
-import { Button} from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
 export const NavigationBar = () => {
   return (
@@ -19,8 +19,11 @@ export const NavigationBar = () => {
             Ronin Satori MMA
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle className="button-toggle" aria-controls="basic-navbar-nav" />
-        
+        <Navbar.Toggle
+          className="button-toggle"
+          aria-controls="basic-navbar-nav"
+        />
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">
@@ -37,14 +40,25 @@ export const NavigationBar = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button className="button-main" as={Link} to="/login"  variant="outline-success m-2">Iniciar Sesion</Button>
+            <Button
+              className="bg-ourBlack button-main"
+              as={Link}
+              to="/login"
+              variant="outline-success m-2"
+            >
+              Iniciar Sesion
+            </Button>
 
-            <Button  className="button-main"as={Link} to="/register" variant="outline-success m-2">Registrar</Button>
-          </Nav>          
-          
+            <Button
+              className="bg-ourBlack button-main"
+              as={Link}
+              to="/register"
+              variant="outline-success m-2"
+            >
+              Registrar
+            </Button>
+          </Nav>
         </Navbar.Collapse>
-
-
       </Container>
     </Navbar>
   );

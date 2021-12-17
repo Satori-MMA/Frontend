@@ -1,5 +1,4 @@
-import { Container, ListGroup, Spinner } from "react-bootstrap";
-import logo from "./Assets/LogoPNG.png";
+import { Container, ListGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -9,15 +8,13 @@ import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
 import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
-import { useQuery } from "@apollo/client";
-import ALL_USERS from "./graphql/users/ALL_USERS";
 import { Contacto } from "./components/contacto/Contacto";
 function App() {
   return (
     <Router className="App">
       <NavigationBar />
-      <header className="">
-        <Container fluid className="bg-ourGray pb-3 pt-3">
+      <header className="App-header bg-ourGray">
+        <Container fluid className="pb-3 pt-3">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cursos" element={<Cursos />} />
@@ -52,7 +49,7 @@ function App() {
 //   );
 // };
 
-const ListUsers = ({ users }) => {
+export const ListUsers = ({ users }) => {
   return (
     <ListGroup>
       {users.edges.map((row) => (

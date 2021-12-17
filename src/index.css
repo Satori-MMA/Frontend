@@ -7,15 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.button-forgot-password{
+.button-forgot-password {
   color: #fff !important;
   width: 100%;
 }
 
-
 .button-login {
   color: #fff !important;
-  border-color: #BA181B !important;
+  border-color: #ba181b !important;
 
   padding: 14px 20px;
   margin: 8px 0;
@@ -28,13 +27,13 @@ body {
   background-color: #e5383b !important;
   border-color: #e5383b !important;
 }
-.button-login:focus{
-  box-shadow: 0 0 0 .25rem rgba(229, 56, 59,.5) !important;
+.button-login:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.5) !important;
 }
 .button-login-r {
   color: #fff !important;
-  border-color: #BA181B !important;
-  background-color: #BA181B !important;
+  border-color: #ba181b !important;
+  background-color: #ba181b !important;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -46,10 +45,10 @@ body {
   background-color: #e5383b !important;
   border-color: #e5383b !important;
 }
-.button-login-r:focus{
-  box-shadow: 0 0 0 .25rem rgba(229, 56, 59,.5) !important;
+.button-login-r:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.5) !important;
 }
-.button-login-google{
+.button-login-google {
   color: black !important;
   background-color: #fff !important;
   padding: 14px 20px;
@@ -64,11 +63,12 @@ body {
   background-color: #e5383b !important;
   border-color: #e5383b !important;
 }
-.button-login-google:focus{
-  box-shadow: 0 0 0 .25rem rgba(229, 56, 59,.5) !important;
+.button-login-google:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.5) !important;
 }
 .button-main {
   color: #e5383b !important;
+  background-color: #161a1d !important;
   border-color: #e5383b !important;
 }
 
@@ -78,8 +78,8 @@ body {
   border-color: #e5383b !important;
 }
 
-.button-main:focus{
-  box-shadow: 0 0 0 .25rem rgba(229, 56, 59,.5) !important;
+.button-main:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.5) !important;
 }
 
 .button-secondary {
@@ -100,22 +100,26 @@ code {
     monospace;
 }
 .form-border {
-  border: 3px solid #BA181B ;
+  border: 3px solid #ba181b;
   border-radius: 7px;
   padding: 25px;
 }
 .icon-user {
   padding: 25px;
 }
-.icon-login{
-  background-color: #BA181B  !important;
+.icon-login {
+  background-color: #ba181b !important;
 }
 .bg-ourBlack {
-  background-color: #0b090a;
+  background-color: #0b090a !important;
 }
 
 .bg-ourGray {
-  background-color: #161a1d;
+  background-color: #161a1d !important;
+}
+
+.bg-cultured{
+  background-color: #F5F3F4 !important;
 }
 
 .text-white {
@@ -127,4 +131,16 @@ code {
 }
 .text-imperialRed {
   color: #e5383b;
+}
+
+.border-carnelian {
+  border-color: #ba181b !important;
+}
+
+.border-line-carnelian {
+  border: 2px solid #ba181b !important;
+}
+
+.border-line-carnelian:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.25) !important;
 }

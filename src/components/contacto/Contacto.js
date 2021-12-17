@@ -2,6 +2,7 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 import { FormContacto } from "./FormContacto";
 import imgWhatsapp from "../../Assets/whatsapp1.png";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
+import { COLORS } from "../utilities/color";
 export const Contacto = () => {
   return (
     <Container fluid>
@@ -20,8 +21,9 @@ export const Contacto = () => {
         <Col>
           <p>Estamos ubicados en bla bla bla </p>
           <div class="mapouter">
-            <div class="gmap_canvas">
+            <div class="gmap_canvas text-center">
               <iframe
+                title="mapToSatori"
                 width="95%"
                 height="400"
                 id="gmap_canvas"
@@ -59,7 +61,7 @@ export const Contacto = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsFacebook size="40%" />
+            <BsFacebook size="40%" color={COLORS.carnelian} />
           </a>
           <br></br>
           Satori MMA Pasto
@@ -71,7 +73,7 @@ export const Contacto = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsInstagram size="40%" />
+            <BsInstagram size="40%" color={COLORS.carnelian} />
           </a>
           <br></br>
           @roninsatorimma
@@ -83,7 +85,7 @@ export const Contacto = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsYoutube size="40%" />
+            <BsYoutube size="40%" color={COLORS.carnelian} />
           </a>
           <br></br>
           Satori MMA Pasto
