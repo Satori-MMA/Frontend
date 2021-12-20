@@ -1,4 +1,4 @@
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import imgAbout1 from "../../Assets/about1.jpg";
 import imgAbout2 from "../../Assets/about2.png";
@@ -25,7 +25,7 @@ export const About = () => {
 
         <Row className="p-2" xs={1} sm={1} lg={2}>
           <Col className="mb-4 p-2">
-            <p>
+          <p className="Justify-Text">
               Somos un <b>centro de entrenamiento y acondicionamiento físico</b>
               , nos enfocamos en disciplinas como:{" "}
               <i>
@@ -35,32 +35,36 @@ export const About = () => {
               , con entrenamientos que combinan estas diversas disciplinas para
               un mejor aprendizaje. También damos cursos de defensa personal.
             </p>
-            <p>
+            <p className="Justify-Text">
               Contamos con mas de 25 años de experiencia en artes marciales y
               hemos representado al país en diversos torneos a nivel nacional e
               internacional. No te conformes con leerlo, ven y compruébalo.
             </p>
           </Col>
-
           <Col>
             <img alt="" width="100%" height="auto" src={imgAbout1} />
           </Col>
         </Row>
         <Row className="pt-5 text-center">
-          <Link
-            to="/contacto"
-            className="bg-black text-white text-decoration-none"
-          >
-            {" "}
-            ¡¡ ENTRENA CON NOSOTROS !!
-          </Link>
+        <Button className="button-secondary" as={Link} to="/login" variant="outline-success m-2 mt-3">
+                Entrena Con Nosotros
+        </Button>
         </Row>
         <h2 className="text-center mt-3">En Satori Encontraras...</h2>
         <Row xs={1} sm={2} lg={3}>
           <Col>
+            <Divider />           
+            <h3 className="text-center">MIXED MARTIAL ARTS</h3>
+            <p className="Justify-Text">
+              Las artes marciales mixtas son una combinación de técnicas de
+              artes marciales tradicionales con otras más modernas con el fin de
+              la competición deportiva de combate o la defensa personal.
+            </p>
+          </Col>
+          <Col>
             <Divider />
             <h3 className="text-center">BRAZILIAN JIU JITSU</h3>
-            <p>
+            <p className="Justify-Text">
               El BJJ es un arte marcial, deporte de combate, y un sistema de
               autodefensa que se centra en el agarre y especialmente en la lucha
               en el suelo. Coge sus fundamentos del Judo Kodokan (Ne-Waza) de
@@ -70,17 +74,8 @@ export const About = () => {
           </Col>
           <Col>
             <Divider />
-            <h3 className="text-center">MIXED MARTIAL ARTS</h3>
-            <p>
-              Las artes marciales mixtas son una combinación de técnicas de
-              artes marciales tradicionales con otras más modernas con el fin de
-              la competición deportiva de combate o la defensa personal.
-            </p>
-          </Col>
-          <Col>
-            <Divider />
             <h3 className="text-center">WRESTLING</h3>
-            <p>
+            <p className="Justify-Text">
               Es un deporte de combate que involucra técnicas de tipo de agarre,
               como peleas de clinch, lanzamientos y derribos, bloqueos de
               articulaciones, pases y otros tipos de agarre.
@@ -89,7 +84,7 @@ export const About = () => {
           <Col>
             <Divider />
             <h3 className="text-center">MUAY THAI</h3>
-            <p>
+            <p className="Justify-Text">
               Conocido también como boxeo tailandés, o tradicionalmente como el
               arte de las ocho extremidades es un arte marcial y deporte de
               contacto extremo, tiene como base el boxeo tailandés, el cual se
@@ -105,7 +100,7 @@ export const About = () => {
           <Col>
             <Divider />
             <h3 className="text-center">BOXING</h3>
-            <p>
+            <p className="Justify-Text">
               El boxeo (del inglés boxing), también llamado a veces boxeo inglés
               o boxeo irlandés, y coloquialmente conocido como box, es un
               deporte de contacto en el que dos contrincantes luchan utilizando
@@ -127,17 +122,17 @@ export const About = () => {
         <Row className="m-3 mb-0" xs={1} sm={1} md={2} lg={2}>
           <Col>
             <h3 className="text-center mt-2">Jesus Fernando Pinzon</h3>
-            <p>
+            <p className="Justify-Text">
               30 años de experiencia en practica de artes marciales y 15 años de
               experiencia como instructor de artes marciales
             </p>
-            <p>
+            <p className="Justify-Text">
               Cinturón negro en taekwondo, cinturón negro primer dan en wing
               tsun, cinturón purpura en Jiu jitsu tradicional, cinturón purpura
               en Brazilian jiu-jitsu, cinturón azul de judo, cinturón marrón de
               Kung fu Wushu e instructor en defensa personal
             </p>
-            <p>
+            <p className="Justify-Text">
               Participacion en competencias nacionales e internacionales, en
               paises como Ecuador y Panama
             </p>
@@ -173,15 +168,15 @@ export const About = () => {
           </Col>
           <Col>
             <h3 className="text-center mt-2">Brayan Andres Pinzon</h3>
-            <p>
+            <p className="Justify-Text">
               8 años de experiencia en practica de artes marciales y 1 año de
               experiencia como instructor artes marciales
             </p>
-            <p>
+            <p className="Justify-Text">
               Experiencia en artes marciales como boxeo, muay thai, jiu-jitsu,
               judo y grappling.
             </p>
-            <p>
+            <p className="Justify-Text">
               Conocimiento sobre defensa personal y acondicionamiento fisico.
             </p>
           </Col>

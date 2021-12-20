@@ -11,7 +11,7 @@ export const Contacto = () => {
       </Row>
       <Row xs={1} sm={1} lg={2}>
         <Col>
-          <p>
+        <p className="Justify-Text m-3">
             Nos encanta escuchar tus inquietudes y estamos ansiosos por hablar
             contigo de tus planes y expectativas sobre nuestras diferentes
             disciplinas. Escribenos ahora! y te responderemos lo antes posible.

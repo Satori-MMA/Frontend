@@ -44,6 +44,31 @@
   text-align: center;
 }
 
+/* Home */
+#course-container {
+  width: 65%;
+}
+
+#schedule-container {
+  width: 30%;
+}
+
+.button-courses {
+  min-width: 80%;
+}
+.button-courses2 {
+  min-width: 90%;
+  min-height: 60px;
+}
+
+.container-schedule{
+  border-color:#fff;
+  border-style: solid;
+  border-radius: 20%;
+  min-width: 90%;
+  min-height: 500px;
+}
+
 
 @keyframes App-logo-spin {
   from {
