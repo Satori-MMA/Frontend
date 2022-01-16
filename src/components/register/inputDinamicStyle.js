@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {AiFillInfoCircle} from 'react-icons/ai'
 const colors = {
     borde: "#0075FF",
     error: "#bb2929",
@@ -74,7 +73,7 @@ const GroupInput = styled.div`
 	position: relative;
 	z-index: 90;
 `;
-const ValidationIcon = styled(FontAwesomeIcon)`
+const ValidationIcon = styled(AiFillInfoCircle)`
     position:absolute;
     z-index: 100;
     bottom: 14px;

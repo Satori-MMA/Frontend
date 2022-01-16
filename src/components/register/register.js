@@ -47,16 +47,8 @@ export const Register = () => {
   return (
     <div id="content">
       <Container fluid id="container">
-        <Row id="data">
-          <Col sm={7} id="image">
-            <h4 className="text-center">
-            <i>              
-              "Guerreros dentro y fuera del tatami"
-            </i>
-            </h4>
-          </Col>
-
-          <Col sm={5} id="form">
+        <Row id="data" className="justify-content-md-center">
+          <Col  sm={8} id="form">
             <h3>Crea tu cuenta gratis</h3>
             <p className="text-muted mb-2">              
               Ingresa la siguiente información para registrarte
@@ -128,6 +120,7 @@ export const Register = () => {
                   />
                 </Col>
               </Row>
+              <hr></hr>
               <Row>
                 {validForm === false && (
                   <ErrorMessage>
@@ -140,7 +133,7 @@ export const Register = () => {
                 )}
                 <Col className="text-center" mb-4="true">
                   <Button
-                    className="btn btn-outline-success button-main width-100"
+                    className="button-login-r"
                     id="register"
                     type="submit"
                   >
