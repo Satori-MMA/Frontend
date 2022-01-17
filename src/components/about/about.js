@@ -5,11 +5,12 @@ import imgAbout2 from "../../Assets/about2.png";
 import instructor1 from "../../Assets/about1.jpg";
 import instructor2 from "../../Assets/Foto7.jpg";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
+import { COLORS } from "../utilities/color";
 
 const Divider = () => {
   return (
     <div className="text-center">
-      <DividerSvg fill="gray" width="50%" />
+      <DividerSvg fill={COLORS.silverChalice} width="50%" />
     </div>
   );
 };
