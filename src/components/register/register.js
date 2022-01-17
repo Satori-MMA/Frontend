@@ -48,12 +48,12 @@ export const Register = () => {
     <div id="content">
       <Container fluid id="container">
         <Row id="data" className="justify-content-md-center">
-          <Col  sm={8} id="form">
+          <Col  sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
             <h3>Crea tu cuenta gratis</h3>
             <p className="text-muted mb-2">              
               Ingresa la siguiente información para registrarte
             </p>
-            <Form action="" onSubmit={handleSubmit}>
+            <Form className="bg-ourBlack form-border"  action="" onSubmit={handleSubmit}>
               <Row className="form-row mb-2">
                 <Input
                   state={name}
