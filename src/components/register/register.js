@@ -49,8 +49,8 @@ export const Register = () => {
       <Container fluid id="container">
         <Row id="data" className="justify-content-md-center">
           <Col  sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
-            <h3>Crea tu cuenta gratis</h3>
-            <p className="text-muted mb-2">              
+            <h3 className="text-center text-imperialRed">Crea tu cuenta gratis</h3>
+            <p className="text-white mb-2">              
               Ingresa la siguiente información para registrarte
             </p>
             <Form className="bg-ourBlack form-border"  action="" onSubmit={handleSubmit}>

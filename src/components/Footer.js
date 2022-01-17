@@ -17,7 +17,7 @@ export const Footer = () => {
               Villa Olímpica, Pasto <br />
               Nariño - Colombia <br />
               Celular: (+57) 301 252 4990 <br />
-              Correo: ...
+              roninsatorimma@gmail.com
             </p>
           </Col>
           <Col sm className="mb-4">
