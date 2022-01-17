@@ -11,7 +11,7 @@ export const Contacto = () => {
       </Row>
       <Row xs={1} sm={1} lg={2}>
         <Col>
-        <p className="Justify-Text m-3">
+          <p className="Justify-Text m-3">
             Nos encanta escuchar tus inquietudes y estamos ansiosos por hablar
             contigo de tus planes y expectativas sobre nuestras diferentes
             disciplinas. Escribenos ahora! y te responderemos lo antes posible.
@@ -19,7 +19,8 @@ export const Contacto = () => {
           <FormContacto />
         </Col>
         <Col>
-          <p>Estamos ubicados en bla bla bla </p>
+        <p></p>
+          <p>Estamos ubicados en Diagonal 16D #6E-80 Villa Olímpica, Pasto </p>
           <div class="mapouter">
             <div class="gmap_canvas text-center">
               <iframe
@@ -27,7 +28,7 @@ export const Contacto = () => {
                 width="95%"
                 height="400"
                 id="gmap_canvas"
-                src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=1.194294813130785,%20-77.26438277486805&t=&z=19&ie=UTF8&iwloc=&output=embed"
                 frameborder="0"
                 scrolling="no"
                 marginheight="0"
