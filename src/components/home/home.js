@@ -17,11 +17,12 @@ import imgWhatsapp from "../../Assets/whatsapp1.png";
 import Logo from "../../Assets/Logo2.png";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
 import Carousel from "react-bootstrap/Carousel";
+import { COLORS } from "../utilities/color";
 
 const Divider = () => {
   return (
     <div className="text-center">
-      <DividerSvg fill="gray" width="50%" />
+      <DividerSvg fill={COLORS.silverChalice} width="50%" />
     </div>
   );
 };
@@ -31,7 +32,7 @@ export const Home = () => {
     <div>
       {/* Carrusel de imagenes */}
       <Container>
-        <Carousel>
+        <Carousel className="mb-2">
           <Carousel.Item>
             <img
               className="d-block w-100"
@@ -118,12 +119,12 @@ export const Home = () => {
         </Carousel>
       </Container>
 
-      <Divider />
+      <Divider/>
 
       {/* Seccion de Informacion */}
       <Row className="text-white m-3" xs={1} sm={2} lg={3}>
         <Col>
-          <Divider />
+          <Divider/>
           <h1 className="text-center text-imperialRed">BIENVENIDOS</h1>
           <Divider />
           <p className="Justify-Text">
