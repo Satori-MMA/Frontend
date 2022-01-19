@@ -5,26 +5,40 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { COLORS } from "../utilities/color";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useState} from "react";
+import { Navigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const infoLogin = () => {
+
+} 
 
 export const Login = () => {
-  const [tokenAuth, { data, loading, error }] = useMutation(LOGIN);
+  const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
   const [datalogin, setDatalogin] = useState({ email: "", password: "" });
 
-  if (loading) return "Submitting...";
+  // if (loading) return "Submitting...";
 
-  if (error) return `Submission error! ${error.message}`;
+  // if (error) return `Submission error! ${error.message}`;
 
   if (typeof data != "undefined") {
     if (data.tokenAuth.success) {
-      console.log("Login Correcto");
+      
+      toast.success("Inicio de sesion exitoso !",{theme: "dark"});
+      console.log("Entro");
+      // return <Navigate to="../cursos" replace={true} /> 
+      
     } else {
-      console.log("Credenciales invalidas");
+      toast.error("Credenciales invalidas",{theme: "dark"});
     }
+    reset();
   }
-  const handleSummit = async (e) => {
+
+
+  const handleSummit =  (e) => {
     e.preventDefault();
-    await tokenAuth({
+    tokenAuth({
       variables: { email: datalogin.email, password: datalogin.password },
     });
     setDatalogin({ email: "", password: "" });
@@ -33,6 +47,7 @@ export const Login = () => {
   return (
     <>
       <Container>
+      <ToastContainer autoClose={4000} />
         <Row>
           <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
             <Form className="bg-ourBlack form-border">
@@ -66,12 +81,14 @@ export const Login = () => {
                   </InputGroup.Text>
 
                   <Form.Control
-                    onChange={(e) =>
+                    onChange={(e) =>{
+                      e.preventDefault();
                       setDatalogin({
                         ...datalogin,
                         password: e.target.value,
                       })
                     }
+                  }
                     type="password"
                     className="border-line-carnelian bg-cultured"
                     placeholder="Ingrese su contraseña"
@@ -86,7 +103,7 @@ export const Login = () => {
                     id="login"
                     variant="outline-primary"
                     type="submit"
-                    onChange={handleSummit}
+                    onClick={handleSummit}
                   >
                     Iniciar Sesion
                   </Button>
