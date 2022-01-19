@@ -41,7 +41,6 @@ export const Login = () => {
     tokenAuth({
       variables: { email: datalogin.email, password: datalogin.password },
     });
-    setDatalogin({ email: "", password: "" });
   };
 
   return (
