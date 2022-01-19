@@ -23,7 +23,7 @@ export const Register = () => {
   const expressions = {
     addres: /^[a-zA-Z0-9\s_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^.{4,12}$/, // 4 a 12 digitos.
+    password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
@@ -160,7 +160,7 @@ export const Register = () => {
                     placeholder="Ingrese su contraseña"
                     type="password"
                     name="password"
-                    errorLabel="La contraseña tiene que ser de 4 a 12 dígitos."
+                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
                     regularExpresion={expressions.password}
                   />
                 </Col>
