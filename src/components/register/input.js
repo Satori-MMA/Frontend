@@ -1,6 +1,5 @@
 import { Col} from "react-bootstrap";
 import { LeyendaError,Label,Input,ValidationIcon,GroupInput } from "./inputDinamicStyle";
-import {AiFillInfoCircle} from 'react-icons/ai'
 const InputComponent = ({ state,changeState,label, name, placeholder, type, errorLabel,regularExpresion }) => {
 
     const handleInputChange = (e) => {
@@ -31,7 +30,6 @@ const InputComponent = ({ state,changeState,label, name, placeholder, type, erro
                 valid = {state.valid}
                 placeholder={placeholder} />
                 <ValidationIcon
-					icon={AiFillInfoCircle}
 					valid={state.valid}
 				/>
                 </GroupInput>

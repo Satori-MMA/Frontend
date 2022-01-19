@@ -2,11 +2,17 @@ import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import { useState } from "react";
 import "./register.css";
 import { ErrorMessage } from "./inputDinamicStyle";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {MdError} from 'react-icons/md'
+import { useMutation } from "@apollo/client";
+import REGISTER from "../../graphql/users/REGISTER";
 import Input from "./input";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Register = () => {
+  const [mutateFunction,{ data,reset}] = useMutation(REGISTER);
+  
+
   const [name, changeName] = useState({ field: "", valid: null });
   const [lastName, changeLastName] = useState({ field: "", valid: null });
   const [email, changeEmail] = useState({ field: "", valid: null });
@@ -15,12 +21,31 @@ export const Register = () => {
   const [password, changePassword] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
-    addres: /^[a-zA-Z0-9_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+    addres: /^[a-zA-Z0-9\s_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     password: /^.{4,12}$/, // 4 a 12 digitos.
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
+  
+
+  //if (loading) return "Submitting...";
+
+  //if (error) return `Submission error! ${error.message}`;
+
+  if (typeof data != "undefined") {
+    console.log(data);
+    if (data.userRegister.success) {
+      console.log("Correcto");
+      toast.success("Revisa tu correo para continuar con el registro");
+    } else {
+      console.log(data.userRegister.errors)
+      toast.error("Un error inesperado ha ocurrido: "+data.userRegister.errors.email[0].message);
+      
+    }
+    reset();
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -31,7 +56,11 @@ export const Register = () => {
       address.valid === "true" &&
       password.valid === "true"
     ) {
-      console.log("Enviar por graphql");
+      mutateFunction({
+        variables: {userPhone:phone.field,userAddress:address.field,firstName:name.field,lastName:lastName.field,email:email.field,password1:password.field,password2:password.field},
+      });
+      
+  
       changeValidForm(true);
       changeName({ field: "", valid: null });
       changeLastName({ field: "", valid: null });
@@ -39,14 +68,30 @@ export const Register = () => {
       changePhone({ field: "", valid: null });
       changeAddress({ field: "", valid: null });
       changePassword({ field: "", valid: null });
+      
+      
+      
+
     } else {
       changeValidForm(false);
     }
+    
   };
 
   return (
     <div id="content">
       <Container fluid id="container">
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover 
+        />
         <Row id="data" className="justify-content-md-center">
           <Col  sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
             <h3 className="text-center text-imperialRed">Crea tu cuenta gratis</h3>
@@ -125,7 +170,7 @@ export const Register = () => {
                 {validForm === false && (
                   <ErrorMessage>
                     <p>
-                      <FontAwesomeIcon icon={faExclamationTriangle} />
+                      <MdError color="red"/>
                       <b>Error:</b> Por favor rellena el formulario
                       correctamente.
                     </p>
