@@ -41,7 +41,7 @@ export const Contacto = () => {
       <Row className="text-center">
         <h1>¡Habla con Nosotros!</h1>
         <a
-          href="https://google.com.co"
+          href="https://wa.me/573012524990"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -1,5 +1,6 @@
 import { Row, Col, Container, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { COLORS } from "../utilities/color";
@@ -108,7 +109,10 @@ export const Login = () => {
                   </Button>
                 </Col>
                 <Col className="p-2">
-                  <Button className="button-login-r" variant="success">
+                  <Button className="button-login-r" variant="success"
+                as={Link}
+                to="/register"
+               >
                     Registrarse
                   </Button>
                 </Col>
