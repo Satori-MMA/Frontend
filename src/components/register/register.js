@@ -21,7 +21,7 @@ export const Register = () => {
   const [password, changePassword] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
-    addres: /^[a-zA-Z0-9\s_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+    addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, numeros, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
