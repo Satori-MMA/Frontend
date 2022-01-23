@@ -6,35 +6,35 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { COLORS } from "../utilities/color";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
-import { useState} from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import { useGlobalState } from "../GlobalState";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
   const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
   const [datalogin, setDatalogin] = useState({ email: "", password: "" });
-
+  const [user, updateUser] = useGlobalState("user");
   // if (loading) return "Submitting...";
 
   // if (error) return `Submission error! ${error.message}`;
 
   if (typeof data != "undefined") {
     if (data.tokenAuth.success) {
-      
-      toast.success("Inicio de sesion exitoso !",{theme: "dark"});
+      toast.success("Inicio de sesion exitoso !", { theme: "dark" });
       console.log("Entro");
-      // return <Navigate to="../cursos" replace={true} /> 
-      
+      localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
+      updateUser(data.tokenAuth.user);
+      console.log(user);
+      // return <Navigate to="../cursos" replace={true} />
     } else {
-      toast.error("Credenciales invalidas",{theme: "dark"});
+      toast.error("Credenciales invalidas", { theme: "dark" });
     }
     reset();
   }
 
-
-  const handleSummit =  (e) => {
+  const handleSummit = (e) => {
     e.preventDefault();
     tokenAuth({
       variables: { email: datalogin.email, password: datalogin.password },
@@ -44,7 +44,7 @@ export const Login = () => {
   return (
     <>
       <Container>
-      <ToastContainer autoClose={4000} />
+        <ToastContainer autoClose={4000} />
         <Row>
           <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
             <Form className="bg-ourBlack form-border">
@@ -78,14 +78,13 @@ export const Login = () => {
                   </InputGroup.Text>
 
                   <Form.Control
-                    onChange={(e) =>{
+                    onChange={(e) => {
                       e.preventDefault();
                       setDatalogin({
                         ...datalogin,
                         password: e.target.value,
-                      })
-                    }
-                  }
+                      });
+                    }}
                     type="password"
                     className="border-line-carnelian bg-cultured"
                     placeholder="Ingrese su contraseña"
@@ -106,10 +105,12 @@ export const Login = () => {
                   </Button>
                 </Col>
                 <Col className="p-2">
-                  <Button className="button-login-r" variant="success"
-                as={Link}
-                to="/register"
-               >
+                  <Button
+                    className="button-login-r"
+                    variant="success"
+                    as={Link}
+                    to="/register"
+                  >
                     Registrarse
                   </Button>
                 </Col>

@@ -2,8 +2,11 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { useGlobalState } from "./GlobalState";
 
 export const NavigationBar = () => {
+  const [user] = useGlobalState("user");
+
   return (
     <Navbar bg="ourBlack" variant="dark" expand="lg">
       <Container>
@@ -27,7 +30,7 @@ export const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">
-              Inicio
+              {user?.firstName}
             </Nav.Link>
             <Nav.Link as={Link} to="/cursos">
               Cursos

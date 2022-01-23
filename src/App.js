@@ -9,7 +9,10 @@ import { About } from "./components/about/about";
 import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
 import { Contacto } from "./components/contacto/Contacto";
+import { createGlobalState } from "react-hooks-global-state";
 function App() {
+  const { useGlobalState } = createGlobalState({ user: {} });
+
   return (
     <Router className="App">
       <NavigationBar />
