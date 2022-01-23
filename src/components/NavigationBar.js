@@ -6,9 +6,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
 
 export const NavigationBar = () => {
-  const [user] = useGlobalState("user");
-  const isLogged = 1;
-  const rol = 1;
+  const [user, updateUser] = useGlobalState("user");
+  const rol = user?.rolUser?.edges[0]?.node.rolName;
+  const logout = (e) => {
+    updateUser(null);
+    window.localStorage.removeItem("user");
+  };
 
   return (
     <Navbar bg="ourBlack" variant="dark" expand="lg">
@@ -32,40 +35,58 @@ export const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">
-              {user?.firstName}
+              Inicio
             </Nav.Link>
 
-            {rol === 1 ? (
-              <Nav.Link as={Link} to="/courses">
-                Cursos
-              </Nav.Link>
+            {rol === "STUDENT" ? (
+              <>
+                <Nav.Link as={Link} to="/courses">
+                  Cursos
+                </Nav.Link>
+                <Nav.Link as={Link} to="/about">
+                  Sobre nosotros
+                </Nav.Link>
+                <Nav.Link as={Link} to="/contact">
+                  Contacto
+                </Nav.Link>
+              </>
+            ) : rol === "TEACHER" ? (
+              <>
+                <Nav.Link as={Link} to="/coursegestion">
+                  Gestion de Cursos
+                </Nav.Link>
+                <Nav.Link as={Link} to="/mensuality">
+                  Gestion de Mensualidades
+                </Nav.Link>
+                <Nav.Link as={Link} to="/reports">
+                  Reportes
+                </Nav.Link>
+              </>
             ) : (
-              <Nav.Link as={Link} to="/coursegestion">
-                Gestion de Cursos
-              </Nav.Link>
-            )}
-            {rol === 1 ? (
-              <Nav.Link as={Link} to="/about">
-                Sobre nosotros
-              </Nav.Link>
-            ) : (
-              <Nav.Link as={Link} to="/mensuality">
-                Gestion de Mensualidades
-              </Nav.Link>
-            )}
-            {rol === 1 ? (
-              <Nav.Link as={Link} to="/contact">
-                Contacto
-              </Nav.Link>
-            ) : (
-              <Nav.Link as={Link} to="/reports">
-                Reportes
-              </Nav.Link>
+              <></>
             )}
           </Nav>
 
           {/* Perfil del Usuario - Inicio Sesion */}
-          {isLogged === 2 ? (
+          {user ? (
+            <NavDropdown
+              title="Perfil"
+              id="basic-nav-dropdown"
+              icon={<FaUserCircle color="red" size={30} />}
+            >
+              <NavDropdown.Item as={Link} to="/profile">
+                Ir al Perfil
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/profileupdate">
+                Editar Informacion
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item>Darse de Baja</NavDropdown.Item>
+              <NavDropdown.Item onClick={logout}>
+                Cerrar sesión
+              </NavDropdown.Item>
+            </NavDropdown>
+          ) : (
             <Nav>
               <Button
                 className="bg-ourBlack button-main"
@@ -85,34 +106,9 @@ export const NavigationBar = () => {
                 Registrar
               </Button>
             </Nav>
-          ) : (
-            <NavDropdown
-              title="Perfil"
-              id="basic-nav-dropdown"
-              icon={<FaUserCircle color="red" size={30} />}
-            >
-              <NavDropdown.Item as={Link} to="/profile">
-                Ir al Perfil
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/profileupdate">
-                Editar Informacion
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>Darse de Baja</NavDropdown.Item>
-            </NavDropdown>
           )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
-
-function NavItem(props) {
-  return (
-    <li className="nav-item">
-      <a href="#" className="icon-button">
-        {props.icon}
-      </a>
-    </li>
-  );
-}

@@ -7,7 +7,6 @@ import { COLORS } from "../utilities/color";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
