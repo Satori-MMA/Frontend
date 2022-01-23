@@ -2,8 +2,9 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaUserGraduate, FaUserNinja } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
+import { COLORS } from "./utilities/color";
 
 export const NavigationBar = () => {
   const [user, updateUser] = useGlobalState("user");
@@ -63,29 +64,47 @@ export const NavigationBar = () => {
                 </Nav.Link>
               </>
             ) : (
-              <></>
+              <>
+                <Nav.Link as={Link} to="/courses">
+                  Cursos
+                </Nav.Link>
+                <Nav.Link as={Link} to="/about">
+                  Sobre nosotros
+                </Nav.Link>
+                <Nav.Link as={Link} to="/contact">
+                  Contacto
+                </Nav.Link>
+              </>
             )}
           </Nav>
 
           {/* Perfil del Usuario - Inicio Sesion */}
           {user ? (
-            <NavDropdown
-              title="Perfil"
-              id="basic-nav-dropdown"
-              icon={<FaUserCircle color="red" size={30} />}
-            >
-              <NavDropdown.Item as={Link} to="/profile">
-                Ir al Perfil
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/profileupdate">
-                Editar Informacion
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>Darse de Baja</NavDropdown.Item>
-              <NavDropdown.Item onClick={logout}>
-                Cerrar sesión
-              </NavDropdown.Item>
-            </NavDropdown>
+            <>
+              {rol === "STUDENT" ? (
+                <FaUserGraduate color={COLORS.carnelian} size={40} />
+              ) : (
+                <FaUserNinja color={COLORS.carnelian} size={40} />
+              )}
+              <Navbar.Text>{user.firstName}</Navbar.Text>
+              <NavDropdown
+                title="Perfil"
+                id="basic-nav-dropdown"
+                icon={<FaUserCircle color="red" size={30} />}
+              >
+                <NavDropdown.Item as={Link} to="/profile">
+                  Ir al Perfil
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/profileupdate">
+                  Editar Informacion
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item>Darse de Baja</NavDropdown.Item>
+                <NavDropdown.Item onClick={logout}>
+                  Cerrar sesión
+                </NavDropdown.Item>
+              </NavDropdown>
+            </>
           ) : (
             <Nav>
               <Button
