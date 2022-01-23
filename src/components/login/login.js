@@ -95,9 +95,9 @@ export const Login = () => {
               <Row className="p-2" xs={1} sm={1} lg={2}>
                 <Col className="p-2">
                   <Button
-                    className="button-login"
+                    className="button-login-r"
                     id="login"
-                    variant="outline-primary"
+                    variant="success"
                     type="submit"
                     onClick={handleSummit}
                   >
@@ -106,8 +106,8 @@ export const Login = () => {
                 </Col>
                 <Col className="p-2">
                   <Button
-                    className="button-login-r"
-                    variant="success"
+                    className="button-login"
+                    variant="outline-primary"
                     as={Link}
                     to="/register"
                   >

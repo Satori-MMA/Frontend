@@ -55,9 +55,10 @@ export const FormContacto = () => {
             rows={3}
           />
         </Form.Group>
-        <Button className="button-main" type="submit">
+        <Button className="button-login-r" type="submit"
+        variant="success">
           Enviar
-        </Button>
+        </Button>        
       </Form>
     </Container>
   );

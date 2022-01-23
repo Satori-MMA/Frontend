@@ -9,10 +9,14 @@ import { About } from "./components/about/about";
 import { Register } from "./components/register/register";
 import { Login } from "./components/login/login";
 import { Contacto } from "./components/contacto/Contacto";
-import { createGlobalState } from "react-hooks-global-state";
-function App() {
-  const { useGlobalState } = createGlobalState({ user: {} });
+import { Courses } from "./components/cursos/Courses";
+import { CoursesGestion } from "./components/cursos/CoursesGestion";
+import { Mensuality } from "./components/payments/mensuality";
+import { Reports } from "./components/reports/reports";
+import { Profile } from "./components/profile/profile";
+import { ProfileUpdate } from "./components/profile/formUpdateProfile";
 
+function App() {
   return (
     <Router className="App">
       <NavigationBar />
@@ -20,10 +24,15 @@ function App() {
         <Container fluid className="pb-3 pt-3">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/cursos" element={<Cursos />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/contact" element={<Contacto />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/coursegestion" element={<CoursesGestion />} />
+            <Route path="/mensuality" element={<Mensuality />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profileupdate" element={<ProfileUpdate />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </Container>
@@ -59,13 +68,6 @@ export const ListUsers = ({ users }) => {
         <ListGroup.Item key={row.node.id}> {row.node.email}</ListGroup.Item>
       ))}
     </ListGroup>
-  );
-};
-const Cursos = () => {
-  return (
-    <div>
-      <p>Aqui iran los cursos ofertados</p>
-    </div>
   );
 };
 

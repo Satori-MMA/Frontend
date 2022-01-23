@@ -3,13 +3,23 @@ import { FormContacto } from "./FormContacto";
 import imgWhatsapp from "../../Assets/whatsapp1.png";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 import { COLORS } from "../utilities/color";
+import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
+
+const Divider = () => {
+  return (
+    <div className="text-center">
+      <DividerSvg fill={COLORS.silverChalice} width="50%" />
+    </div>
+  );
+};
+
 export const Contacto = () => {
   return (
     <Container fluid>
       <Row className="pt-5 text-center">
         <h1> En Satori MMA nos importa tu opinión</h1>
       </Row>
-      <Row xs={1} sm={1} lg={2}>
+      <Row className="text-center mb-4" xs={1} sm={1} lg={2}>
         <Col>
           <p className="Justify-Text m-3">
             Nos encanta escuchar tus inquietudes y estamos ansiosos por hablar
@@ -26,7 +36,7 @@ export const Contacto = () => {
               <iframe
                 title="mapToSatori"
                 width="95%"
-                height="400"
+                height="450"
                 id="gmap_canvas"
                 src="https://maps.google.com/maps?q=1.194294813130785,%20-77.26438277486805&t=&z=19&ie=UTF8&iwloc=&output=embed"
                 frameborder="0"
@@ -38,7 +48,10 @@ export const Contacto = () => {
           </div>
         </Col>
       </Row>
-      <Row className="text-center">
+
+      <Divider />
+
+      <Row className="text-center mt-4">
         <h1>¡Habla con Nosotros!</h1>
         <a
           href="https://wa.me/573012524990"

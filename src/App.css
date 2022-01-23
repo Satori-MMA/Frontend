@@ -4,6 +4,7 @@
 
 .App-logo {
   height: 40vmin;
+  animation: App-logo-spin infinite 20s linear;
   pointer-events: none;
 }
 
@@ -66,9 +67,8 @@
   border-style: solid;
   border-radius: 20%;
   min-width: 90%;
-  min-height: 500px;
+  min-height: 95%;
 }
-
 
 @keyframes App-logo-spin {
   from {
