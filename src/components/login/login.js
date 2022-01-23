@@ -1,12 +1,13 @@
 import { Row, Col, Container, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { COLORS } from "../utilities/color";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,12 @@ export const Login = () => {
   const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
   const [datalogin, setDatalogin] = useState({ email: "", password: "" });
   const [user, updateUser] = useGlobalState("user");
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
   // if (loading) return "Submitting...";
 
   // if (error) return `Submission error! ${error.message}`;
@@ -26,7 +33,7 @@ export const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
       updateUser(data.tokenAuth.user);
       console.log(user);
-      // return <Navigate to="../cursos" replace={true} />
+      navigate("/");
     } else {
       toast.error("Credenciales invalidas", { theme: "dark" });
     }

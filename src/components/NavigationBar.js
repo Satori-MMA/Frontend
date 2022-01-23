@@ -1,17 +1,19 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FaUserCircle, FaUserGraduate, FaUserNinja } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
 import { COLORS } from "./utilities/color";
 
 export const NavigationBar = () => {
+  let navigate = useNavigate();
   const [user, updateUser] = useGlobalState("user");
   const rol = user?.rolUser?.edges[0]?.node.rolName;
   const logout = (e) => {
     updateUser(null);
     window.localStorage.removeItem("user");
+    navigate("/");
   };
 
   return (

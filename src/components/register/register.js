@@ -1,17 +1,18 @@
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./register.css";
 import { ErrorMessage } from "./inputDinamicStyle";
-import {MdError} from 'react-icons/md'
+import { MdError } from "react-icons/md";
 import { useMutation } from "@apollo/client";
 import REGISTER from "../../graphql/users/REGISTER";
 import Input from "./input";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { useGlobalState } from "../GlobalState";
 
 export const Register = () => {
-  const [mutateFunction,{ data,reset}] = useMutation(REGISTER);
-  
+  const [mutateFunction, { data, reset }] = useMutation(REGISTER);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [lastName, changeLastName] = useState({ field: "", valid: null });
@@ -27,7 +28,13 @@ export const Register = () => {
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
-  
+  const [user] = useGlobalState("user");
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   //if (loading) return "Submitting...";
 
@@ -39,13 +46,15 @@ export const Register = () => {
       console.log("Correcto");
       toast.success("Revisa tu correo para continuar con el registro");
     } else {
-      console.log(data.userRegister.errors)
-      toast.error("Un error inesperado ha ocurrido: "+data.userRegister.errors.email[0].message);
-      
+      console.log(data.userRegister.errors);
+      toast.error(
+        "Un error inesperado ha ocurrido: " +
+          data.userRegister.errors.email[0].message
+      );
     }
     reset();
   }
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -57,10 +66,17 @@ export const Register = () => {
       password.valid === "true"
     ) {
       mutateFunction({
-        variables: {userPhone:phone.field,userAddress:address.field,firstName:name.field,lastName:lastName.field,email:email.field,password1:password.field,password2:password.field},
+        variables: {
+          userPhone: phone.field,
+          userAddress: address.field,
+          firstName: name.field,
+          lastName: lastName.field,
+          email: email.field,
+          password1: password.field,
+          password2: password.field,
+        },
       });
-      
-  
+
       changeValidForm(true);
       changeName({ field: "", valid: null });
       changeLastName({ field: "", valid: null });
@@ -68,37 +84,38 @@ export const Register = () => {
       changePhone({ field: "", valid: null });
       changeAddress({ field: "", valid: null });
       changePassword({ field: "", valid: null });
-      
-      
-      
-
     } else {
       changeValidForm(false);
     }
-    
   };
 
   return (
     <div id="content">
       <Container fluid id="container">
         <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover 
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
         />
         <Row id="data" className="justify-content-md-center">
-          <Col  sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
-            <h3 className="text-center text-imperialRed">Crea tu cuenta gratis</h3>
-            <p className="text-white mb-2">              
+          <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
+            <h3 className="text-center text-imperialRed">
+              Crea tu cuenta gratis
+            </h3>
+            <p className="text-white mb-2">
               Ingresa la siguiente información para registrarte
             </p>
-            <Form className="bg-ourBlack form-border"  action="" onSubmit={handleSubmit}>
+            <Form
+              className="bg-ourBlack form-border"
+              action=""
+              onSubmit={handleSubmit}
+            >
               <Row className="form-row mb-2">
                 <Input
                   state={name}
@@ -170,7 +187,7 @@ export const Register = () => {
                 {validForm === false && (
                   <ErrorMessage>
                     <p>
-                      <MdError color="red"/>
+                      <MdError color="red" />
                       <b>Error:</b> Por favor rellena el formulario
                       correctamente.
                     </p>
