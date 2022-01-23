@@ -1,10 +1,6 @@
 import { Row, Col, Container, Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Carrusel1 from "../../Assets/Foto4.jpg";
-import Carrusel2 from "../../Assets/Foto1.jpg";
-import Carrusel3 from "../../Assets/Foto3.jpg";
-import Carrusel4 from "../../Assets/Foto12.jpg";
 import informacion1 from "../../Assets/Foto10.png";
 import informacion2 from "../../Assets/Foto5.jpg";
 import informacion3 from "../../Assets/Foto6.jpg";
@@ -14,10 +10,10 @@ import informacion3 from "../../Assets/Foto6.jpg";
 // import Horarios4 from "../../Assets/P4-Satori.png";
 // import Horarios5 from "../../Assets/P5-Satori.png";
 import imgWhatsapp from "../../Assets/whatsapp1.png";
-import Logo from "../../Assets/Logo2.png";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
-import Carousel from "react-bootstrap/Carousel";
 import { COLORS } from "../utilities/color";
+import { CarouselI } from "./Carousel";
+import { Schedule } from "./Schedule";
 
 const Divider = () => {
   return (
@@ -32,99 +28,15 @@ export const Home = () => {
     <div>
       {/* Carrusel de imagenes */}
       <Container>
-        <Carousel className="mb-2">
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Carrusel1}
-              alt="Centro de Entrenamiento Satori - Slide 1"
-            />
-            <Carousel.Caption>
-              <h1>Centro de Entrenamiento</h1>
-              <h3>SATORI MMA PASTO</h3>
-              <p>Guerreros dentro y fuera del tatami</p>
-              <Button
-                className="button-secondary"
-                as={Link}
-                to="/login"
-                variant="success m-2 mt-3"
-              >
-                Unete a Nosotros
-              </Button>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Carrusel2}
-              alt="Centro de Entrenamiento Satori - Slide 2"
-            />
-            <Carousel.Caption>
-              <h1>Centro de Entrenamiento</h1>
-              <h3>SATORI MMA PASTO</h3>
-              <p>Guerreros dentro y fuera del tatami</p>
-              <Button
-                className="button-secondary"
-                as={Link}
-                to="/login"
-                variant="success m-2 mt-3"
-              >
-                Unete a Nosotros
-              </Button>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Carrusel3}
-              alt="Centro de Entrenamiento Satori - Slide 3"
-            />
-            <Carousel.Caption>
-              <h1>Centro de Entrenamiento</h1>
-              <h3>SATORI MMA PASTO</h3>
-              <p>Guerreros dentro y fuera del tatami</p>
-              <Button
-                className="button-secondary"
-                as={Link}
-                to="/login"
-                variant="success m-2 mt-3"
-              >
-                Unete a Nosotros
-              </Button>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Carrusel4}
-              alt="Centro de Entrenamiento Satori - Slide 4"
-            />
-            <Carousel.Caption>
-              <h1>Centro de Entrenamiento</h1>
-              <h3>SATORI MMA PASTO</h3>
-              <p>Guerreros dentro y fuera del tatami</p>
-              <Button
-                className="button-secondary"
-                as={Link}
-                to="/login"
-                variant="outline-success m-2 mt-3"
-              >
-                Unete a Nosotros
-              </Button>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+        <CarouselI />
       </Container>
 
-      <Divider/>
+      <Divider />
 
       {/* Seccion de Informacion */}
       <Row className="text-white m-3" xs={1} sm={2} lg={3}>
         <Col>
-          <Divider/>
+          <Divider />
           <h1 className="text-center text-imperialRed">BIENVENIDOS</h1>
           <Divider />
           <p className="Justify-Text">
@@ -188,7 +100,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses2"
               as={Link}
-              to="/contacto"
+              to="/contact"
               variant="outline-success m-2"
             >
               ¡ ENTRENA CON NOSOTROS !
@@ -207,7 +119,7 @@ export const Home = () => {
         <Button
           className="btn-lg bg-ourBlack button-main button-courses2"
           as={Link}
-          to="/cursos"
+          to="/courses"
           variant="outline-success m-2"
         >
           Ver Todos Los Cursos
@@ -218,7 +130,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/contacto"
+              to="/courses"
               variant="outline-success m-2"
             >
               Jiu-Jitsu
@@ -229,7 +141,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/contacto"
+              to="/courses"
               variant="outline-success m-2"
             >
               Muay Thai
@@ -241,7 +153,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/contacto"
+              to="/courses"
               variant="outline-success m-2"
             >
               MMA
@@ -252,7 +164,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/contacto"
+              to="/courses"
               variant="outline-success m-2"
             >
               Defensa Personal
@@ -276,135 +188,28 @@ export const Home = () => {
       </Row>
       <Container fluid className="text-white">
         <Row xs={1} sm={2} lg={4} className="mt-3 mb-3">
-          <Col>
-            <Container
-              fluid
-              className="container-schedule text-center mt-2 mb-2"
-            >
-              <h3 className="text-center">LUNES</h3>
-              <Divider />
-              <img
-                className="mt-3 mb-3"
-                alt="Centro de entrenamiento Satori - Horario"
-                width="40%"
-                height="auto"
-                src={Logo}
-              />
-              <p className="text-center">6:00 PM - 8:00 PM</p>
-              <Divider />
-              <p className="text-center mb-5">
-                Brazilian Jiu-Jitsu & Grappling
-              </p>
-            </Container>
-          </Col>
-          <Col>
-            <Container
-              fluid
-              className="container-schedule text-center mt-2 mb-2"
-            >
-              <h3 className="text-center">MIERCOLES</h3>
-              <Divider />
-              <img
-                className="mt-3 mb-3"
-                alt="Centro de entrenamiento Satori - Horario"
-                width="40%"
-                height="auto"
-                src={Logo}
-              />
-              <p className="text-center">6:00 PM - 8:00 PM</p>
-              <Divider />
-              <p className="text-center mb-5">Muay Thai</p>
-            </Container>
-          </Col>
-          <Col>
-            <Container
-              fluid
-              className="container-schedule text-center mt-2 mb-2"
-            >
-              <h3 className="text-center">VIERNES</h3>
-              <Divider />
-              <img
-                className="mt-3 mb-3"
-                alt="Centro de entrenamiento Satori - Horario"
-                width="40%"
-                height="auto"
-                src={Logo}
-              />
-              <p className="text-center">6:00 PM - 8:00 PM</p>
-              <Divider />
-              <p className="text-center mb-5">MMA (Mixed Martial Arts)</p>
-            </Container>
-          </Col>
-          <Col>
-            <Container
-              fluid
-              className="container-schedule text-center mt-2 mb-2"
-            >
-              <h3 className="text-center">SABADO</h3>
-              <Divider />
-              <img
-                className="mt-3 mb-3"
-                alt="Centro de entrenamiento Satori - Horario"
-                width="40%"
-                height="auto"
-                src={Logo}
-              />
-              <p className="text-center">9:00 AM - 10:00 AM</p>
-              <p className="text-center">10:00 AM - 12:00 M</p>
-              <Divider />
-              <p className="text-center mb-5">
-                Variado: Jiu-Jitsu & Grappling, Muay Thai, MMA
-              </p>
-            </Container>
-          </Col>
+          <Schedule
+            dia="LUNES"
+            horario="6:00 PM - 8:00 PM"
+            clase="Brazilian Jiu-Jitsu y Grappling"
+          />
+          <Schedule
+            dia="MIERCOLES"
+            horario="6:00 PM - 8:00 PM"
+            clase="Muay Thai"
+          />
+          <Schedule
+            dia="VIERNES"
+            horario="6:00 PM - 8:00 PM"
+            clase="MMA (Mixed Martial Arts)"
+          />
+          <Schedule
+            dia="SABADO"
+            horario="9:00 AM - 10:00 AM y 10:00 AM - 12:00 M"
+            clase="Jiu-Jitsu, Muay Thai, MMA"
+          />
         </Row>
       </Container>
-
-      {/* Carrusel de imagenes Horarios y Entrenos*/}
-      {/* <Container fluid id="schedule-container" className="text-center">
-        <Carousel>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Horarios1}
-              alt="Horarios Centro de Entrenamiento Satori - Slide 1"
-            />            
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Horarios2}
-              alt="Horarios Centro de Entrenamiento Satori - Slide 1"
-            />            
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Horarios3}
-              alt="Horarios Centro de Entrenamiento Satori - Slide 1"
-            />            
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Horarios4}
-              alt="Horarios Centro de Entrenamiento Satori - Slide 1"
-            />            
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={Horarios5}
-              alt="Horarios Centro de Entrenamiento Satori - Slide 1"
-            />            
-          </Carousel.Item>
-          
-        </Carousel>
-      </Container> */}
 
       <Divider />
     </div>

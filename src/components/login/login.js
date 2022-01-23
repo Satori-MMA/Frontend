@@ -54,7 +54,7 @@ export const Login = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <InputGroup>
                   <InputGroup.Text className="border-carnelian icon-login">
-                    <FaUserCircle color="black" size={30} />
+                  <FaUserCircle color="black" size={30} />
                   </InputGroup.Text>
                   <Form.Control
                     onChange={(e) => {
@@ -96,9 +96,9 @@ export const Login = () => {
               <Row className="p-2" xs={1} sm={1} lg={2}>
                 <Col className="p-2">
                   <Button
-                    className="button-login"
+                    className="button-login-r"
                     id="login"
-                    variant="outline-primary"
+                    variant="success"
                     type="submit"
                     onClick={handleSummit}
                   >
@@ -106,7 +106,7 @@ export const Login = () => {
                   </Button>
                 </Col>
                 <Col className="p-2">
-                  <Button className="button-login-r" variant="success"
+                  <Button className="button-login" variant="outline-primary" 
                 as={Link}
                 to="/register"
                >
