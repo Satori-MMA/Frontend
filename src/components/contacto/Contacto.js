@@ -31,8 +31,8 @@ export const Contacto = () => {
         <Col>
         <p></p>
           <p>Estamos ubicados en Diagonal 16D #6E-80 Villa Olímpica, Pasto </p>
-          <div className={"mapouter"}>
-            <div className={"gmap_canvas text-center"}>
+          <div className="mapouter">
+            <div className="gmap_canvas text-center">
               <iframe
                 title="mapToSatori"
                 width="95%"

@@ -3,24 +3,27 @@ import { useEffect, useState } from "react";
 import "../register/register.css";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import UPDATE_USER from "../../graphql/users/UPDATE_USER";
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
+import FIND_USER from "../../graphql/users/FIND_USER";
 
 
 
 export const ProfileUpdate = () => {
   const [user, updateUser] = useGlobalState("user");
-  const [mutateFunction, { data, reset }] = useMutation(UPDATE_USER); //TODO Cambiar mutation por update
+  console.log(user.email);
+  const { data, loading, error, } = useQuery(FIND_USER, { variables: { email: user.email} });
+  const [mutateFunction, { data: data1, reset }] = useMutation(UPDATE_USER); 
 
-  const [name, changeName] = useState({ field: user.firstName, valid: null });
-  const [lastName, changeLastName] = useState({ field: user.lastName, valid: null });
-  const [phone, changePhone] = useState({ field: user.userPhone, valid: null });
-  const [address, changeAddress] = useState({ field: user.userAddress, valid: null });
+  const [name, changeName] = useState({ field: "", valid: null });
+  const [lastName, changeLastName] = useState({ field: "", valid: null });
+  const [phone, changePhone] = useState({ field: "", valid: null });
+  const [address, changeAddress] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
     addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, numeros, guion y guion_bajo
@@ -28,25 +31,30 @@ export const ProfileUpdate = () => {
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
   useEffect(() => {
-    if (user) {
-      //navigate("/");
-    }
-  }, []);
+    
+        console.log(data)
+        if(data !== undefined ){
+            changeName({field:data.users.edges[0].node.firstName, valid:'true'});
+            changeLastName({field:data.users.edges[0].node.lastName,valid:'true'})
+            changePhone({field:data.users.edges[0].node.userPhone,valid:'true'})
+            changeAddress({field:data.users.edges[0].node.userAddress,valid:'true'})
+        }
+}, [data]);
 
-  //if (loading) return "Submitting...";
+if (error) return <div>errors</div>;
 
-  //if (error) return `Submission error! ${error.message}`;
+if (loading || !data) return <div>loading</div>;
 
-  if (typeof data != "undefined") {
+  if (typeof data1 != "undefined") {
     console.log(data);
-    if (data.updateAccount.success) {
+    if (data1.updateAccount.success) {
       console.log("Correcto");
       toast.success("Informacion actualizada exitosamente");
     } else {
-      console.log(data.updateAccount.errors);
+      console.log(data1.updateAccount.errors);
       toast.error(
         "Un error inesperado ha ocurrido: " +
-          data.updateAccount.errors.email[0].message
+          data1.updateAccount.errors.email[0].message
       );
     }
     reset();
@@ -66,7 +74,7 @@ export const ProfileUpdate = () => {
           userAddress: address.field,
           firstName: name.field,
           email: user.email,
-          lastName: lastName.field,
+          lastName: lastName.field
         },
       });
 
