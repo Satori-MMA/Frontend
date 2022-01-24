@@ -15,8 +15,11 @@ import { Mensuality } from "./components/payments/mensuality";
 import { Reports } from "./components/reports/reports";
 import { Profile } from "./components/profile/profile";
 import { ProfileUpdate } from "./components/profile/formUpdateProfile";
+import {PasswordUpdate} from './components/profile/formUpdatePassword';
 import { CourseEdit } from "./components/courses/course-edit";
 import { CoursesList } from "./components/courses/courses-list";
+;
+
 function App() {
   return (
     <Router className="App">
@@ -32,6 +35,7 @@ function App() {
             <Route path="/mensuality" element={<Mensuality />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profileupdate" element={<ProfileUpdate />} />
+            <Route path="/passwordupdate" element={<PasswordUpdate />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />

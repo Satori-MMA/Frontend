@@ -19,7 +19,8 @@ export const Login = () => {
   let navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      navigate("/");
+      console.log(user);
+      navigate("/profile");
     }
   }, []);
   // if (loading) return "Submitting...";

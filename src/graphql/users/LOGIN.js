@@ -11,7 +11,10 @@ const LOGIN = gql`
       unarchiving
       user {
         id
+        userPhone
         firstName
+        lastName
+        userAddress
         email
         verified
         rolUser {
