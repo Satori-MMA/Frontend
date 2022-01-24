@@ -30,8 +30,9 @@ export const Login = () => {
   if (typeof data != "undefined") {
     if (data.tokenAuth.success) {
       toast.success("Inicio de sesion exitoso !", { theme: "dark" });
-      console.log("Entro");
       localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
+      localStorage.setItem("token", data.tokenAuth.token);
+      
       updateUser(data.tokenAuth.user);
       console.log(user);
       navigate("/");

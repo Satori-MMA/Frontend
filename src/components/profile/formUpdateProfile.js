@@ -4,7 +4,7 @@ import "../register/register.css";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
 import { useMutation } from "@apollo/client";
-import REGISTER from "../../graphql/users/REGISTER";
+import UPDATE_USER from "../../graphql/users/UPDATE_USER";
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ import { useGlobalState } from "../GlobalState";
 
 export const ProfileUpdate = () => {
   const [user, updateUser] = useGlobalState("user");
-  const [mutateFunction, { data, reset }] = useMutation(REGISTER); //TODO Cambiar mutation por update
+  const [mutateFunction, { data, reset }] = useMutation(UPDATE_USER); //TODO Cambiar mutation por update
 
   const [name, changeName] = useState({ field: user.firstName, valid: null });
   const [lastName, changeLastName] = useState({ field: user.lastName, valid: null });
@@ -27,7 +27,6 @@ export const ProfileUpdate = () => {
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
-  let navigate = useNavigate();
   useEffect(() => {
     if (user) {
       //navigate("/");
@@ -40,14 +39,14 @@ export const ProfileUpdate = () => {
 
   if (typeof data != "undefined") {
     console.log(data);
-    if (data.userRegister.success) {
+    if (data.updateAccount.success) {
       console.log("Correcto");
-      toast.success("Revisa tu correo para continuar con el registro");
+      toast.success("Informacion actualizada exitosamente");
     } else {
-      console.log(data.userRegister.errors);
+      console.log(data.updateAccount.errors);
       toast.error(
         "Un error inesperado ha ocurrido: " +
-          data.userRegister.errors.email[0].message
+          data.updateAccount.errors.email[0].message
       );
     }
     reset();
@@ -66,6 +65,7 @@ export const ProfileUpdate = () => {
           userPhone: phone.field,
           userAddress: address.field,
           firstName: name.field,
+          email: user.email,
           lastName: lastName.field,
         },
       });
