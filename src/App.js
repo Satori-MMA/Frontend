@@ -16,6 +16,7 @@ import { Reports } from "./components/reports/reports";
 import { Profile } from "./components/profile/profile";
 import { ProfileUpdate } from "./components/profile/formUpdateProfile";
 import { CourseEdit } from "./components/courses/course-edit";
+import { CoursesList } from "./components/courses/courses-list";
 function App() {
   return (
     <Router className="App">
@@ -26,7 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contacto />} />
-            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses" element={<CoursesList />} />
             <Route path="/coursegestion" element={<CoursesGestion />} />
             <Route path="/mensuality" element={<Mensuality />} />
             <Route path="/profile" element={<Profile />} />
