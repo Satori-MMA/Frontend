@@ -15,7 +15,7 @@ import { Mensuality } from "./components/payments/mensuality";
 import { Reports } from "./components/reports/reports";
 import { Profile } from "./components/profile/profile";
 import { ProfileUpdate } from "./components/profile/formUpdateProfile";
-
+import { CourseEdit } from "./components/courses/course-edit";
 function App() {
   return (
     <Router className="App">
@@ -34,6 +34,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/course-edit/:id" element={<CourseEdit/>}/>
           </Routes>
         </Container>
       </header>
