@@ -1,0 +1,26 @@
+h1{
+    text-align: center;
+}
+.container{
+    padding: 0%;
+}
+
+#more{
+    width: 16rem;
+}
+.card{
+    width: 18rem;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.card p{
+    text-align: left;
+    font-size: small;
+}
+label{
+    margin: 1%;
+    display: inline-block;
+    font-size: medium;
+    font-weight: bold;
+	cursor: pointer;
+}
