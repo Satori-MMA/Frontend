@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
 import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
@@ -26,8 +27,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink)
 });
-ReactDOM.render(
-  <ApolloProvider client={client}>
+ReactDOM.render(  
+  <ApolloProvider client={client}>    
     <App />
   </ApolloProvider>,
   document.getElementById("root")
