@@ -1,5 +1,5 @@
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../register/register.css";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
@@ -23,16 +23,14 @@ export const PasswordForget = () => {
 
     //if (error) return `Submission error! ${error.message}`;
 
-    if (typeof data != "undefined") {
+    if (data !== undefined) {
         console.log(data);
-        if (data.sendEmail.success) {
-            console.log("Correcto");
-            toast.success("Revisa tu correo para continuar con el registro");
+        if (data.sendPasswordReset.success) {
+            toast.success("Revisa tu correo para restablecer la contraseña");
         } else {
-            console.log(data.sendEmail.errors);
             toast.error(
                 "Un error inesperado ha ocurrido: " +
-                data.userRegister.errors.email[0].message
+                data.sendPasswordReset.errors.email[0].message
             );
         }
         reset();
