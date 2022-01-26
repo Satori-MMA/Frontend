@@ -7,19 +7,17 @@ import { useMutation } from "@apollo/client";
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UPDATE_PASSWORD from "../../graphql/users/UPDATE_PASSWORD";
+import RESET_PASSWORD from "../../graphql/users/RESET_PASSWORD";
+import { useParams } from "react-router-dom";
 
-export const PasswordUpdate = (isReset) => {
-    
-    const [mutateFunction, { data, reset }] = useMutation(UPDATE_PASSWORD);
-    
-    const [password, changePassword] = useState({ field: "", valid: null });
+export const  PasswordReset= () => {
+    const params = useParams()
+    const [mutateFunction, { data, reset }] = useMutation(RESET_PASSWORD);
     const [password1, changePassword1] = useState({ field: "", valid: null });
     const [password2, changePassword2] = useState({ field: "", valid: null });
 
     const [validForm, changeValidForm] = useState(null);
     const expressions = {
-        password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
         password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
         password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
     };
@@ -29,15 +27,14 @@ export const PasswordUpdate = (isReset) => {
     //if (error) return `Submission error! ${error.message}`;
     
     if (data !== undefined) {
-            console.log(data);
-            if (data.passwordChange.success) {
-                toast.success("Actualizacion de contraseña exitoso");
-                changePassword({ field: "", valid: null });
+            
+            if (data.passwordReset.success) {
+                toast.success("Se restablecio la contraseña de forma exitosa");
                 changePassword1({ field: "", valid: null });
                 changePassword2({ field: "", valid: null });
             } else {
                 toast.error(
-                    "Contraseña actual incorrecta " 
+                    "Ocurrio un error inesperado, intente nuevamente " 
                 );
             }
             reset();
@@ -48,14 +45,14 @@ export const PasswordUpdate = (isReset) => {
         
         e.preventDefault();
         if (
-            password.valid === "true"
-            && password1.valid === "true"
+            password1.valid === "true"
             && password2.valid === "true"
             && password1.field === password2.field
+            && params.token !== null
         ) {
             mutateFunction({
                 variables: {
-                    oldPassword: password.field, 
+                    token: params.token,
                     password1: password1.field,
                     password2: password2.field
                 },
@@ -65,7 +62,7 @@ export const PasswordUpdate = (isReset) => {
             
         } else if(password1.field !== password2.field){
             toast.error(
-                "La contraseña nueva no coincide " 
+                "La contraseña nueva no coincide" 
             );
         } else {
             changeValidForm(false);
@@ -99,16 +96,6 @@ export const PasswordUpdate = (isReset) => {
                         >
                             <Row>
                                 <Col>
-                                <Input
-                                        state={password}
-                                        changeState={changePassword}
-                                        label="Contraseña actual"
-                                        placeholder="Ingrese su contraseña"
-                                        type="password"
-                                        name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
-                                        regularExpresion={expressions.password}
-                                    />
                                     <Input
                                         state={password1}
                                         changeState={changePassword1}

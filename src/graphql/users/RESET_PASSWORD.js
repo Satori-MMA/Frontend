@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const RESETPASSWORD = gql`
+const RESET_PASSWORD = gql`
 
 
 mutation resetPassword($token:String!,$password1: String!,$password2: String!){
@@ -10,4 +10,4 @@ mutation resetPassword($token:String!,$password1: String!,$password2: String!){
     }
 }`;
 
-export default RESETPASSWORD;
+export default RESET_PASSWORD;

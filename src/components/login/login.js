@@ -118,8 +118,13 @@ export const Login = () => {
                   >
                     Registrarse
               </Button>
-                  <Button className="button-forgot-password" variant="link">
-                    Olvide mi contraseña
+                  <Button 
+                    className="button-forgot-password" 
+                    variant="link"
+                    as={Link}
+                  to="/sendEmailForget"
+                  >
+                      Olvide mi contraseña
               </Button>
             </Form>
           </Col>

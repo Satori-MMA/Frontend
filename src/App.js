@@ -7,6 +7,8 @@ import { Home } from "./components/home/home";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
 import { Register } from "./components/register/register";
+import {PasswordReset} from './components/profile/formResetPassword';
+import {PasswordForget} from './components/profile/formForgetPassword';
 import { Login } from "./components/login/login";
 import { Contacto } from "./components/contacto/Contacto";
 import { CoursesGestion } from "./components/cursos/CoursesGestion";
@@ -38,9 +40,11 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profileupdate" element={<ProfileUpdate />} />
             <Route path="/passwordupdate" element={<PasswordUpdate />} />
+            <Route path="/sendEmailForget" element={<PasswordForget />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/resetPassword/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
           </Routes>
         </Container>
