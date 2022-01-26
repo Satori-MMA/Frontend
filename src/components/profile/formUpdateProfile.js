@@ -182,11 +182,11 @@ if (loading || !data) return <div>loading</div>;
                     Guardar
                   </Button>
                 </Col>
-                <Col className="text-center" mb-4="true">
+                <Col className="text-center"  mb-4="true">
                   <Button
                     className="button-login"
-                    id="register"
-                    type=""
+                    variant="outline-primary"
+                    type="submit"
                     as={Link}
                     to="/passwordupdate"
                   >

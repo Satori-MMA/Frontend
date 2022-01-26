@@ -8,25 +8,33 @@ body {
 }
 
 .button-forgot-password {
-  color: #fff !important;
+  color: #F5F3F4!important;
   width: 100%;
 }
-
+.button-forgot-password:hover {
+  color: #FFFFFF !important;
+  border-color: none!important;
+  text-decoration-color: #ba181b !important;
+  
+}
+.button-forgot-password:focus {
+  box-shadow: none !important;
+}
 .button-login {
   color: #fff !important;
   border-color: #ba181b !important;
-
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
 }
+
 .button-login:hover {
   color: #fff !important;
   background-color: #e5383b !important;
   border-color: #e5383b !important;
 }
+
 .button-login:focus {
   box-shadow: 0 0 0 0.25rem rgba(229, 56, 59, 0.5) !important;
 }
@@ -35,7 +43,7 @@ body {
   border-color: #ba181b !important;
   background-color: #ba181b !important;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 0 0 2em 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -111,7 +119,7 @@ code {
 .form-border {
   border: 3px solid #ba181b;
   border-radius: 7px;
-  padding: 25px;
+  padding: 2em 1.5em;
 }
 .icon-user {
   padding: 25px;

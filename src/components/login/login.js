@@ -2,12 +2,10 @@ import { Row, Col, Container, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { AiFillGoogleCircle } from "react-icons/ai";
 import { COLORS } from "../utilities/color";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
@@ -53,16 +51,16 @@ export const Login = () => {
     <>
       <Container>
         <ToastContainer autoClose={4000} />
-        <Row>
+        <Row className="justify-content-md-center">
           <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
             <Form className="bg-ourBlack form-border">
               <Row className="icon-user">
-                <FaUserCircle color={COLORS.carnelian} size={150} />
+                <FaUserCircle color={COLORS.carnelian} size={125} />
               </Row>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <InputGroup>
                   <InputGroup.Text className="border-carnelian icon-login">
-                    <FaUserCircle color="black" size={30} />
+                    <FaUserCircle color="black" size={30}/>
                   </InputGroup.Text>
                   <Form.Control
                     onChange={(e) => {
@@ -75,6 +73,7 @@ export const Login = () => {
                     type="email"
                     className="border-line-carnelian bg-cultured"
                     placeholder="Ingrese su correo electronico"
+                    width= "1px"
                   />
                 </InputGroup>
               </Form.Group>
@@ -100,39 +99,27 @@ export const Login = () => {
                 </InputGroup>
               </Form.Group>
 
-              <Row className="p-2" xs={1} sm={1} lg={2}>
-                <Col className="p-2">
-                  <Button
-                    className="button-login-r"
-                    id="login"
-                    variant="success"
-                    type="submit"
-                    onClick={handleSummit}
-                  >
-                    Iniciar Sesion
-                  </Button>
-                </Col>
-                <Col className="p-2">
-                  <Button
-                    className="button-login"
-                    variant="outline-primary"
-                    as={Link}
-                    to="/register"
+              
+              <Button
+                className="button-login-r"
+                id="login"
+                variant="success"
+                type="submit"
+                onClick={handleSummit}
+              >
+                Iniciar Sesion
+              </Button>
+
+              <Button
+                className="button-login"
+                variant="outline-primary"
+                as={Link}
+                to="/register"
                   >
                     Registrarse
-                  </Button>
-                </Col>
-              </Row>
-              <Button
-                className="button-login-google"
-                variant={COLORS.lightGray}
-                type="submit"
-              >
-                <AiFillGoogleCircle size={40} />
-                &ensp; Iniciar Sesion con Google
               </Button>
-              <Button className="button-forgot-password" variant="link">
-                Olvide mi contraseña
+                  <Button className="button-forgot-password" variant="link">
+                    Olvide mi contraseña
               </Button>
             </Form>
           </Col>
