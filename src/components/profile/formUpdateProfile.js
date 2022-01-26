@@ -12,13 +12,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 import FIND_USER from "../../graphql/users/FIND_USER";
 
-
-
 export const ProfileUpdate = () => {
   const [user, updateUser] = useGlobalState("user");
+  const navigate = useNavigate();
   console.log(user.email);
-  const { data, loading, error, } = useQuery(FIND_USER, { variables: { email: user.email} });
-  const [mutateFunction, { data: data1, reset }] = useMutation(UPDATE_USER); 
+  const { data, loading, error } = useQuery(FIND_USER, {
+    variables: { email: user.email },
+  });
+  const [mutateFunction, { data: data1, reset }] = useMutation(UPDATE_USER);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [lastName, changeLastName] = useState({ field: "", valid: null });
@@ -31,25 +32,39 @@ export const ProfileUpdate = () => {
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
   useEffect(() => {
-    
-        console.log(data)
-        if(data !== undefined ){
-            changeName({field:data.users.edges[0].node.firstName, valid:'true'});
-            changeLastName({field:data.users.edges[0].node.lastName,valid:'true'})
-            changePhone({field:data.users.edges[0].node.userPhone,valid:'true'})
-            changeAddress({field:data.users.edges[0].node.userAddress,valid:'true'})
-        }
-}, [data]);
+    console.log(data);
+    if (data !== undefined) {
+      changeName({ field: data.users.edges[0].node.firstName, valid: "true" });
+      changeLastName({
+        field: data.users.edges[0].node.lastName,
+        valid: "true",
+      });
+      changePhone({ field: data.users.edges[0].node.userPhone, valid: "true" });
+      changeAddress({
+        field: data.users.edges[0].node.userAddress,
+        valid: "true",
+      });
+    }
+  }, [data]);
 
-if (error) return <div>errors</div>;
+  if (error) return <div>errors</div>;
 
-if (loading || !data) return <div>loading</div>;
+  if (loading || !data) return <div>loading</div>;
 
   if (typeof data1 != "undefined") {
     console.log(data);
     if (data1.updateAccount.success) {
       console.log("Correcto");
       toast.success("Informacion actualizada exitosamente");
+      const newUser ={...user,
+        firstName: name.field,
+        lastName: lastName.field,
+        userPhone: phone.field,
+        userAddress: address.field,}
+
+      updateUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
+      navigate("/profile")
     } else {
       console.log(data1.updateAccount.errors);
       toast.error(
@@ -74,15 +89,11 @@ if (loading || !data) return <div>loading</div>;
           userAddress: address.field,
           firstName: name.field,
           email: user.email,
-          lastName: lastName.field
+          lastName: lastName.field,
         },
       });
 
       changeValidForm(true);
-      changeName({ field: "", valid: null });
-      changeLastName({ field: "", valid: null });
-      changePhone({ field: "", valid: null });
-      changeAddress({ field: "", valid: null });
     } else {
       changeValidForm(false);
     }
@@ -158,8 +169,6 @@ if (loading || !data) return <div>loading</div>;
                     errorLabel="El telefono solo puede contener numeros y el maximo son 14 dígitos."
                     regularExpresion={expressions.phone}
                   />
-
-                  
                 </Col>
               </Row>
               <hr></hr>
@@ -182,7 +191,7 @@ if (loading || !data) return <div>loading</div>;
                     Guardar
                   </Button>
                 </Col>
-                <Col className="text-center"  mb-4="true">
+                <Col className="text-center" mb-4="true">
                   <Button
                     className="button-login"
                     variant="outline-primary"
@@ -198,6 +207,6 @@ if (loading || !data) return <div>loading</div>;
           </Col>
         </Row>
       </Container>
-    </div>   
+    </div>
   );
 };
