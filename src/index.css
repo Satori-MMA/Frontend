@@ -208,6 +208,32 @@ code {
   min-height: 70%;
 }
 
+.popup-inner-schedule{
+  position: relative;
+  margin: 0px;
+  padding-bottom: 2%;
+  background-color: rgba(0, 0, 0, 0);
+  width: 80%;
+  max-width: 50px;
+}
+
+.container-popup-schedule{
+  min-width: 70%;
+}
+.imgSchedule{
+    width: 50%; /* or any custom size */
+    object-fit: contain;
+}
+.close-btn-schedule {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  position: absolute;
+  top: 1%;
+  right:27%;
+  border-radius: 30%;
+}
+
 .no-border-card {
   border: 0px !important;
   background-color: transparent !important;
