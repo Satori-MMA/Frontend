@@ -84,9 +84,9 @@ export const  PasswordReset= () => {
                     pauseOnHover
                 />
                 <Row id="data" className="justify-content-md-center">
-                    <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
+                    <Col sm={5} className="pt m-auto shadow-sm rounded-lg" id="form">
                         <h3 className="text-center text-imperialRed">
-                            Actualizar Contraseña
+                            Restablecer Contraseña
                         </h3>
         
                         <Form

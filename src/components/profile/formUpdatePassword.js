@@ -29,7 +29,6 @@ export const PasswordUpdate = (isReset) => {
     //if (error) return `Submission error! ${error.message}`;
     
     if (data !== undefined) {
-            console.log(data);
             if (data.passwordChange.success) {
                 toast.success("Actualizacion de contraseña exitoso");
                 changePassword({ field: "", valid: null });
@@ -87,7 +86,7 @@ export const PasswordUpdate = (isReset) => {
                     pauseOnHover
                 />
                 <Row id="data" className="justify-content-md-center">
-                    <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
+                    <Col sm={5} className="pt m-auto shadow-sm rounded-lg" id="form">
                         <h3 className="text-center text-imperialRed">
                             Actualizar Contraseña
                         </h3>

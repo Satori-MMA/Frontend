@@ -68,9 +68,9 @@ export const PasswordForget = () => {
                     pauseOnHover
                 />
                 <Row id="data" className="justify-content-md-center">
-                    <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
+                    <Col sm={5} className="pt m-auto shadow-sm rounded-lg" id="form">
                         <h3 className="text-center text-imperialRed">
-                            Olvidaste tu contraseña ?
+                            ¿Olvidaste tu contraseña ?
                         </h3>
                         <p className="text-white mb-2">
                             Ingresa tu correo para restablecerla

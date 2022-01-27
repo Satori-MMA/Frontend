@@ -44,7 +44,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/resetPassword/:token" element={<PasswordReset />} />
+            <Route path="/password-reset/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
           </Routes>
         </Container>
