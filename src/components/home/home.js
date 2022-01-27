@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import informacion1 from "../../Assets/Foto10.png";
 import informacion2 from "../../Assets/Foto5.jpg";
 import informacion3 from "../../Assets/Foto6.jpg";
-// import Horarios1 from "../../Assets/P1-Satori.png";
-// import Horarios2 from "../../Assets/P2-Satori.png";
-// import Horarios3 from "../../Assets/P3-Satori.png";
-// import Horarios4 from "../../Assets/P4-Satori.png";
-// import Horarios5 from "../../Assets/P5-Satori.png";
 import imgWhatsapp from "../../Assets/whatsapp1.png";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
 import { COLORS } from "../utilities/color";
@@ -27,9 +22,9 @@ export const Home = () => {
   return (
     <div>
       {/* Carrusel de imagenes */}
-      <Container>
+
         <CarouselI />
-      </Container>
+
 
       <Divider />
 

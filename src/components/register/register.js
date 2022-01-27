@@ -45,6 +45,7 @@ export const Register = () => {
     if (data.userRegister.success) {
       console.log("Correcto");
       toast.success("Revisa tu correo para continuar con el registro");
+      navigate("/login")
     } else {
       console.log(data.userRegister.errors);
       toast.error(

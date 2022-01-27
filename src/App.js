@@ -7,19 +7,26 @@ import { Home } from "./components/home/home";
 import { Footer } from "./components/Footer";
 import { About } from "./components/about/about";
 import { Register } from "./components/register/register";
+import {PasswordReset} from './components/profile/formResetPassword';
+import {PasswordForget} from './components/profile/formForgetPassword';
 import { Login } from "./components/login/login";
 import { Contacto } from "./components/contacto/Contacto";
-import { Courses } from "./components/cursos/Courses";
 import { CoursesGestion } from "./components/cursos/CoursesGestion";
 import { Mensuality } from "./components/payments/mensuality";
 import { Reports } from "./components/reports/reports";
 import { Profile } from "./components/profile/profile";
 import { ProfileUpdate } from "./components/profile/formUpdateProfile";
+import {PasswordUpdate} from './components/profile/formUpdatePassword';
 import { CourseEdit } from "./components/courses/course-edit";
 import { CoursesList } from "./components/courses/courses-list";
+import { Welcome } from "./components/utilities/Welcome";
+
 function App() {
+  
+  
   return (
     <Router className="App">
+      {window.localStorage.getItem('alreadyLoad')?<></>:<Welcome/>}
       <NavigationBar />
       <header className="App-header bg-ourGray">
         <Container fluid className="pb-3 pt-3">
@@ -32,9 +39,12 @@ function App() {
             <Route path="/mensuality" element={<Mensuality />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profileupdate" element={<ProfileUpdate />} />
+            <Route path="/passwordupdate" element={<PasswordUpdate />} />
+            <Route path="/sendEmailForget" element={<PasswordForget />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/password-reset/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
           </Routes>
         </Container>
