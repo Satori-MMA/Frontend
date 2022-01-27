@@ -7,7 +7,7 @@ import DELETE_USER from "../graphql/users/DELETE_USER";
 import { FaUserCircle, FaUserGraduate, FaUserNinja } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
 import { COLORS } from "./utilities/color";
-import swal from "sweetalert2";
+import  swal  from "sweetalert2";
 import { __InputValue } from "graphql";
 export const NavigationBar = () => {
   const [mutateFunction, { data, reset }] = useMutation(DELETE_USER);
