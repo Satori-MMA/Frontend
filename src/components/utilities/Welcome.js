@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Modal, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Container, Modal } from "react-bootstrap";
+import { useState } from "react";
 import { COLORS } from "../utilities/color";
 import Logo from "../../Assets/Logo2.png";
 import {
@@ -44,7 +44,7 @@ export const Welcome = (props) => {
         <h5 className="text-welcome-messagge">
           Tienes derecho a una leccion presencial totalmente gratis para que
           conozcas nuestras instalaciones y la metodologia a utilizar, ademas en
-          la aplicacion encontraras muchos cursos gratis donde aprenderas cosas
+          la aplicacion encontraras muchos cursos donde aprenderas cosas
           muy interesantes.
         </h5>
         <h4 className="text-welcome-messagge">Contactate con nosotros:</h4>

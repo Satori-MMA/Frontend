@@ -1,6 +1,9 @@
-import { Col, Container } from "react-bootstrap";
+import {Col, Container, Button } from "react-bootstrap";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
 import { COLORS } from "../utilities/color";
+import {MIERCOLES} from "../../Assets/Foto1.jpg";
+import { SchedulePopup } from "./schedulePopup";
+import { useState } from "react";
 import Logo from "../../Assets/Logo2.png";
 const Divider = () => {
   return (
@@ -11,6 +14,11 @@ const Divider = () => {
 };
 
 export const Schedule = ({ dia, horario, clase }) => {
+  const [btnPopup, setbtnPopup] = useState(false);
+  const handleOpen = () => {
+    setbtnPopup(true);    
+  };
+  
   return (
     <Col>
       <Container fluid className="container-schedule text-center mt-2 mb-2">
@@ -23,9 +31,27 @@ export const Schedule = ({ dia, horario, clase }) => {
           height="auto"
           src={Logo}
         />
-        <p className="text-center">{horario}</p>
-        <Divider />
-        <p className="text-center mb-5">{clase}</p>
+        {
+        dia==="MIERCOLES"?
+        <div>
+        <p className="text-center mb-4">{horario}</p>        
+        <p className="text-center mb-4">{clase}</p>                
+        </div>         :
+
+        <div>
+        <p className="text-center">{horario}</p>        
+        <p className="text-center mb-2">{clase}</p> 
+        </div>         
+        }
+
+        <Button
+            className="button-secondary"
+            variant="success m-2 mt-3 mb-4"
+            onClick={handleOpen}
+          >
+            Mas Informacion
+          </Button>
+          <SchedulePopup dia={dia} trigger={btnPopup} setTrigger={setbtnPopup}></SchedulePopup>
       </Container>
     </Col>
   );
