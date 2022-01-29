@@ -24,3 +24,20 @@ label{
     font-weight: bold;
 	cursor: pointer;
 }
+.form-select {
+    width: 80%;
+    margin-bottom: 2%;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    margin-top: 5%;
+    margin-left: 0px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.button-login-r{
+    margin-top: 3%;
+}

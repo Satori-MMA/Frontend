@@ -20,7 +20,7 @@ import {PasswordUpdate} from './components/profile/formUpdatePassword';
 import { CourseEdit } from "./components/courses/course-edit";
 import { CoursesList } from "./components/courses/courses-list";
 import { Welcome } from "./components/utilities/Welcome";
-
+import { RegisterCourse } from "./components/courses/register-course";
 function App() {
   
   
@@ -46,6 +46,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/password-reset/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
+            <Route path="/registerCourse" element={<RegisterCourse/>}/>
           </Routes>
         </Container>
       </header>
