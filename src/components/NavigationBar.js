@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/client";
 import DELETE_USER from "../graphql/users/DELETE_USER";
 import { FaUserCircle, FaUserGraduate, FaUserNinja } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
+import Swal from 'sweetalert2'
 import { COLORS } from "./utilities/color";
 import  swal  from "sweetalert2";
 import { __InputValue } from "graphql";
