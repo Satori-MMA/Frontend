@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FaUserCircle, FaUserGraduate, FaUserNinja } from "react-icons/fa";
 import { useGlobalState } from "./GlobalState";
+import Swal from 'sweetalert2'
 import { COLORS } from "./utilities/color";
 
 export const NavigationBar = () => {
