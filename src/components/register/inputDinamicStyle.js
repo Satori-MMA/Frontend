@@ -39,6 +39,7 @@ const ErrorMessage= styled.div`
 	grid-column: span 2;
 	p {
 		margin: 0;
+		font-size:15px;
 	} 
 	b {
 		margin-left: 10px;

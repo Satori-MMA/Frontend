@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 
 export const Register = () => {
-  const [mutateFunction, { data, reset }] = useMutation(REGISTER);
+  const [mutateFunction, { data, loading, error, reset }] = useMutation(REGISTER);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [lastName, changeLastName] = useState({ field: "", valid: null });
@@ -28,6 +28,9 @@ export const Register = () => {
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
+
+
+
   const [user] = useGlobalState("user");
   let navigate = useNavigate();
   useEffect(() => {
@@ -36,21 +39,34 @@ export const Register = () => {
     }
   }, []);
 
-  //if (loading) return "Submitting...";
+  if (loading) {
+    const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, loading));
+    toast.promise(
+      resolveAfter3Sec,
+      {
+        pending: 'Cargando',
+        success: 'Revisa tu correo para continuar con el registro',
+        error: 'Un error inesperado ha ocurrido '
+      }
+    )
+  };
 
-  //if (error) return `Submission error! ${error.message}`;
-
+  if (error) return `Submission error! ${error.message}`;
+  function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
   if (typeof data != "undefined") {
     console.log(data);
     if (data.userRegister.success) {
       console.log("Correcto");
-      toast.success("Revisa tu correo para continuar con el registro");
-      navigate("/login")
+
+      delay(3000).then(() => navigate("/login"));
+
     } else {
       console.log(data.userRegister.errors);
       toast.error(
         "Un error inesperado ha ocurrido: " +
-          data.userRegister.errors.email[0].message
+        data.userRegister.errors.email[0].message
       );
     }
     reset();
@@ -58,36 +74,42 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      name.valid === "true" &&
-      lastName.valid === "true" &&
-      email.valid === "true" &&
-      phone.valid === "true" &&
-      address.valid === "true" &&
-      password.valid === "true"
-    ) {
-      mutateFunction({
-        variables: {
-          userPhone: phone.field,
-          userAddress: address.field,
-          firstName: name.field,
-          lastName: lastName.field,
-          email: email.field,
-          password1: password.field,
-          password2: password.field,
-        },
-      });
-
-      changeValidForm(true);
-      changeName({ field: "", valid: null });
-      changeLastName({ field: "", valid: null });
-      changeEmail({ field: "", valid: null });
-      changePhone({ field: "", valid: null });
-      changeAddress({ field: "", valid: null });
-      changePassword({ field: "", valid: null });
-    } else {
+    if (password.field.includes(name.field)) {
       changeValidForm(false);
+    } else {
+      if (
+        name.valid === "true" &&
+        lastName.valid === "true" &&
+        email.valid === "true" &&
+        phone.valid === "true" &&
+        address.valid === "true" &&
+        password.valid === "true"
+      ) {
+        mutateFunction({
+          variables: {
+            userPhone: phone.field,
+            userAddress: address.field,
+            firstName: name.field,
+            lastName: lastName.field,
+            email: email.field,
+            password1: password.field,
+            password2: password.field,
+          },
+        });
+
+        changeValidForm(true);
+        changeName({ field: "", valid: null });
+        changeLastName({ field: "", valid: null });
+        changeEmail({ field: "", valid: null });
+        changePhone({ field: "", valid: null });
+        changeAddress({ field: "", valid: null });
+        changePassword({ field: "", valid: null });
+      } else {
+        changeValidForm(false);
+      }
     }
+
+
   };
 
   return (
@@ -190,7 +212,7 @@ export const Register = () => {
                     <p>
                       <MdError color="red" />
                       <b>Error:</b> Por favor rellena el formulario
-                      correctamente.
+                      correctamente, recuerda que tú nombre y contraseña deben ser diferentes!.
                     </p>
                   </ErrorMessage>
                 )}
