@@ -11,6 +11,7 @@ import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
+  
   const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
   const [datalogin, setDatalogin] = useState({ email: "", password: "" });
   const [user, updateUser] = useGlobalState("user");
@@ -21,6 +22,7 @@ export const Login = () => {
       navigate("/profile");
     }
   }, []);
+  
   // if (loading) return "Submitting...";
 
   // if (error) return `Submission error! ${error.message}`;
@@ -42,9 +44,19 @@ export const Login = () => {
 
   const handleSummit = (e) => {
     e.preventDefault();
-    tokenAuth({
-      variables: { email: datalogin.email, password: datalogin.password },
-    });
+    if(datalogin.email===""){
+      toast.error("Ingrese el correo electronico", { theme: "dark" });
+    } else if(!datalogin.email.includes("@")){
+      toast.error("Correo electronico invalido", { theme: "dark" });
+    }else if(datalogin.password === ""){
+      toast.error("Ingrese la contraseña", { theme: "dark" });
+    }else {
+      tokenAuth({
+        variables: { email: datalogin.email, password: datalogin.password },
+      });
+    }
+    
+    
   };
 
   return (

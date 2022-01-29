@@ -8,11 +8,12 @@ import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UPDATE_PASSWORD from "../../graphql/users/UPDATE_PASSWORD";
+import  swal  from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export const PasswordUpdate = (isReset) => {
     
     const [mutateFunction, { data, reset }] = useMutation(UPDATE_PASSWORD);
-    
     const [password, changePassword] = useState({ field: "", valid: null });
     const [password1, changePassword1] = useState({ field: "", valid: null });
     const [password2, changePassword2] = useState({ field: "", valid: null });
@@ -23,17 +24,24 @@ export const PasswordUpdate = (isReset) => {
         password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
         password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
     };
-
+    let navigate = useNavigate();
     //if (loading) return "Submitting...";
 
     //if (error) return `Submission error! ${error.message}`;
     
     if (data !== undefined) {
             if (data.passwordChange.success) {
-                toast.success("Actualizacion de contraseña exitoso");
-                changePassword({ field: "", valid: null });
-                changePassword1({ field: "", valid: null });
-                changePassword2({ field: "", valid: null });
+                swal.fire({
+                    icon: "success",
+                    text: "Actualizacion de contraseña exitoso",
+                    color: '#fff',
+                    background: '#000',
+                    iconColor: '#BA181B',
+                    confirmButtonColor: '#BA181B',
+        
+                    timer: "2000",
+                })
+                navigate('/home')
             } else {
                 toast.error(
                     "Contraseña actual incorrecta " 

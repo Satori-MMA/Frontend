@@ -1,5 +1,5 @@
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../register/register.css";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
@@ -8,7 +8,8 @@ import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RESET_PASSWORD from "../../graphql/users/RESET_PASSWORD";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import  swal  from "sweetalert2";
 
 export const  PasswordReset= () => {
     const params = useParams()
@@ -21,7 +22,7 @@ export const  PasswordReset= () => {
         password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
         password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
     };
-
+    let navigate = useNavigate();
     //if (loading) return "Submitting...";
 
     //if (error) return `Submission error! ${error.message}`;
@@ -29,9 +30,20 @@ export const  PasswordReset= () => {
     if (data !== undefined) {
             
             if (data.passwordReset.success) {
+                swal.fire({
+                        icon: "success",
+                        text: "Se restablecio la contraseña de forma exitosa",
+                        color: '#fff',
+                        background: '#000',
+                        iconColor: '#BA181B',
+                        confirmButtonColor: '#BA181B',
+            
+                        timer: "2000",
+                })
                 toast.success("Se restablecio la contraseña de forma exitosa");
                 changePassword1({ field: "", valid: null });
                 changePassword2({ field: "", valid: null });
+                navigate("/login");
             } else {
                 toast.error(
                     "Ocurrio un error inesperado, intente nuevamente " 
