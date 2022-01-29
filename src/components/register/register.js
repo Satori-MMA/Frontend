@@ -24,7 +24,7 @@ export const Register = () => {
   const expressions = {
     addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, numeros, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
+    password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, // 8 digitos al menos una letra y un numero
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
@@ -40,15 +40,7 @@ export const Register = () => {
   }, []);
 
   if (loading) {
-    const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, loading));
-    toast.promise(
-      resolveAfter3Sec,
-      {
-        pending: 'Cargando',
-        success: 'Revisa tu correo para continuar con el registro',
-        error: 'Un error inesperado ha ocurrido '
-      }
-    )
+    const id = toast.loading("Cargando...")
   };
 
   if (error) return `Submission error! ${error.message}`;
@@ -59,7 +51,7 @@ export const Register = () => {
     console.log(data);
     if (data.userRegister.success) {
       console.log("Correcto");
-
+      toast.success("Revisa tu correo para continuar con el registro")
       delay(3000).then(() => navigate("/login"));
 
     } else {
@@ -200,7 +192,7 @@ export const Register = () => {
                     placeholder="Ingrese su contraseña"
                     type="password"
                     name="password"
-                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero y un caracter especial"
                     regularExpresion={expressions.password}
                   />
                 </Col>
