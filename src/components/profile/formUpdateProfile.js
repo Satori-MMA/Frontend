@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 import FIND_USER from "../../graphql/users/FIND_USER";
+import  swal  from "sweetalert2";
 
 export const ProfileUpdate = () => {
   const [user, updateUser] = useGlobalState("user");
@@ -32,7 +33,7 @@ export const ProfileUpdate = () => {
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
   };
   useEffect(() => {
-    console.log(data);
+    
     if (data !== undefined) {
       changeName({ field: data.users.edges[0].node.firstName, valid: "true" });
       changeLastName({
@@ -55,7 +56,16 @@ export const ProfileUpdate = () => {
     console.log(data);
     if (data1.updateAccount.success) {
       console.log("Correcto");
-      toast.success("Informacion actualizada exitosamente");
+      swal.fire({
+        icon: "success",
+        text: "Actualizacion de informacion exitoso",
+        color: '#fff',
+        background: '#000',
+        iconColor: '#BA181B',
+        confirmButtonColor: '#BA181B',
+
+        timer: "2000",
+    })
       const newUser ={...user,
         firstName: name.field,
         lastName: lastName.field,
