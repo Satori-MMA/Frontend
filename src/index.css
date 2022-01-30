@@ -208,7 +208,7 @@ code {
   min-height: 70%;
 }
 
-.popup-inner-schedule{
+.popup-inner-schedule {
   position: relative;
   margin: 0px;
   padding-bottom: 2%;
@@ -217,12 +217,12 @@ code {
   max-width: 50px;
 }
 
-.container-popup-schedule{
+.container-popup-schedule {
   min-width: 70%;
 }
-.imgSchedule{
-    width: 50%; /* or any custom size */
-    object-fit: contain;
+.imgSchedule {
+  width: 50%; /* or any custom size */
+  object-fit: contain;
 }
 .close-btn-schedule {
   border-color: rgba(0, 0, 0, 0);
@@ -230,7 +230,7 @@ code {
   color: black;
   position: absolute;
   top: 1%;
-  right:27%;
+  right: 27%;
   border-radius: 30%;
 }
 
@@ -240,6 +240,30 @@ code {
   text-align: center;
 }
 
-.circle{
+.circle {
   border-radius: 50%;
+}
+
+.floating-button {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  bottom: 50%;
+  right: 97%;
+  border-color: transparent !important;
+  text-align: center;
+  background-color: transparent !important;
+  border-radius: 100% !important;
+}
+
+@media only screen and (max-width: 900px){
+  .floating-button  {
+    right: 96%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .floating-button  {
+    right: 95%;
+  }
 }

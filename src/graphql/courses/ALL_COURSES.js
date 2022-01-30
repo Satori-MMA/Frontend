@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 
 const ALL_COURSES = gql`
 query coursesQuery($after:String){
-    allCourses(first: 5,after:$after){
+    allCourses(first: 20,after:$after){
   	    edges{
             node{
             id
