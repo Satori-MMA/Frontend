@@ -11,6 +11,7 @@ import { MdManageSearch } from "react-icons/md";
 export const CoursesList = () => {
   const { data, loading, error, fetchMore } = useQuery(ALL_COURSES, {
     variables: { after: null },
+    fetchPolicy: "network-only",
   });
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
@@ -19,7 +20,7 @@ export const CoursesList = () => {
   const handleShow = () => setShow(true);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShow(false)
+    setShow(false);
   };
   const handleSearchStringChange = (e) => {
     setSearchString(e.target.value);
@@ -84,7 +85,12 @@ export const CoursesList = () => {
                 .includes(searchString.toLowerCase())
             )
             .map(({ node }) => (
-              <CourseCard course={node} link={"course-edit"} name={"Editar"} key={node.id}/>
+              <CourseCard
+                course={node}
+                link={"course-edit"}
+                name={"Editar"}
+                key={node.id}
+              />
               // renderCard(node)
             ))}
         </Row>

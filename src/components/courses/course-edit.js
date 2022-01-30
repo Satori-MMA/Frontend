@@ -128,7 +128,6 @@ export const CourseEdit = () => {
       description.valid === "true"
     ) {
       if (params.id === title.field) {
-        console.log("Es el mismo")
         mutateFunction({
           variables: {
             id:id,
@@ -141,7 +140,7 @@ export const CourseEdit = () => {
         });
         swal.fire({
           icon: "success",
-          text: "Curso creado",
+          text: "Curso actualizado",
           color: "#fff",
           background: "#000",
           timer: "2000",
