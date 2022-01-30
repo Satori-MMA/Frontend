@@ -116,7 +116,7 @@ export const CourseEdit = () => {
                     value={selects}
                     onChange={onChangeCategory}
                   >
-                    {c_data.allCategories.edges.map(({ node }) => (
+                    {c_data?.allCategories?.edges?.map(({ node }) => (
                       <option value={node.id}>{node.catName}</option>
                     ))}
                   </Form.Select>

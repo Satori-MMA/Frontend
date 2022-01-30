@@ -84,7 +84,7 @@ export const CoursesList = () => {
                 .includes(searchString.toLowerCase())
             )
             .map(({ node }) => (
-              <CourseCard course={node} link={"course-edit"} name={"Editar"} />
+              <CourseCard course={node} link={"course-edit"} name={"Editar"} key={node.id}/>
               // renderCard(node)
             ))}
         </Row>
