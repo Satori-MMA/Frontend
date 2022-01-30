@@ -6,6 +6,7 @@ query findCourse($title:String){
     allCourses(coTitle:$title){
   	    edges{
             node{
+            id
             coTitle
             coPrice
             coDescription

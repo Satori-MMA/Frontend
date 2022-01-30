@@ -192,7 +192,7 @@ export const Register = () => {
                     placeholder="Ingrese su contraseña"
                     type="password"
                     name="password"
-                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra, un numero, una matuscula y un caracter especial"
+                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra, un numero, una mayuscula y un caracter especial"
                     regularExpresion={expressions.password}
                   />
                 </Col>

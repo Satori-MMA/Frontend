@@ -9,6 +9,8 @@ const CourseCard = ({course,link,name}) =>{
             <Card.Text>
                 {course.coDescription}
             </Card.Text>
+            <hr/>
+            <p>Precio <span className="text-danger">$</span>{course.coPrice}</p>
             <Button
             as={Link}
             to={{pathname: `/${link}/${course.coTitle}`}}
