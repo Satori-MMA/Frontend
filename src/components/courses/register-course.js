@@ -80,6 +80,7 @@ export const RegisterCourse = () => {
           background: "#000",
           timer: "2000",
         });
+        
         navigate("/courses");
       }
     }
@@ -121,6 +122,14 @@ export const RegisterCourse = () => {
     ) {
       console.log(title);
       findCourse({ variables: { title: mytitle.field } });
+    }else{
+      swal.fire({
+        icon: "error",
+        text: "LLena el formulario correctamente por favor",
+        color: "#fff",
+        background: "#000",
+        timer: "2000",
+      });
     }
   };
   return (

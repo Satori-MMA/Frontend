@@ -1,19 +1,31 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
-import { useQuery } from "@apollo/client";
+import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
+import swal from "sweetalert2";
 import "./courses.css";
 import Input from "../register/input";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
+import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { useNavigate } from "react-router-dom";
 
 export const CourseEdit = () => {
   const params = useParams();
-  const { data, loading, error } = useQuery(FIND_COURSE, {
-    variables: { title: params.id },
-  });
+  const [id,setId] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [findCourse, { data, loading }] = useLazyQuery(
+    FIND_COURSE,
+    {
+      fetchPolicy: "network-only",
+    }
+  );
+  const [
+    mutateFunction,
+    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
+  ] = useMutation(UPDATE_COURSE);
   const [title, changeTitle] = useState({ field: "", valid: null });
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [image, changeImage] = useState({ field: "", valid: null });
@@ -24,9 +36,51 @@ export const CourseEdit = () => {
     loading: c_loading,
   } = useQuery(ALL_CATEGORIES);
   const [selects, setSelect] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
-    async function loading() {
-      if (data !== undefined) {
+    findCourse({ variables: { title: params.id } })
+  }, [])
+
+  useEffect(() => {
+    if (isLoaded) {
+      if (data) {
+        console.log("Le llego esto: ",title.field);
+        console.log(data);
+        if (data.allCourses.edges.length > 0) {
+          console.log("Mismo nombre");
+          swal.fire({
+            icon: "error",
+            text: "Ya existe un curso con el mismo nombre",
+            color: "#fff",
+            background: "#000",
+            timer: "2000",
+          });
+        } else {
+          console.log("Todo ok");
+          mutateFunction({
+            variables: {
+              id:id,
+              coTitle: title.field,
+              coDescription: description.field,
+              coImage: "TODO",
+              coPrice: price.field,
+              categoryId: selects,
+            },
+          });
+          swal.fire({
+            icon: "success",
+            text: "Curso actualizado",
+            color: "#fff",
+            background: "#000",
+            timer: "2000",
+          });
+
+          navigate("/courses");
+        }
+      }
+    } else {
+      if (data) {
+        setId(data.allCourses.edges[0].node.id)
         changeTitle({
           field: data.allCourses.edges[0].node.coTitle,
           valid: "true",
@@ -39,15 +93,21 @@ export const CourseEdit = () => {
           field: data.allCourses.edges[0].node.coPrice,
           valid: "true",
         });
+        setIsLoaded(true)
       }
     }
-    loading();
+
   }, [data]);
+
+  
+
+
+
   const onChangeCategory = (e) => {
     setSelect(e.target.value);
   };
 
-  if (error) return <div>errors</div>;
+
 
   if (loading || !data) return <LoadingSpin />;
 
@@ -59,13 +119,60 @@ export const CourseEdit = () => {
   const handleInputChange = (e) => {
     changeDescription({ ...description, field: e.target.value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (title.valid === "true" &&
+      price.valid === "true" &&
+      description.valid === "true"
+    ) {
+      if (params.id === title.field) {
+        console.log("Es el mismo")
+        mutateFunction({
+          variables: {
+            id:id,
+            coTitle: title.field,
+            coDescription: description.field,
+            coImage: "TODO",
+            coPrice: price.field,
+            categoryId: selects,
+          },
+        });
+        swal.fire({
+          icon: "success",
+          text: "Curso creado",
+          color: "#fff",
+          background: "#000",
+          timer: "2000",
+        });
+        
+        navigate("/courses");
+      } else {
+        console.log("le voy a mandar: ",title.field)
+        findCourse({ variables: { title: title.field } });
+        
+      }
+    } else {
+      swal.fire({
+        icon: "error",
+        text: "Llena correctamente el formulario por favor",
+        color: "#fff",
+        background: "#000",
+        timer: "2000",
+      });
+    }
+  }
   return (
     <div>
       <Container>
         <Row>
           <h3>Actualizar curso</h3>
           <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
-            <Form>
+            <Form
+              className="bg-ourBlack form-border"
+              action=""
+              onSubmit={handleSubmit}>
               <Input
                 state={title}
                 changeState={changeTitle}
