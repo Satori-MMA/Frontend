@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./courses.css";
 import CourseCard from "./courseCard";
+import { LoadingSpin } from "../utilities/LoadingSpin";
 
 
 export const CoursesList = () => {
@@ -11,7 +12,7 @@ export const CoursesList = () => {
     console.log("la data es: " + data)
     if (error) return <div>errors</div>;
 
-    if (loading || !data) return <div>loading</div>;
+    if (loading || !data) return <LoadingSpin/>
     return (
         <div>
             <Container fluid>

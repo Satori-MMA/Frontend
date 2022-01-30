@@ -14,6 +14,7 @@ import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 import CREATE_COURSE from "../../graphql/courses/CREATE_COURSE";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import { useNavigate } from "react-router-dom";
+import { LoadingSpin } from "../utilities/LoadingSpin";
 
 export const RegisterCourse = () => {
   const {
@@ -90,7 +91,10 @@ export const RegisterCourse = () => {
   };
   if (c_error) return <div>errors</div>;
 
-  if (c_loading) return <div>loading</div>;
+  if (c_loading)
+    return (
+        <LoadingSpin />
+    );
 
   if (m_loading) {
   }

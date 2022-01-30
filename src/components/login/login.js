@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
+import { LoadingSpin } from "../utilities/LoadingSpin";
 
 export const Login = () => {
-  
   const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
   const [datalogin, setDatalogin] = useState({ email: "", password: "" });
   const [user, updateUser] = useGlobalState("user");
@@ -22,8 +22,8 @@ export const Login = () => {
       navigate("/profile");
     }
   }, []);
-  
-  // if (loading) return "Submitting...";
+
+  if (loading) return <LoadingSpin />;
 
   // if (error) return `Submission error! ${error.message}`;
 
@@ -32,7 +32,7 @@ export const Login = () => {
       toast.success("Inicio de sesion exitoso !", { theme: "dark" });
       localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
       localStorage.setItem("token", data.tokenAuth.token);
-      
+
       updateUser(data.tokenAuth.user);
       console.log(user);
       navigate("/");
@@ -44,19 +44,17 @@ export const Login = () => {
 
   const handleSummit = (e) => {
     e.preventDefault();
-    if(datalogin.email===""){
+    if (datalogin.email === "") {
       toast.error("Ingrese el correo electronico", { theme: "dark" });
-    } else if(!datalogin.email.includes("@")){
+    } else if (!datalogin.email.includes("@")) {
       toast.error("Correo electronico invalido", { theme: "dark" });
-    }else if(datalogin.password === ""){
+    } else if (datalogin.password === "") {
       toast.error("Ingrese la contraseña", { theme: "dark" });
-    }else {
+    } else {
       tokenAuth({
         variables: { email: datalogin.email, password: datalogin.password },
       });
     }
-    
-    
   };
 
   return (
@@ -72,7 +70,7 @@ export const Login = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <InputGroup>
                   <InputGroup.Text className="border-carnelian icon-login">
-                    <FaUserCircle color="black" size={30}/>
+                    <FaUserCircle color="black" size={30} />
                   </InputGroup.Text>
                   <Form.Control
                     onChange={(e) => {
@@ -85,7 +83,7 @@ export const Login = () => {
                     type="email"
                     className="border-line-carnelian bg-cultured"
                     placeholder="Ingrese su correo electronico"
-                    width= "1px"
+                    width="1px"
                   />
                 </InputGroup>
               </Form.Group>
@@ -111,7 +109,6 @@ export const Login = () => {
                 </InputGroup>
               </Form.Group>
 
-              
               <Button
                 className="button-login-r"
                 id="login"
@@ -127,16 +124,16 @@ export const Login = () => {
                 variant="outline-primary"
                 as={Link}
                 to="/register"
-                  >
-                    Registrarse
+              >
+                Registrarse
               </Button>
-                  <Button 
-                    className="button-forgot-password" 
-                    variant="link"
-                    as={Link}
-                  to="/sendEmailForget"
-                  >
-                      Olvide mi contraseña
+              <Button
+                className="button-forgot-password"
+                variant="link"
+                as={Link}
+                to="/sendEmailForget"
+              >
+                Olvide mi contraseña
               </Button>
             </Form>
           </Col>
