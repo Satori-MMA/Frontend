@@ -224,6 +224,23 @@ code {
   width: 50%; /* or any custom size */
   object-fit: contain;
 }
+@media only screen and (max-width: 600px){
+  .container-popup-schedule  {
+    min-width: 100%; 
+  }
+  .imgSchedule {
+    width: 100%; 
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .container-popup-schedule  {
+    widmin-widthth: 100%; 
+  }
+}
+
+
+
 .close-btn-schedule {
   border-color: rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0);
