@@ -1,65 +1,133 @@
-import { Container, Form, InputGroup, Button } from "react-bootstrap";
-import { FaUserCircle } from "react-icons/fa";
-import { RiMailFill, RiPhoneFill } from "react-icons/ri";
-import { COLORS } from "../utilities/color";
+import { Container, Form, Button } from "react-bootstrap";
+import { useMutation } from "@apollo/client";
+import { useState, useEffect} from "react";
+import Input from "../register/input";
+import { toast } from "react-toastify";
+import OPINION_REGISTER from "../../graphql/contact/OPINION_REGISTER";
+import { ErrorMessage } from "../register/inputDinamicStyle";
+import { MdError } from "react-icons/md";
+import swal from "sweetalert2";
 
 export const FormContacto = () => {
+  const [mutateFunction, { data}] = useMutation(OPINION_REGISTER);
+  const [name, changeName] = useState({ field: "", valid: null });
+  const [comment, changeComment] = useState({ field: "", valid: null });
+  const [email, changeEmail] = useState({ field: "", valid: null });
+  const [phone, changePhone] = useState({ field: "", valid: null });
+  const [validForm, changeValidForm] = useState(null);
+  const expressions = {
+    name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    phone: /^\d{7,14}$/, // 7 a 14 numeros.
+    comment: /^[a-zA-Z0-9\s_.-]{1,200}$/, // Letras y espacios, pueden llevar acentos.
+  };
+
+  useEffect( ()=> {
+    
+    if (data) {
+      console.log("Correcto");
+      swal.fire({
+        icon: "success",
+        text: "Comentario Enviado",
+        color: "#fff",
+        background: "#000",
+        timer: "2000",
+      });
+    } else {
+      console.log(data);
+      toast.error("Un error inesperado ha ocurrido: ");
+    }
+
+  }, [data])
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      name.valid === "true" &&
+      comment.valid === "true" &&
+      email.valid === "true" &&
+      phone.valid === "true"
+    ) {      
+      mutateFunction({
+        variables: {
+          userName: name.field,
+          userPhone: phone.field,
+          userEmail: email.field,
+          userComment: comment.field,
+        },
+      });
+
+      changeValidForm(true);
+      changeName({ field: "", valid: null });
+      changeComment({ field: "", valid: null });
+      changeEmail({ field: "", valid: null });
+      changePhone({ field: "", valid: null });
+    } else {
+     
+      changeValidForm(false);
+    }
+  };
+
   return (
-    <Container>
-      <Form>
-        <Form.Group className="mb-3" controlId="formContactName">
-          <InputGroup>
-            <InputGroup.Text className="bg-ourBlack border-carnelian">
-              <FaUserCircle color={COLORS.carnelian} size={30} />
-            </InputGroup.Text>
-            <Form.Control
-              type="txt"
-              className="bg-cultured border-line-carnelian"
-              placeholder="Ingrese su nombre"
-            />
-          </InputGroup>
-        </Form.Group>
+    <Container fluid className="bg-ourBlack form-border text-left pb-0 pt-3">
+      <h1>Envianos un comentario:</h1>
+      <Form action="" onSubmit={handleSubmit}>
+        <Input
+          state={name}
+          changeState={changeName}
+          label="Nombre"
+          placeholder="Ingrese su nombre"
+          type="text"
+          name="name"
+          errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
+          regularExpresion={expressions.name}
+        />
 
-        <Form.Group className="mb-3" controlId="formContactEmail">
-          <InputGroup>
-            <InputGroup.Text className="bg-ourBlack border-carnelian">
-              <RiMailFill color={COLORS.carnelian} size={30} />
-            </InputGroup.Text>
-            <Form.Control
-              type="email"
-              className="bg-cultured border-line-carnelian"
-              placeholder="Ingrese su correo electronico"
-            />
-          </InputGroup>
-        </Form.Group>
+        <Input
+          state={phone}
+          changeState={changePhone}
+          label="Telefono"
+          placeholder="Ingrese su telefono"
+          type="text"
+          name="phone"
+          errorLabel="El telefono no puede ser vacio, solo puede contener numeros y el maximo son 14 dígitos."
+          regularExpresion={expressions.phone}
+        />
+        <Input
+          state={email}
+          changeState={changeEmail}
+          label="Correo"
+          placeholder="Ingrese su correo"
+          type="email"
+          name="email"
+          errorLabel="El correo solo puede contener letras, numeros, puntos, guiones y guion bajo."
+          regularExpresion={expressions.email}
+        />
 
-        <Form.Group className="mb-3" controlId="formContactPhone">
-          <InputGroup>
-            <InputGroup.Text className="bg-ourBlack border-carnelian">
-              <RiPhoneFill color={COLORS.carnelian} size={30} />
-            </InputGroup.Text>
-
-            <Form.Control
-              type="number"
-              className="bg-cultured border-line-carnelian"
-              placeholder="Ingrese su número de telefono"
-            />
-          </InputGroup>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formContactComment">
-          <Form.Label>Comentario</Form.Label>
-          <Form.Control
-            className="bg-cultured border-line-carnelian"
-            as="textarea"
-            rows={3}
-          />
-        </Form.Group>
-        <Button className="button-login-r" type="submit"
-        variant="success">
+        <Input
+          state={comment}
+          changeState={changeComment}
+          label="Comentario"
+          placeholder="Ingrese el comentario"
+          type="text"
+          name="comment"
+          errorLabel="El comentario no puede contener caracteres especiales ni ser vacio"
+          regularExpresion={expressions.comment}
+        />
+        <hr></hr>
+        <Button className="button-login-r" id="register" type="submit">
           Enviar
-        </Button>        
+        </Button>
       </Form>
+
+      {validForm === false && (
+        <ErrorMessage>
+          <p>
+            <MdError color="red" />
+            <b>Error:</b> Por favor rellena el formulario correctamente,            
+          </p>
+        </ErrorMessage>
+      )}
     </Container>
   );
 };

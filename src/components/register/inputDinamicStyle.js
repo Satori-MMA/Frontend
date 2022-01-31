@@ -36,7 +36,7 @@ const ErrorMessage= styled.div`
 	background: #F66060;
 	padding: 0px 15px;
 	border-radius: 3px;
-	grid-column: span 2;
+	grid-column: span 1;
 	p {
 		margin: 0;
 		font-size:15px;

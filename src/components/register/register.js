@@ -172,7 +172,7 @@ export const Register = () => {
                     placeholder="Ingrese su telefono"
                     type="text"
                     name="phone"
-                    errorLabel="El telefono solo puede contener numeros y el maximo son 14 dígitos."
+                    errorLabel="El telefono no puede ser vacio, solo puede contener numeros y el maximo son 14 dígitos."
                     regularExpresion={expressions.phone}
                   />
                   <Input

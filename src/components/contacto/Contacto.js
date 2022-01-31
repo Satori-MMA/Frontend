@@ -36,13 +36,13 @@ export const Contacto = () => {
               <iframe
                 title="mapToSatori"
                 width="95%"
-                height="450"
+                height="615"
                 id="gmap_canvas"
                 src="https://maps.google.com/maps?q=1.194294813130785,%20-77.26438277486805&t=&z=19&ie=UTF8&iwloc=&output=embed"
-                frameborder="0"
+                frameBorder="0"
                 scrolling="no"
-                marginheight="0"
-                marginwidth="0"
+                marginHeight="0"
+                marginWidth="0"
               ></iframe>
             </div>
           </div>

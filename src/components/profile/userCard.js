@@ -19,7 +19,7 @@ export const UserCard = () => {
           <Card.Title>
             {user.firstName} {user?.rolUser?.edges[0]?.node.rolName}
           </Card.Title>
-          <Card.Text className="p-">
+          <Card.Text className="p-2">
             <p>
               <strong>Nombre completo: </strong> {user.firstName}{" "}
               {user.lastName}

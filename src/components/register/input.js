@@ -17,7 +17,7 @@ const InputComponent = ({ state,changeState,label, name, placeholder, type, erro
     return (
         <Col className='form-group' >
             <Label>{label}<span className='text-danger'>*</span></Label>
-            <GroupInput>
+            <GroupInput>            
             <Input
                 className='form-control'
                 type={type}
