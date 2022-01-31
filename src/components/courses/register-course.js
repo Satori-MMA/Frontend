@@ -57,7 +57,7 @@ export const RegisterCourse = () => {
   }, [c_data]);
 
   useEffect(() => {
-    if (f_data && !f_loading) {
+    if (f_data) {
       console.log(title);
       console.log(f_data);
       if (f_data.allCourses.edges.length > 0) {

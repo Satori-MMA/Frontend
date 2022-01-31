@@ -10,8 +10,7 @@ import { MdManageSearch } from "react-icons/md";
 import { useGlobalState } from "../GlobalState";
 
 export const CoursesGestion = () => {
-  const { data, loading, error, fetchMore } = useQuery(ALL_COURSES, {
-    variables: { after: null },
+  const { data, loading, error, refetch  } = useQuery(ALL_COURSES, {
     fetchPolicy: "network-only",
   });
   const navigate = useNavigate();
@@ -22,6 +21,7 @@ export const CoursesGestion = () => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
     }
+    refetch()
   }, []);
 
   const handleClose = () => setShow(false);
@@ -54,7 +54,7 @@ export const CoursesGestion = () => {
           onHide={handleClose}
           scroll="true"
         >
-          <Offcanvas.Header closeButton>
+          <Offcanvas.Header className="text-white" closeButton>
             <Offcanvas.Title>Filtrar cursos</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -101,7 +101,7 @@ export const CoursesGestion = () => {
               // renderCard(node)
             ))}
         </Row>
-        <Row className="justify-content-md-center">
+        {/* <Row className="justify-content-md-center">
           <Button
             className="bg-ourBlack button-main"
             variant="outline-success m-2"
@@ -123,7 +123,7 @@ export const CoursesGestion = () => {
           >
             Cargar mas cursos
           </Button>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );

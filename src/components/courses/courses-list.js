@@ -9,8 +9,7 @@ import { useState } from "react";
 import { MdManageSearch } from "react-icons/md";
 
 export const CoursesList = () => {
-  const { data, loading, error, fetchMore } = useQuery(ALL_COURSES, {
-    variables: { after: null },
+  const { data, loading, error, refetch } = useQuery(ALL_COURSES, {
     fetchPolicy: "network-only",
   });
   const [show, setShow] = useState(false);
@@ -25,6 +24,7 @@ export const CoursesList = () => {
   const handleSearchStringChange = (e) => {
     setSearchString(e.target.value);
   };
+  refetch();
 
   console.log("la data es: " + data);
   if (error) return <div>errors</div>;
@@ -80,7 +80,7 @@ export const CoursesList = () => {
               // renderCard(node)
             ))}
         </Row>
-        <Row className="justify-content-md-center">
+        {/* <Row className="justify-content-md-center">
           <Button
             className="bg-ourBlack button-main"
             variant="outline-success m-2"
@@ -102,7 +102,7 @@ export const CoursesList = () => {
           >
             Cargar mas cursos
           </Button>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );
