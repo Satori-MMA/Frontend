@@ -11,7 +11,7 @@ import {PasswordReset} from './components/profile/formResetPassword';
 import {PasswordForget} from './components/profile/formForgetPassword';
 import { Login } from "./components/login/login";
 import { Contacto } from "./components/contacto/Contacto";
-import { CoursesGestion } from "./components/cursos/CoursesGestion";
+import { CoursesGestion } from "./components/courses/CoursesGestion";
 import { Mensuality } from "./components/payments/mensuality";
 import { Reports } from "./components/reports/reports";
 import { Profile } from "./components/profile/profile";

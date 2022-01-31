@@ -1,20 +1,28 @@
 import { Row, Col, Container, Form, Button, Offcanvas } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./courses.css";
 import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdManageSearch } from "react-icons/md";
+import { useGlobalState } from "../GlobalState";
 
-export const CoursesList = () => {
+export const CoursesGestion = () => {
   const { data, loading, error, fetchMore } = useQuery(ALL_COURSES, {
     variables: { after: null },
     fetchPolicy: "network-only",
   });
+  const navigate = useNavigate();
+  const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
+  useEffect(() => {
+    if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
+      navigate("/");
+    }
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -60,10 +68,23 @@ export const CoursesList = () => {
             </Form>
           </Offcanvas.Body>
         </Offcanvas>
+        <Row>
+          <Col></Col>
+          <Col xs={12} md={8}>
+            <Button
+              className="button-login-r"
+              variant="success"
+              as={Link}
+              to="/registerCourse"
+            >
+              Agregar un curso
+            </Button>
+          </Col>
+          <Col></Col>
+        </Row>
 
         <Row>
-          <h1>Programas de formacion y Cursos</h1>
-          <h3>Tenemos cursos para todos los niveles</h3>
+          <h1>Gestión de cursos</h1>
           {data.allCourses.edges
             .filter((element) =>
               element.node.coTitle
@@ -73,8 +94,8 @@ export const CoursesList = () => {
             .map(({ node }) => (
               <CourseCard
                 course={node}
-                link={"buy"}
-                name={"Comprar"}
+                link={"course-edit"}
+                name={"Editar"}
                 key={node.id}
               />
               // renderCard(node)

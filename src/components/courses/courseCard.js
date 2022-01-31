@@ -12,6 +12,7 @@ const CourseCard = ({course,link,name}) =>{
             <hr/>
             <p>Precio <span className="text-danger">$</span>{course.coPrice}</p>
             <Button
+            className="button-login-r mb-1"
             as={Link}
             to={{pathname: `/${link}/${course.coTitle}`}}
             variant="primary"

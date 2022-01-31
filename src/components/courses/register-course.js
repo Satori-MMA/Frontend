@@ -15,6 +15,7 @@ import CREATE_COURSE from "../../graphql/courses/CREATE_COURSE";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { useGlobalState } from "../GlobalState";
 
 export const RegisterCourse = () => {
   const {
@@ -39,6 +40,12 @@ export const RegisterCourse = () => {
   const [price, changePrice] = useState({ field: "", valid: null });
   const [selects, setSelect] = useState();
   const navigate = useNavigate();
+  const [user] = useGlobalState("user");
+  useEffect(() => {
+    if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     async function loading() {
@@ -80,8 +87,8 @@ export const RegisterCourse = () => {
           background: "#000",
           timer: "2000",
         });
-        
-        navigate("/courses");
+
+        navigate("/coursegestion");
       }
     }
   }, [f_data]);
@@ -92,10 +99,7 @@ export const RegisterCourse = () => {
   };
   if (c_error) return <div>errors</div>;
 
-  if (c_loading)
-    return (
-        <LoadingSpin />
-    );
+  if (c_loading) return <LoadingSpin />;
 
   if (m_loading) {
   }
@@ -122,7 +126,7 @@ export const RegisterCourse = () => {
     ) {
       console.log(title);
       findCourse({ variables: { title: mytitle.field } });
-    }else{
+    } else {
       swal.fire({
         icon: "error",
         text: "LLena el formulario correctamente por favor",

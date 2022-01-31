@@ -11,17 +11,15 @@ import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useNavigate } from "react-router-dom";
+import { useGlobalState } from "../GlobalState";
 
 export const CourseEdit = () => {
   const params = useParams();
-  const [id,setId] = useState();
+  const [id, setId] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [findCourse, { data, loading }] = useLazyQuery(
-    FIND_COURSE,
-    {
-      fetchPolicy: "network-only",
-    }
-  );
+  const [findCourse, { data, loading }] = useLazyQuery(FIND_COURSE, {
+    fetchPolicy: "network-only",
+  });
   const [
     mutateFunction,
     { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
@@ -37,14 +35,20 @@ export const CourseEdit = () => {
   } = useQuery(ALL_CATEGORIES);
   const [selects, setSelect] = useState();
   const navigate = useNavigate();
+  const [user] = useGlobalState("user");
   useEffect(() => {
-    findCourse({ variables: { title: params.id } })
-  }, [])
+    if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
+      navigate("/");
+    }
+  }, []);
+  useEffect(() => {
+    findCourse({ variables: { title: params.id } });
+  }, []);
 
   useEffect(() => {
     if (isLoaded) {
       if (data) {
-        console.log("Le llego esto: ",title.field);
+        console.log("Le llego esto: ", title.field);
         console.log(data);
         if (data.allCourses.edges.length > 0) {
           console.log("Mismo nombre");
@@ -59,7 +63,7 @@ export const CourseEdit = () => {
           console.log("Todo ok");
           mutateFunction({
             variables: {
-              id:id,
+              id: id,
               coTitle: title.field,
               coDescription: description.field,
               coImage: "TODO",
@@ -75,12 +79,12 @@ export const CourseEdit = () => {
             timer: "2000",
           });
 
-          navigate("/courses");
+          navigate("/coursegestion");
         }
       }
     } else {
       if (data) {
-        setId(data.allCourses.edges[0].node.id)
+        setId(data.allCourses.edges[0].node.id);
         changeTitle({
           field: data.allCourses.edges[0].node.coTitle,
           valid: "true",
@@ -93,21 +97,14 @@ export const CourseEdit = () => {
           field: data.allCourses.edges[0].node.coPrice,
           valid: "true",
         });
-        setIsLoaded(true)
+        setIsLoaded(true);
       }
     }
-
   }, [data]);
-
-  
-
-
 
   const onChangeCategory = (e) => {
     setSelect(e.target.value);
   };
-
-
 
   if (loading || !data) return <LoadingSpin />;
 
@@ -123,14 +120,15 @@ export const CourseEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (title.valid === "true" &&
+    if (
+      title.valid === "true" &&
       price.valid === "true" &&
       description.valid === "true"
     ) {
       if (params.id === title.field) {
         mutateFunction({
           variables: {
-            id:id,
+            id: id,
             coTitle: title.field,
             coDescription: description.field,
             coImage: "TODO",
@@ -145,12 +143,11 @@ export const CourseEdit = () => {
           background: "#000",
           timer: "2000",
         });
-        
-        navigate("/courses");
+
+        navigate("/coursegestion");
       } else {
-        console.log("le voy a mandar: ",title.field)
+        console.log("le voy a mandar: ", title.field);
         findCourse({ variables: { title: title.field } });
-        
       }
     } else {
       swal.fire({
@@ -161,7 +158,7 @@ export const CourseEdit = () => {
         timer: "2000",
       });
     }
-  }
+  };
   return (
     <div>
       <Container>
@@ -171,7 +168,8 @@ export const CourseEdit = () => {
             <Form
               className="bg-ourBlack form-border"
               action=""
-              onSubmit={handleSubmit}>
+              onSubmit={handleSubmit}
+            >
               <Input
                 state={title}
                 changeState={changeTitle}
