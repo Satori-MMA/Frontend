@@ -200,7 +200,7 @@ export const Home = () => {
           />
           <Schedule
             dia="SABADO"
-            horario="9:00 AM - 10:00 AM y 10:00 AM - 12:00 M"
+            horario="9:00 AM - 10:00 AM"
             clase="Jiu-Jitsu, Muay Thai, MMA"
           />
         </Row>
