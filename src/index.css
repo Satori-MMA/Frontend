@@ -141,6 +141,10 @@ code {
   color: #f5f3f4;
 }
 
+.text-gray {
+  color: #B1A7A6 !important;
+}
+
 .text-carnelian {
   color: #ba181b;
 }
@@ -235,10 +239,9 @@ code {
 
 @media only screen and (max-width: 500px){
   .container-popup-schedule  {
-    widmin-widthth: 100%; 
+    min-width: 100%; 
   }
 }
-
 
 
 .close-btn-schedule {
@@ -271,6 +274,10 @@ code {
   text-align: center;
   background-color: transparent !important;
   border-radius: 100% !important;
+}
+
+.dropdown-toggle::after {
+ color:#0B090A !important;
 }
 
 @media only screen and (max-width: 900px){

@@ -169,7 +169,7 @@ export const Home = () => {
         <Button
           className="btn-lg bg-ourBlack button-main button-courses"
           as={Link}
-          to="/contacto"
+          to="/courses"
           variant="outline-success m-2"
         >
           Acondicionamiento Fisico
