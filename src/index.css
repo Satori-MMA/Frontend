@@ -142,7 +142,7 @@ code {
 }
 
 .text-gray {
-  color: #B1A7A6 !important;
+  color: #b1a7a6 !important;
 }
 
 .text-carnelian {
@@ -228,21 +228,20 @@ code {
   width: 50%; /* or any custom size */
   object-fit: contain;
 }
-@media only screen and (max-width: 600px){
-  .container-popup-schedule  {
-    min-width: 100%; 
+@media only screen and (max-width: 600px) {
+  .container-popup-schedule {
+    min-width: 100%;
   }
   .imgSchedule {
-    width: 100%; 
+    width: 100%;
   }
 }
 
-@media only screen and (max-width: 500px){
-  .container-popup-schedule  {
-    min-width: 100%; 
+@media only screen and (max-width: 500px) {
+  .container-popup-schedule {
+    min-width: 100%;
   }
 }
-
 .text-left{
   text-align: left !important;
 }
@@ -280,18 +279,22 @@ code {
 }
 
 .dropdown-toggle::after {
- color:#0B090A !important;
+  color: #0b090a !important;
 }
 
-
-@media only screen and (max-width: 900px){
-  .floating-button  {
+@media only screen and (max-width: 900px) {
+  .floating-button {
     right: 96%;
   }
 }
 
-@media only screen and (max-width: 600px){
-  .floating-button  {
+
+@media only screen and (max-width: 600px) {
+  .floating-button {
     right: 95%;
   }
+}
+
+.svg-red {
+  fill: #e5383b !important;
 }
