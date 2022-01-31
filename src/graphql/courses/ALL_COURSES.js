@@ -9,6 +9,9 @@ const ALL_COURSES = gql`
           coTitle
           coPrice
           coDescription
+          category{
+            catName
+          }
         }
       }
     }

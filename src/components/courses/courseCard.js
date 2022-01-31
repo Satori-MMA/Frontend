@@ -15,7 +15,8 @@ const CourseCard = ({ course, link, name }) => {
         <hr />
         <p>
           Precio <span className="text-danger">$</span>
-          {course.coPrice}
+          {course.coPrice}<br/>
+          Categoria: {course.category.catName}
         </p>
         <Button
           className="button-login-r mb-1"
