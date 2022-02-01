@@ -129,7 +129,7 @@ export const RegisterCourse = () => {
     } else {
       swal.fire({
         icon: "error",
-        text: "LLena el formulario correctamente por favor",
+        text: "Llena el formulario correctamente por favor",
         color: "#fff",
         background: "#000",
         timer: "2000",
@@ -153,7 +153,7 @@ export const RegisterCourse = () => {
                 label="Titulo"
                 type="text"
                 name="title"
-                errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
+                errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
                 regularExpresion={expressions.text}
               />
               <label>
@@ -171,7 +171,7 @@ export const RegisterCourse = () => {
                 label="Precio"
                 type="text"
                 name="price"
-                errorLabel="El precio solo puede contener numeros y el maximo son 14 dígitos."
+                errorLabel="El precio solo puede contener números y el máximo son 14 dígitos."
                 regularExpresion={expressions.price}
               />
               <Row>

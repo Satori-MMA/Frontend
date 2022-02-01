@@ -1,6 +1,5 @@
-import { Row, Col, Container, Form, Button, Offcanvas } from "react-bootstrap";
+import { Row, Container, Form, Button, Offcanvas } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
 import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./courses.css";
 import CourseCard from "./courseCard";
@@ -62,7 +61,7 @@ export const CoursesList = () => {
         </Offcanvas>
 
         <Row>
-          <h1>Programas de formacion y Cursos</h1>
+          <h1>Programas de formación y Cursos</h1>
           <h3>Tenemos cursos para todos los niveles</h3>
           {data.allCourses.edges
             .filter((element) =>

@@ -194,7 +194,7 @@ export const CourseEdit = () => {
                 label="Precio"
                 type="text"
                 name="price"
-                errorLabel="El precio solo puede contener numeros y el maximo son 14 dígitos."
+                errorLabel="El precio solo puede contener números y el maximo son 14 dígitos."
                 regularExpresion={expressions.price}
               />
               <Row>

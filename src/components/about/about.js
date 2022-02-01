@@ -37,7 +37,7 @@ export const About = () => {
               un mejor aprendizaje. También damos cursos de defensa personal.
             </p>
             <p className="Justify-Text">
-              Contamos con mas de 25 años de experiencia en artes marciales y
+              Contamos con más de 25 años de experiencia en artes marciales y
               hemos representado al país en diversos torneos a nivel nacional e
               internacional. No te conformes con leerlo, ven y compruébalo.
             </p>
@@ -129,7 +129,7 @@ export const About = () => {
           <Col>
             <h3 className="text-center text-imperialRed mt-2">Jesus Fernando Pinzon</h3>
             <p className="Justify-Text">
-              30 años de experiencia en practica de artes marciales y 15 años de
+              30 años de experiencia en práctica de artes marciales y 15 años de
               experiencia como instructor de artes marciales
             </p>
             <p className="Justify-Text">
@@ -139,8 +139,8 @@ export const About = () => {
               Kung fu Wushu e instructor en defensa personal
             </p>
             <p className="Justify-Text">
-              Participacion en competencias nacionales e internacionales, en
-              paises como Ecuador y Panama
+            Participación en competencias nacionales e internacionales, en
+              países como Ecuador y Panamá
             </p>
           </Col>
           <Col className="text-center">
@@ -175,7 +175,7 @@ export const About = () => {
           <Col>
             <h3 className="text-center text-imperialRed mt-2">Brayan Andres Pinzon</h3>
             <p className="Justify-Text">
-              8 años de experiencia en practica de artes marciales y 1 año de
+              8 años de experiencia en práctica de artes marciales y 1 año de
               experiencia como instructor artes marciales
             </p>
             <p className="Justify-Text">
@@ -183,7 +183,7 @@ export const About = () => {
               judo y grappling.
             </p>
             <p className="Justify-Text">
-              Conocimiento sobre defensa personal y acondicionamiento fisico.
+              Conocimiento sobre defensa personal y acondicionamiento físico.
             </p>
           </Col>
         </Row>

@@ -32,7 +32,7 @@ export const  PasswordReset= () => {
             if (data.passwordReset.success) {
                 swal.fire({
                         icon: "success",
-                        text: "Se restablecio la contraseña de forma exitosa",
+                        text: "Se restableció la contraseña de forma exitosa",
                         color: '#fff',
                         background: '#000',
                         iconColor: '#BA181B',
@@ -40,13 +40,13 @@ export const  PasswordReset= () => {
             
                         timer: "2000",
                 })
-                toast.success("Se restablecio la contraseña de forma exitosa");
+                toast.success("Se restableció la contraseña de forma exitosa");
                 changePassword1({ field: "", valid: null });
                 changePassword2({ field: "", valid: null });
                 navigate("/login");
             } else {
                 toast.error(
-                    "Ocurrio un error inesperado, intente nuevamente " 
+                    "Ocurrió un error inesperado, intente nuevamente " 
                 );
             }
             reset();
@@ -115,7 +115,7 @@ export const  PasswordReset= () => {
                                         placeholder="Ingrese su contraseña"
                                         type="password"
                                         name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                                        errorLabel="La contraseña tiene que ser de mínimo 8 dígitos y contener al menos una letra y  un numero"
                                         regularExpresion={expressions.password1}
                                     />
                                     <Input
@@ -125,7 +125,7 @@ export const  PasswordReset= () => {
                                         placeholder="Ingrese su contraseña"
                                         type="password"
                                         name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                                        errorLabel="La contraseña tiene que ser de  mínimo 8 dígitos y contener al menos una letra y un número"
                                         regularExpresion={expressions.password2}
                                     />
                                 </Col>

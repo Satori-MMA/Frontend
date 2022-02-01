@@ -25,7 +25,7 @@ export const CarouselI = () => {
             to="/login"
             variant="success m-2 mt-3"
           >
-            Unete a Nosotros
+            Únete a Nosotros
           </Button>
         </Carousel.Caption>
       </Carousel.Item>
@@ -46,7 +46,7 @@ export const CarouselI = () => {
             to="/login"
             variant="success m-2 mt-3"
           >
-            Unete a Nosotros
+            Únete a Nosotros
           </Button>
         </Carousel.Caption>
       </Carousel.Item>
@@ -67,7 +67,7 @@ export const CarouselI = () => {
             to="/login"
             variant="success m-2 mt-3"
           >
-            Unete a Nosotros
+            Únete a Nosotros
           </Button>
         </Carousel.Caption>
       </Carousel.Item>
@@ -88,7 +88,7 @@ export const CarouselI = () => {
             to="/login"
             variant="outline-success m-2 mt-3"
           >
-            Unete a Nosotros
+            Únete a Nosotros
           </Button>
         </Carousel.Caption>
       </Carousel.Item>

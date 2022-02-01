@@ -119,10 +119,10 @@ export const NavigationBar = () => {
             ) : rol === "TEACHER" ? (
               <>
                 <Nav.Link as={Link} to="/coursegestion">
-                  Gestion de Cursos
+                  Gestión de Cursos
                 </Nav.Link>
                 <Nav.Link as={Link} to="/mensuality">
-                  Gestion de Mensualidades
+                  Gestión de Mensualidades
                 </Nav.Link>
                 <Nav.Link as={Link} to="/reports">
                   Reportes
@@ -162,7 +162,7 @@ export const NavigationBar = () => {
                   Ir al Perfil
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/profileupdate">
-                  Editar Informacion
+                  Editar Información
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={unsubscribe}>
@@ -182,7 +182,7 @@ export const NavigationBar = () => {
                 to="/login"
                 variant="outline-success m-2"
               >
-                Iniciar Sesion
+                Iniciar Sesión
               </Button>
 
               <Button

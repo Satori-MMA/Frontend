@@ -27,10 +27,10 @@ export const UserCard = () => {
               <strong>email: </strong>
               {user.email}
               <br />
-              <strong>Número de telefono: </strong>
+              <strong>Número de teléfono: </strong>
               {user.userPhone}
               <br />
-              <strong>Direccion: </strong>
+              <strong>Dirección: </strong>
               {user.userAddress}
               <br />
             </p>

@@ -29,7 +29,7 @@ export const Login = () => {
 
   if (typeof data != "undefined") {
     if (data.tokenAuth.success) {
-      toast.success("Inicio de sesion exitoso !", { theme: "dark" });
+      toast.success("Inicio de sesión exitoso !", { theme: "dark" });
       localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
       localStorage.setItem("token", data.tokenAuth.token);
 
@@ -45,9 +45,9 @@ export const Login = () => {
   const handleSummit = (e) => {
     e.preventDefault();
     if (datalogin.email === "") {
-      toast.error("Ingrese el correo electronico", { theme: "dark" });
+      toast.error("Ingrese el correo electrónico", { theme: "dark" });
     } else if (!datalogin.email.includes("@")) {
-      toast.error("Correo electronico invalido", { theme: "dark" });
+      toast.error("Correo electrónico invalido", { theme: "dark" });
     } else if (datalogin.password === "") {
       toast.error("Ingrese la contraseña", { theme: "dark" });
     } else {
@@ -82,7 +82,7 @@ export const Login = () => {
                     }}
                     type="email"
                     className="border-line-carnelian bg-cultured"
-                    placeholder="Ingrese su correo electronico"
+                    placeholder="Ingrese su correo electrónico"
                     width="1px"
                   />
                 </InputGroup>
@@ -116,7 +116,7 @@ export const Login = () => {
                 type="submit"
                 onClick={handleSummit}
               >
-                Iniciar Sesion
+                Iniciar Sesión
               </Button>
 
               <Button
@@ -133,7 +133,7 @@ export const Login = () => {
                 as={Link}
                 to="/sendEmailForget"
               >
-                Olvide mi contraseña
+                Olvidé mi contraseña
               </Button>
             </Form>
           </Col>

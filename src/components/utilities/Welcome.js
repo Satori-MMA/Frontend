@@ -38,16 +38,17 @@ export const Welcome = (props) => {
           src={Logo}
         />
         <h5 className="text-welcome-messagge">
-          Si es la primera vez que accedes a nuestra aplicacion, tenemos muchas
+          Si es la primera vez que accedes a nuestra aplicación, tenemos muchas
           sorpresas para ti 😃
         </h5>
         <h5 className="text-welcome-messagge">
-          Tienes derecho a una leccion presencial totalmente gratis para que
-          conozcas nuestras instalaciones y la metodologia a utilizar, ademas en
-          la aplicacion encontraras muchos cursos donde aprenderas cosas
+        Tienes derecho a una lección presencial totalmente gratis para que
+          conozcas nuestras instalaciones y la metodología a utilizar, además en
+          la aplicación encontraras muchos cursos donde aprenderás cosas
           muy interesantes.
+
         </h5>
-        <h4 className="text-welcome-messagge">Contactate con nosotros:</h4>
+        <h4 className="text-welcome-messagge mb-3">Contáctate con nosotros:</h4>
 
         <a
           className="m-1"
@@ -55,7 +56,7 @@ export const Welcome = (props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsWhatsapp size="5%" color={COLORS.carnelian} />
+          <BsWhatsapp className="icon-welcome" color={COLORS.carnelian} />
         </a>
         <a
           className="m-1"
@@ -63,7 +64,7 @@ export const Welcome = (props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsFacebook size="5%" color={COLORS.carnelian} />
+          <BsFacebook className="icon-welcome" color={COLORS.carnelian} />
         </a>
         <a
           className="m-1"
@@ -71,7 +72,7 @@ export const Welcome = (props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsInstagram size="5%" color={COLORS.carnelian} />
+          <BsInstagram  className="icon-welcome" color={COLORS.carnelian} />
         </a>
         <a
           className="m-1"
@@ -79,7 +80,7 @@ export const Welcome = (props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsYoutube size="5%" color={COLORS.carnelian} />
+          <BsYoutube  className="icon-welcome" color={COLORS.carnelian} />
         </a>
       </Container>
     </div>

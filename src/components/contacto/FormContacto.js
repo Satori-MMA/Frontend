@@ -79,18 +79,18 @@ export const FormContacto = () => {
           placeholder="Ingrese su nombre"
           type="text"
           name="name"
-          errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
+          errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
           regularExpresion={expressions.name}
         />
 
         <Input
           state={phone}
           changeState={changePhone}
-          label="Telefono"
-          placeholder="Ingrese su telefono"
+          label="Teléfono"
+          placeholder="Ingrese su teléfono"
           type="text"
           name="phone"
-          errorLabel="El telefono no puede ser vacio, solo puede contener numeros y el maximo son 14 dígitos."
+          errorLabel="El teléfono no puede ser vacío, solo puede contener números y el máximo son 14 dígitos."
           regularExpresion={expressions.phone}
         />
         <Input
@@ -100,7 +100,7 @@ export const FormContacto = () => {
           placeholder="Ingrese su correo"
           type="email"
           name="email"
-          errorLabel="El correo solo puede contener letras, numeros, puntos, guiones y guion bajo."
+          errorLabel="El correo solo puede contener letras, números, puntos, guiones y guion bajo."
           regularExpresion={expressions.email}
         />
 
@@ -111,7 +111,7 @@ export const FormContacto = () => {
           placeholder="Ingrese el comentario"
           type="text"
           name="comment"
-          errorLabel="El comentario no puede contener caracteres especiales ni ser vacio"
+          errorLabel="El comentario no puede contener caracteres especiales ni ser vacío"
           regularExpresion={expressions.comment}
         />
         <hr></hr>

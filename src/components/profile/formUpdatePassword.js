@@ -20,9 +20,9 @@ export const PasswordUpdate = (isReset) => {
 
     const [validForm, changeValidForm] = useState(null);
     const expressions = {
-        password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
-        password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
-        password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
+        password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 dígitos al menos una letra y un numero
+        password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 dígitos al menos una letra y un numero
+        password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 dígitos al menos una letra y un numero
     };
     let navigate = useNavigate();
     //if (loading) return "Submitting...";
@@ -33,7 +33,7 @@ export const PasswordUpdate = (isReset) => {
             if (data.passwordChange.success) {
                 swal.fire({
                     icon: "success",
-                    text: "Actualizacion de contraseña exitoso",
+                    text: "Actualización de contraseña exitoso",
                     color: '#fff',
                     background: '#000',
                     iconColor: '#BA181B',
@@ -113,7 +113,7 @@ export const PasswordUpdate = (isReset) => {
                                         placeholder="Ingrese su contraseña"
                                         type="password"
                                         name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                                        errorLabel="La contraseña tiene que ser de mínimo 8 dígitos y contener al menos una letra y  un numero"
                                         regularExpresion={expressions.password}
                                     />
                                     <Input
@@ -123,7 +123,7 @@ export const PasswordUpdate = (isReset) => {
                                         placeholder="Ingrese su contraseña"
                                         type="password"
                                         name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                                        errorLabel="La contraseña tiene que ser de mínimo 8 dígitos y contener al menos una letra y  un numero"
                                         regularExpresion={expressions.password1}
                                     />
                                     <Input
@@ -133,7 +133,7 @@ export const PasswordUpdate = (isReset) => {
                                         placeholder="Ingrese su contraseña"
                                         type="password"
                                         name="password"
-                                        errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra y  un numero"
+                                        errorLabel="La contraseña tiene que ser de mínimo 8 dígitos y contener al menos una letra y un numero"
                                         regularExpresion={expressions.password2}
                                     />
                                 </Col>

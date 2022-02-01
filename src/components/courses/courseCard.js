@@ -16,7 +16,7 @@ const CourseCard = ({ course, link, name }) => {
         <p>
           Precio <span className="text-danger">$</span>
           {course.coPrice}<br/>
-          Categoria: {course.category.catName}
+          Categoría: {course.category.catName}
         </p>
         <Button
           className="button-login-r mb-1"

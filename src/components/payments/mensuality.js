@@ -13,7 +13,7 @@ export const Mensuality = () => {
   }, []);
   return (
     <div>
-      <h1 className="text-white text-center"> Gestion de Mensualidades </h1>
+      <h1 className="text-white text-center"> Gestión de Mensualidades </h1>
       <LoadingMessage />
     </div>
   );

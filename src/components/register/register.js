@@ -22,11 +22,11 @@ export const Register = () => {
   const [password, changePassword] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
-    addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, numeros, guion y guion_bajo
+    addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, números, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 digitos al menos una letra y un numero
+    password: /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 dígitos al menos una letra y un numero
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    phone: /^\d{7,14}$/, // 7 a 14 numeros.
+    phone: /^\d{7,14}$/, // 7 a 14 números.
   };
 
 
@@ -139,7 +139,7 @@ export const Register = () => {
                   placeholder="Ingrese su nombre"
                   type="text"
                   name="name"
-                  errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
+                  errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
                   regularExpresion={expressions.name}
                 />
                 <Input
@@ -149,7 +149,7 @@ export const Register = () => {
                   placeholder="Ingrese su apellido"
                   type="text"
                   name="lastName"
-                  errorLabel="El apellido no puede contener caracteres especiales ni ser vacio"
+                  errorLabel="El apellido no puede contener caracteres especiales ni ser vacío"
                   regularExpresion={expressions.name}
                 />
               </Row>
@@ -158,21 +158,21 @@ export const Register = () => {
                   <Input
                     state={address}
                     changeState={changeAddress}
-                    label="Direccion"
-                    placeholder="Ingrese su direccion"
+                    label="Dirección"
+                    placeholder="Ingrese su dirección"
                     type="text"
                     name="address"
-                    errorLabel="La direccion tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo"
+                    errorLabel="La dirección tiene que ser de 4 a 16 dígitos y solo puede contener números, letras y guion bajo"
                     regularExpresion={expressions.addres}
                   />
                   <Input
                     state={phone}
                     changeState={changePhone}
-                    label="Telefono"
-                    placeholder="Ingrese su telefono"
+                    label="Teléfono"
+                    placeholder="Ingrese su teléfono"
                     type="text"
                     name="phone"
-                    errorLabel="El telefono no puede ser vacio, solo puede contener numeros y el maximo son 14 dígitos."
+                    errorLabel="El teléfono no puede ser vacío, solo puede contener números y el máximo son 14 dígitos."
                     regularExpresion={expressions.phone}
                   />
                   <Input
@@ -182,7 +182,7 @@ export const Register = () => {
                     placeholder="Ingrese su correo"
                     type="email"
                     name="email"
-                    errorLabel="El correo solo puede contener letras, numeros, puntos, guiones y guion bajo."
+                    errorLabel="El correo solo puede contener letras, números, puntos, guiones y guion bajo."
                     regularExpresion={expressions.email}
                   />
                   <Input
@@ -192,7 +192,7 @@ export const Register = () => {
                     placeholder="Ingrese su contraseña"
                     type="password"
                     name="password"
-                    errorLabel="La contraseña tiene que ser de minimo 8 digitos y contener al menos una letra, un numero, una mayuscula y un caracter especial"
+                    errorLabel="La contraseña tiene que ser de minimo 8 dígitos y contener al menos una letra, un numero, una mayúscula y un carácter especial"
                     regularExpresion={expressions.password}
                   />
                 </Col>
@@ -201,10 +201,9 @@ export const Register = () => {
               <Row>
                 {validForm === false && (
                   <ErrorMessage>
-                    <p>
+                    <p className="mb-2">
                       <MdError color="red" />
-                      <b>Error:</b> Por favor rellena el formulario
-                      correctamente, recuerda que tú nombre y contraseña deben ser diferentes!.
+                      <b>Error:</b> Por favor rellena el formulario correctamente, recuerda que tú nombre y contraseña deben ser diferentes!
                     </p>
                   </ErrorMessage>
                 )}

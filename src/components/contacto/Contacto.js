@@ -24,7 +24,7 @@ export const Contacto = () => {
           <p className="Justify-Text m-3">
             Nos encanta escuchar tus inquietudes y estamos ansiosos por hablar
             contigo de tus planes y expectativas sobre nuestras diferentes
-            disciplinas. Escribenos ahora! y te responderemos lo antes posible.
+            disciplinas. ¡Escríbenos ahora! y te responderemos lo antes posible.
           </p>
           <FormContacto />
         </Col>
@@ -64,7 +64,7 @@ export const Contacto = () => {
 
       <Row className="text-center">
         <h1>
-          Tambien nos puedes contactar por cualquiera de nuestras redes sociales
+        También nos puedes contactar por cualquiera de nuestras redes sociales
         </h1>
       </Row>
       <Row className="text-center" xs={1} sm={3} lg={3}>

@@ -29,9 +29,9 @@ export const ProfileUpdate = () => {
   const [address, changeAddress] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
-    addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, numeros, guion y guion_bajo
+    addres: /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, números, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    phone: /^\d{7,14}$/, // 7 a 14 numeros.
+    phone: /^\d{7,14}$/, // 7 a 14 números.
   };
   useEffect(() => {
     if (data !== undefined) {
@@ -58,7 +58,7 @@ export const ProfileUpdate = () => {
       console.log("Correcto");
       swal.fire({
         icon: "success",
-        text: "Actualizacion de informacion exitoso",
+        text: "Actualización de información exitoso",
         color: "#fff",
         background: "#000",
         iconColor: "#BA181B",
@@ -130,7 +130,7 @@ export const ProfileUpdate = () => {
               Actualizacion de perfil
             </h3>
             <p className="text-white mb-2">
-              Ingresa la informacion que desea actualizar
+              Ingresa la información que desea actualizar
             </p>
             <Form
               className="bg-ourBlack form-border"
@@ -145,7 +145,7 @@ export const ProfileUpdate = () => {
                   placeholder="Ingrese su nombre"
                   type="text"
                   name="name"
-                  errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
+                  errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
                   regularExpresion={expressions.name}
                 />
                 <Input
@@ -155,7 +155,7 @@ export const ProfileUpdate = () => {
                   placeholder="Ingrese su apellido"
                   type="text"
                   name="lastName"
-                  errorLabel="El apellido no puede contener caracteres especiales ni ser vacio"
+                  errorLabel="El apellido no puede contener caracteres especiales ni ser vacío"
                   regularExpresion={expressions.name}
                 />
               </Row>
@@ -164,21 +164,21 @@ export const ProfileUpdate = () => {
                   <Input
                     state={address}
                     changeState={changeAddress}
-                    label="Direccion"
-                    placeholder="Ingrese su direccion"
+                    label="Dirección"
+                    placeholder="Ingrese su dirección"
                     type="text"
                     name="address"
-                    errorLabel="La direccion tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo"
+                    errorLabel="La dirección tiene que ser de 4 a 16 dígitos y solo puede contener números, letras y guion bajo"
                     regularExpresion={expressions.addres}
                   />
                   <Input
                     state={phone}
                     changeState={changePhone}
-                    label="Telefono"
-                    placeholder="Ingrese su telefono"
+                    label="Teléfono"
+                    placeholder="Ingrese su teléfono"
                     type="text"
                     name="phone"
-                    errorLabel="El telefono solo puede contener numeros y el maximo son 14 dígitos."
+                    errorLabel="El teléfono solo puede contener números y el máximo son 14 dígitos."
                     regularExpresion={expressions.phone}
                   />
                 </Col>

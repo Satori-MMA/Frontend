@@ -229,32 +229,63 @@ code {
   object-fit: contain;
 }
 @media only screen and (max-width: 600px) {
+  .popup-inner .close-btn {
+    border-color: black;
+    background-color: black;
+    color: black;
+    position: absolute;
+    top: 0%;
+    right: 4%;
+    border-radius: 30%;
+  }
   .container-popup-schedule {
-    min-width: 100%;
+    min-height: 90%;
   }
   .imgSchedule {
     width: 100%;
   }
-}
+  .close-btn-schedule{
+   border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  position: absolute;
+  top: 0%;
+  right: 4%;
+  border-radius: 30%;
+  }
 
-@media only screen and (max-width: 500px) {
   .container-popup-schedule {
-    min-width: 100%;
+    min-width: 100%;  
+  }
+
+  .text-welcome-messagge{
+    font-size: small !important;
+  }
+  .icon-welcome{
+    font-size: 35px !important;
   }
 }
+
+@media only screen and (min-width: 600px) {
+  .close-btn-schedule {
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    position: absolute;
+    top: 0%;
+    right: 26%;
+    border-radius: 30%;
+  }
+  .icon-welcome{
+    font-size: 55px !important;
+  }
+}
+
+
 .text-left{
   text-align: left !important;
 }
 
-.close-btn-schedule {
-  border-color: rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0);
-  color: black;
-  position: absolute;
-  top: 1%;
-  right: 27%;
-  border-radius: 30%;
-}
 
 .no-border-card {
   border: 0px !important;

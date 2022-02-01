@@ -42,7 +42,7 @@ export const Home = () => {
             También dictamos cursos de defensa personal.
           </p>
 
-          <p>Si quieres saber mas, escribenos:</p>
+          <p>Si quieres saber más, escríbenos:</p>
           <a
             href="https://wa.me/573012524990"
             target="_blank"
@@ -107,8 +107,8 @@ export const Home = () => {
 
       {/* Seccion de Informacion Cursos */}
       <Row className="pt-2 text-center">
-        <h1 className="text-imperialRed"> Programas de Formacion y Cursos</h1>
-        <p>Tenemos muchos cursos para todas las catehorias y niveles</p>
+        <h1 className="text-imperialRed"> Programas de Formación y Cursos</h1>
+        <p>Tenemos muchos cursos para todas las categorías y niveles</p>
       </Row>
       <Container fluid id="course-container" className="text-center">
         <Button
@@ -200,7 +200,7 @@ export const Home = () => {
           />
           <Schedule
             dia="SABADO"
-            horario="9:00 AM - 10:00 AM"
+            horario="10:00 AM - 12:00 M"
             clase="Jiu-Jitsu, Muay Thai, MMA"
           />
         </Row>

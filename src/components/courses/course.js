@@ -1,10 +1,6 @@
 import "./courses.css";
 
-
-
-export const Course = () => {
-    
-    
+export const Course = () => {    
     return (
         <div>
         </div>
