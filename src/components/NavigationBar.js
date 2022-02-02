@@ -80,7 +80,7 @@ export const NavigationBar = () => {
       });
   };
   return (
-    <Navbar bg="ourBlack" variant="dark" expand="lg">
+    <Navbar className="navbar" bg="ourBlack" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <div className="d-flex align-items-center">

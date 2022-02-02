@@ -228,6 +228,49 @@ code {
   width: 50%; /* or any custom size */
   object-fit: contain;
 }
+
+.text-left{
+  text-align: left !important;
+}
+
+
+.no-border-card {
+  border: 0px !important;
+  background-color: transparent !important;
+  text-align: center;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.floating-button {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  bottom: 50%;
+  right: 97%;
+  border-color: transparent !important;
+  text-align: center;
+  background-color: transparent !important;
+  border-radius: 100% !important;
+}
+
+.dropdown-toggle::after {
+  color: #0b090a !important;
+}
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  top: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
   .popup-inner .close-btn {
     border-color: black;
@@ -264,6 +307,20 @@ code {
   .icon-welcome{
     font-size: 35px !important;
   }
+  .navbar{
+    padding: 3% !important;
+  }
+  .carousel-caption {
+    position: absolute;
+    right: 15%;
+    top: 20px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 0px !important;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
+  }    
 }
 
 @media only screen and (min-width: 600px) {
@@ -281,37 +338,6 @@ code {
   }
 }
 
-
-.text-left{
-  text-align: left !important;
-}
-
-
-.no-border-card {
-  border: 0px !important;
-  background-color: transparent !important;
-  text-align: center;
-}
-
-.circle {
-  border-radius: 50%;
-}
-
-.floating-button {
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  bottom: 50%;
-  right: 97%;
-  border-color: transparent !important;
-  text-align: center;
-  background-color: transparent !important;
-  border-radius: 100% !important;
-}
-
-.dropdown-toggle::after {
-  color: #0b090a !important;
-}
 
 @media only screen and (max-width: 900px) {
   .floating-button {

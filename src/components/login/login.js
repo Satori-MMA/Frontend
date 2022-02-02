@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useGlobalState } from "../GlobalState";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import swal from "sweetalert2";
 
 export const Login = () => {
   const [tokenAuth, { data, loading, error, reset }] = useMutation(LOGIN);
@@ -28,14 +29,25 @@ export const Login = () => {
   // if (error) return `Submission error! ${error.message}`;
 
   if (typeof data != "undefined") {
+    // console.log(data.tokenAuth.user.verified);
     if (data.tokenAuth.success) {
-      toast.success("Inicio de sesión exitoso !", { theme: "dark" });
-      localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
-      localStorage.setItem("token", data.tokenAuth.token);
+      // if (data.tokenAuth.user.verified) {
+        toast.success("Inicio de sesión exitoso !", { theme: "dark" });
+        localStorage.setItem("user", JSON.stringify(data.tokenAuth.user));
+        localStorage.setItem("token", data.tokenAuth.token);
 
-      updateUser(data.tokenAuth.user);
-      console.log(user);
-      navigate("/");
+        updateUser(data.tokenAuth.user);
+        console.log(user);
+        navigate("/");
+      // } else {
+      //   swal.fire({
+      //     icon: "success",
+      //     text: "Hemos enviado un correo para que vuelvas a activar tu cuenta",
+      //     color: "#fff",
+      //     background: "#000",
+      //     timer: "2000",
+      //   });
+      // }
     } else {
       toast.error("Credenciales invalidas", { theme: "dark" });
     }
