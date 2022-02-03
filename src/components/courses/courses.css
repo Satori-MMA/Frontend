@@ -41,3 +41,11 @@ input[type="file"] {
 .button-login-r{
     margin-top: 3%;
 }
+.card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.bottom {
+    margin-top: auto;
+  }

@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ReactComponent as FightSVG } from "../../Assets/fight.svg";
 import { COLORS } from "../utilities/color";
@@ -9,23 +9,27 @@ const CourseCard = ({ course, link, name }) => {
         <FightSVG fill={COLORS.rubyRed} width="70%" height="auto"/>
       </center>
       {/* <Card.Img variant="top" src="" title="imagen" /> */}
-      <Card.Body>
+      <Card.Body className="card-body">
+        <Row className="mb-3">
         <Card.Title>{course.coTitle}</Card.Title>
         <Card.Text>{course.coDescription}</Card.Text>
+        </Row>
+        <Row className="bottom">
         <hr />
         <p>
           Precio <span className="text-danger">$</span>
           {course.coPrice}<br/>
           Categoría: {course.category.catName}
-        </p>
+        </p>        
         <Button
-          className="button-login-r mb-1"
+          className="button-login-r bottom mb-1"
           as={Link}
           to={{ pathname: `/${link}/${course.coTitle}` }}
           variant="primary"
         >
           {name}
         </Button>
+        </Row>  
       </Card.Body>
     </Card>
   );
