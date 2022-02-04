@@ -2,6 +2,7 @@ import { Row, Col, Container, Form, Button, Offcanvas } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
 import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
+import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 import "./courses.css";
 import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
@@ -13,15 +14,22 @@ export const CoursesGestion = () => {
   const { data, loading, error, refetch  } = useQuery(ALL_COURSES, {
     fetchPolicy: "network-only",
   });
+  const { data:category_data, loading:category_load_, error:category_error_, refetch:category_refecth } = useQuery(ALL_CATEGORIES, {
+    fetchPolicy: "network-only",
+  });
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
+  const [category, setCategory] = useState("");
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
-    }
+    } 
+    category_refecth()
     refetch()
+   
+    
   }, []);
 
   const handleClose = () => setShow(false);
@@ -31,13 +39,19 @@ export const CoursesGestion = () => {
     setShow(false);
   };
   const handleSearchStringChange = (e) => {
+    // console.log("Buscando")
     setSearchString(e.target.value);
   };
+  const handleSearchCategory = (e) => {   
+    console.log("Buscando por categoria")
+    console.log(e.target.name)
+    setCategory(e);
+  };
 
-  console.log("la data es: " + data);
+  // console.log("la data es: " + data);
   if (error) return <div>errors</div>;
 
-  if (loading || !data) return <LoadingSpin />;
+  if (category_load_ || loading || !data) return <LoadingSpin />;
   return (
     <div>
       <Container fluid>
@@ -65,7 +79,14 @@ export const CoursesGestion = () => {
                 value={searchString}
                 onChange={handleSearchStringChange}
               />
+              {console.log("data")}          
+              {console.log(category_data.allCategories.edges)}
+              {category_data.allCategories.edges
+              .map(({ node }) => ( <Button className="button-courses" name={node.catName} variant="outline-primary"              
+              onClick={handleSearchCategory}>{ node.catName }</Button>
+))}
             </Form>
+            
           </Offcanvas.Body>
         </Offcanvas>
         <Row>
@@ -90,6 +111,7 @@ export const CoursesGestion = () => {
               element.node.coTitle
                 .toLowerCase()
                 .includes(searchString.toLowerCase())
+                
             )
             .map(({ node }) => (
               <CourseCard
