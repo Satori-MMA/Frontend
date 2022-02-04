@@ -6,13 +6,24 @@ import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useState } from "react";
 import { MdManageSearch } from "react-icons/md";
+import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 
 export const CoursesList = () => {
   const { data, loading, error, refetch } = useQuery(ALL_COURSES, {
     fetchPolicy: "network-only",
   });
+
+  const {
+    data: category_data,
+    loading: category_load_,    
+    refetch: category_refecth,
+  } = useQuery(ALL_CATEGORIES, {
+    fetchPolicy: "network-only",
+  });
+
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,6 +36,11 @@ export const CoursesList = () => {
   };
   refetch();
 
+  const handleSearchCategory = (e) => {
+    console.log("Buscando por categoria");
+    console.log(e.target.name);
+    setCategory(e.target.name);
+  };
   console.log("la data es: " + data);
   if (error) return <div>errors</div>;
 
@@ -56,6 +72,24 @@ export const CoursesList = () => {
                 value={searchString}
                 onChange={handleSearchStringChange}
               />
+              <Button
+                  className="button-courses mt-4 mb-2"
+                  name=""
+                  variant="outline-primary"
+                  onClick={handleSearchCategory}
+                >
+                  Todos los cursos
+                </Button>
+              {category_data.allCategories.edges.map(({ node }) => (
+                <Button
+                  className="button-courses"
+                  name={node.catName}
+                  variant="outline-primary"
+                  onClick={handleSearchCategory}
+                >
+                  {node.catName}
+                </Button>
+              ))}
             </Form>
           </Offcanvas.Body>
         </Offcanvas>
@@ -64,10 +98,12 @@ export const CoursesList = () => {
           <h1>Programas de formación y Cursos</h1>
           <h3>Tenemos cursos para todos los niveles</h3>
           {data.allCourses.edges
-            .filter((element) =>
-              element.node.coTitle
-                .toLowerCase()
-                .includes(searchString.toLowerCase())
+            .filter(
+              (element) =>
+                element.node.coTitle
+                  .toLowerCase()
+                  .includes(searchString.toLowerCase()) &&
+                element.node.category.catName.includes(category)
             )
             .map(({ node }) => (
               <CourseCard

@@ -16,8 +16,7 @@ export const CoursesGestion = () => {
   });
   const {
     data: category_data,
-    loading: category_load_,
-    error: category_error_,
+    loading: category_load_,    
     refetch: category_refecth,
   } = useQuery(ALL_CATEGORIES, {
     fetchPolicy: "network-only",
@@ -84,6 +83,14 @@ export const CoursesGestion = () => {
               />
               {console.log("data")}
               {console.log(category_data.allCategories.edges)}
+              <Button
+                  className="button-courses mt-4 mb-2"
+                  name=""
+                  variant="outline-primary"
+                  onClick={handleSearchCategory}
+                >
+                  Todos los cursos
+                </Button>
               {category_data.allCategories.edges.map(({ node }) => (
                 <Button
                   className="button-courses"
