@@ -11,10 +11,15 @@ import { MdManageSearch } from "react-icons/md";
 import { useGlobalState } from "../GlobalState";
 
 export const CoursesGestion = () => {
-  const { data, loading, error, refetch  } = useQuery(ALL_COURSES, {
+  const { data, loading, error, refetch } = useQuery(ALL_COURSES, {
     fetchPolicy: "network-only",
   });
-  const { data:category_data, loading:category_load_, error:category_error_, refetch:category_refecth } = useQuery(ALL_CATEGORIES, {
+  const {
+    data: category_data,
+    loading: category_load_,
+    error: category_error_,
+    refetch: category_refecth,
+  } = useQuery(ALL_CATEGORIES, {
     fetchPolicy: "network-only",
   });
   const navigate = useNavigate();
@@ -25,11 +30,9 @@ export const CoursesGestion = () => {
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
-    } 
-    category_refecth()
-    refetch()
-   
-    
+    }
+    category_refecth();
+    refetch();
   }, []);
 
   const handleClose = () => setShow(false);
@@ -42,10 +45,10 @@ export const CoursesGestion = () => {
     // console.log("Buscando")
     setSearchString(e.target.value);
   };
-  const handleSearchCategory = (e) => {   
-    console.log("Buscando por categoria")
-    console.log(e.target.name)
-    setCategory(e);
+  const handleSearchCategory = (e) => {
+    console.log("Buscando por categoria");
+    console.log(e.target.name);
+    setCategory(e.target.name);
   };
 
   // console.log("la data es: " + data);
@@ -79,14 +82,19 @@ export const CoursesGestion = () => {
                 value={searchString}
                 onChange={handleSearchStringChange}
               />
-              {console.log("data")}          
+              {console.log("data")}
               {console.log(category_data.allCategories.edges)}
-              {category_data.allCategories.edges
-              .map(({ node }) => ( <Button className="button-courses" name={node.catName} variant="outline-primary"              
-              onClick={handleSearchCategory}>{ node.catName }</Button>
-))}
+              {category_data.allCategories.edges.map(({ node }) => (
+                <Button
+                  className="button-courses"
+                  name={node.catName}
+                  variant="outline-primary"
+                  onClick={handleSearchCategory}
+                >
+                  {node.catName}
+                </Button>
+              ))}
             </Form>
-            
           </Offcanvas.Body>
         </Offcanvas>
         <Row>
@@ -107,11 +115,12 @@ export const CoursesGestion = () => {
         <Row>
           <h1>Gestión de cursos</h1>
           {data.allCourses.edges
-            .filter((element) =>
-              element.node.coTitle
-                .toLowerCase()
-                .includes(searchString.toLowerCase())
-                
+            .filter(
+              (element) =>
+                element.node.coTitle
+                  .toLowerCase()
+                  .includes(searchString.toLowerCase()) &&
+                element.node.category.catName.includes(category)
             )
             .map(({ node }) => (
               <CourseCard
