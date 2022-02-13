@@ -2,8 +2,7 @@ import { Card, Button, Row } from "react-bootstrap";
 import { FcBusinessman } from "react-icons/fc";
 import { useGlobalState } from "../GlobalState";
 import { COLORS } from "../utilities/color";
-export const UserCard = () => {
-  const [user] = useGlobalState("user");
+export const UserCard = ({user}) => {
   return (
     <Card className="no-border-card">
       <Card.Body className="bg-ourBlack form-border m-0">
