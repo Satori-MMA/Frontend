@@ -125,7 +125,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/courses"
+              to={{ pathname: `/courses/Brazilian Jiu-Jitsu` }}
               variant="outline-success m-2"
             >
               Jiu-Jitsu
@@ -136,7 +136,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/courses"
+              to={{ pathname: `/courses/Muay Thai` }}
               variant="outline-success m-2"
             >
               Muay Thai
@@ -148,7 +148,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/courses"
+              to={{ pathname: `/courses/MMA` }}
               variant="outline-success m-2"
             >
               MMA
@@ -159,7 +159,7 @@ export const Home = () => {
             <Button
               className="btn-lg bg-ourBlack button-main button-courses"
               as={Link}
-              to="/courses"
+              to={{ pathname: `/courses/Defensa Personal` }}
               variant="outline-success m-2"
             >
               Defensa Personal
@@ -169,7 +169,7 @@ export const Home = () => {
         <Button
           className="btn-lg bg-ourBlack button-main button-courses"
           as={Link}
-          to="/courses"
+          to={{ pathname: `/courses/Acondicionamiento Fisico` }}
           variant="outline-success m-2"
         >
           Acondicionamiento Fisico

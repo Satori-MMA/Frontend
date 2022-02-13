@@ -35,6 +35,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contacto />} />
             <Route path="/courses" element={<CoursesList />} />
+            <Route path="/courses/:cat" element={<CoursesList />} />
             <Route path="/coursegestion" element={<CoursesGestion />} />
             <Route path="/mensuality" element={<Mensuality />} />
             <Route path="/profile" element={<Profile />} />

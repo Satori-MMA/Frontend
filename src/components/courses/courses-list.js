@@ -4,8 +4,9 @@ import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./courses.css";
 import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdManageSearch } from "react-icons/md";
+import { useParams } from "react-router-dom";
 import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 
 export const CoursesList = () => {
@@ -15,7 +16,7 @@ export const CoursesList = () => {
 
   const {
     data: category_data,
-    loading: category_load_,    
+    loading: category_load_,
     refetch: category_refecth,
   } = useQuery(ALL_CATEGORIES, {
     fetchPolicy: "network-only",
@@ -24,7 +25,13 @@ export const CoursesList = () => {
   const [show, setShow] = useState(false);
   const [searchString, setSearchString] = useState("");
   const [category, setCategory] = useState("");
+  const params = useParams();
 
+  useEffect(() => {
+    if (params.cat) {
+      setCategory(params.cat);
+    }
+  }, []);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSubmit = (e) => {
@@ -73,14 +80,14 @@ export const CoursesList = () => {
                 onChange={handleSearchStringChange}
               />
               <Button
-                  className="button-courses mt-4 mb-2"
-                  name=""
-                  variant="outline-primary"
-                  onClick={handleSearchCategory}
-                >
-                  Todos los cursos
-                </Button>
-              {category_data.allCategories.edges.map(({ node }) => (
+                className="button-courses mt-4 mb-2"
+                name=""
+                variant="outline-primary"
+                onClick={handleSearchCategory}
+              >
+                Todos los cursos
+              </Button>
+              {category_data?.allCategories?.edges?.map(({ node }) => (
                 <Button
                   className="button-courses"
                   name={node.catName}
@@ -95,8 +102,23 @@ export const CoursesList = () => {
         </Offcanvas>
 
         <Row>
-          <h1>Programas de formación y Cursos</h1>
-          <h3>Tenemos cursos para todos los niveles</h3>
+          {data.allCourses.edges.filter(
+            (element) =>
+              element.node.coTitle
+                .toLowerCase()
+                .includes(searchString.toLowerCase()) &&
+              element.node.category.catName.includes(category)
+          ).length === 0 ? (
+            <h3>
+              Por ahora no tenemos cursos que concuerden con su busqueda
+            </h3>
+          ) : (
+            <>
+              <h1>Programas de formación y Cursos</h1>
+              <h3>Tenemos cursos para todos los niveles</h3>
+            </>
+          )}
+
           {data.allCourses.edges
             .filter(
               (element) =>
