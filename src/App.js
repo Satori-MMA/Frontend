@@ -21,6 +21,8 @@ import { CourseEdit } from "./components/courses/course-edit";
 import { CoursesList } from "./components/courses/courses-list";
 import { Welcome } from "./components/utilities/Welcome";
 import { RegisterCourse } from "./components/courses/register-course";
+import { LessonRegister } from "./components/lesson/lesson";
+import { LessonCRUD } from "./components/lesson/lessonList";
 function App() {
   
   
@@ -48,6 +50,8 @@ function App() {
             <Route path="/password-reset/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
             <Route path="/registerCourse" element={<RegisterCourse/>}/>
+            <Route path="/registerLesson" element={<LessonRegister/>}/>
+            <Route path="/crudLesson" element={<LessonCRUD/>}/>
           </Routes>
         </Container>
       </header>

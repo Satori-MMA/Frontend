@@ -1,11 +1,12 @@
 import { Card, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ReactComponent as FightSVG } from "../../Assets/fight.svg";
-import { COLORS } from "../utilities/color";
+// import { ReactComponent as FightSVG } from "../../Assets/fight.svg";
+// import { COLORS } from "../utilities/color";
 import swal from "sweetalert2";
+import ReactPlayer from 'react-player'
 import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { useMutation } from "@apollo/client";
-const CourseCard = ({ course, link, name }) => {
+const LessonCard = ({ course, link, name }) => {
   const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
     useMutation(UPDATE_COURSE);
   const desactivateCourse = (e) => {
@@ -53,21 +54,29 @@ const CourseCard = ({ course, link, name }) => {
   return (
     <Card key={course.id} bg="dark">
       <center>
-        <FightSVG fill={COLORS.rubyRed} width="70%" height="auto" />
+      
       </center>
       {/* <Card.Img variant="top" src="" title="imagen" /> */}
       <Card.Body className="card-body">
         <Row className="mb-3">
-          <Card.Title>{course.coTitle}</Card.Title>
-          <Card.Text>{course.coDescription}</Card.Text>
+          <Card.Title>Lección</Card.Title>
+          <ReactPlayer
+          url='https://youtu.be/iW_b2srB3DI'
+          className='react-player'
+          playing
+          width='90%'
+          height='auto'
+          muted = 'false'
+      />
+          
         </Row>
         <Row className="bottom">
           <hr />
           <p>
-            Precio <span className="text-danger">$</span>
-            {course.coPrice}
+            Codigo <span className="text-danger"></span>
+            {/* {course.coPrice} */}1231
             <br />
-            Categoría: {course.category.catName}
+            Evaluación: 4
           </p>
           <Button
             className="button-login-r bottom mb-1"
@@ -82,20 +91,13 @@ const CourseCard = ({ course, link, name }) => {
             onClick={desactivateCourse}
             variant="primary"
           >
-            Desactivar curso
+            Desactivar lección
           </Button>
-          <Button
-            className="button-login-r bottom mb-1"
-            as={Link}
-            to={'/crudLesson'}
-            variant="primary"
-          >
-            Gestionar Lecciones
-          </Button>
+          
         </Row>
       </Card.Body>
     </Card>
   );
 };
 
-export default CourseCard;
+export default LessonCard;
