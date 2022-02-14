@@ -12,6 +12,7 @@ const ALL_COURSES = gql`
           category{
             catName
           }
+          isActive
         }
       }
     }

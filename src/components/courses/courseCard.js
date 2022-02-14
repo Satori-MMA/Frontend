@@ -11,12 +11,13 @@ const CourseCard = ({ course, link, name }) => {
     useMutation(UPDATE_COURSE);
   const [user, updateUser] = useGlobalState("user");
   const rol = user?.rolUser?.edges[0]?.node.rolName;
-  const desactivateCourse = (e) => {
+  const changeStatusCourse = (e) => {
     e.preventDefault();
+    const estado = course.isActive ? "desactivar" : "activar";
     swal
       .fire({
-        title: "Desactivar curso",
-        text: "¿Estas seguro de desactivar este curso?",
+        title: estado.charAt(0).toUpperCase() + estado.slice(1) + " curso",
+        text: "¿Estas seguro de " + estado + " este curso?",
         icon: "question",
         color: "#fff",
         background: "#000",
@@ -31,10 +32,9 @@ const CourseCard = ({ course, link, name }) => {
           console.log(result);
           return mutate({
             variables: {
-              isActive: false,
+              isActive: !course.isActive,
               coTitle: course.coTitle,
               id: course.id,
-
             },
           });
         }
@@ -72,7 +72,7 @@ const CourseCard = ({ course, link, name }) => {
             <br />
             Categoría: {course.category.catName}
           </p>
-          
+
           <Button
             className="button-login-r bottom mb-1"
             as={Link}
@@ -82,33 +82,29 @@ const CourseCard = ({ course, link, name }) => {
             {name}
           </Button>
           {rol === "STUDENT" ? (
-              <>
-               
-              </>
-            ) : rol === "TEACHER" ? (
-              <>
-          <Button
-             className="button-courses"
-             variant="outline-primary"
-            onClick={desactivateCourse}            
-          >
-            Desactivar curso
-          </Button>
-          
-          <Button
-            className="button-courses bottom mt-1"
-            as={Link}
-            to={'/crudLesson'}
-            variant="outline-primary"
-          >
-            Gestionar Lecciones
-          </Button>
-              </>
-            ) : (
-              <>
-                
-              </>
-            )}          
+            <></>
+          ) : rol === "TEACHER" ? (
+            <>
+              <Button
+                className="button-courses"
+                variant="outline-primary"
+                onClick={changeStatusCourse}
+              >
+                {course.isActive ? "Desactivar curso" : "Activar curso"}
+              </Button>
+
+              <Button
+                className="button-courses bottom mt-1"
+                as={Link}
+                to={"/crudLesson"}
+                variant="outline-primary"
+              >
+                Gestionar Lecciones
+              </Button>
+            </>
+          ) : (
+            <></>
+          )}
         </Row>
       </Card.Body>
     </Card>

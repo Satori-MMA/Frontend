@@ -107,7 +107,8 @@ export const CoursesList = () => {
               element.node.coTitle
                 .toLowerCase()
                 .includes(searchString.toLowerCase()) &&
-              element.node.category.catName.includes(category)
+              element.node.category.catName.includes(category) &&
+              element.node.isActive
           ).length === 0 ? (
             <h3>
               Por el momento no tenemos cursos que concuerden con su busqueda
@@ -125,7 +126,8 @@ export const CoursesList = () => {
                 element.node.coTitle
                   .toLowerCase()
                   .includes(searchString.toLowerCase()) &&
-                element.node.category.catName.includes(category)
+                element.node.category.catName.includes(category) &&
+                element.node.isActive
             )
             .map(({ node }) => (
               <CourseCard
