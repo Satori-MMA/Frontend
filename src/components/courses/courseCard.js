@@ -5,9 +5,12 @@ import { COLORS } from "../utilities/color";
 import swal from "sweetalert2";
 import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { useMutation } from "@apollo/client";
+import { useGlobalState } from "../GlobalState";
 const CourseCard = ({ course, link, name }) => {
   const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
     useMutation(UPDATE_COURSE);
+  const [user, updateUser] = useGlobalState("user");
+  const rol = user?.rolUser?.edges[0]?.node.rolName;
   const desactivateCourse = (e) => {
     e.preventDefault();
     swal
@@ -69,6 +72,7 @@ const CourseCard = ({ course, link, name }) => {
             <br />
             Categoría: {course.category.catName}
           </p>
+          
           <Button
             className="button-login-r bottom mb-1"
             as={Link}
@@ -77,13 +81,25 @@ const CourseCard = ({ course, link, name }) => {
           >
             {name}
           </Button>
-          <Button
-            className="button-login-r bottom mb-1"
-            onClick={desactivateCourse}
-            variant="primary"
+          {rol === "STUDENT" ? (
+              <>
+               
+              </>
+            ) : rol === "TEACHER" ? (
+              <>
+                 <Button
+             className="button-courses"
+             variant="outline-primary"
+            onClick={desactivateCourse}            
           >
             Desactivar curso
           </Button>
+              </>
+            ) : (
+              <>
+                
+              </>
+            )}          
         </Row>
       </Card.Body>
     </Card>
