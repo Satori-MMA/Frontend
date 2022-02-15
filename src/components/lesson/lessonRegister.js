@@ -7,23 +7,88 @@ import { MdError } from "react-icons/md";
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
+import { useMutation, useQuery } from "@apollo/client";
+import CREATE_LESSON from "../../graphql/lessons/REGISTER_LESSON";
+import swal from "sweetalert2";
+import { Navigate, useParams } from "react-router-dom";
 // import { Link, useNavigate } from "react-router-dom";
 
 // import swal from "sweetalert2";
 // import { LoadingSpin } from "../utilities/LoadingSpin";
 
-export const LessonRegister = () => {
+export const LessonRegister = ({id}) => {
+    const params = useParams();
+    const {data: c_data, error: c_error,loading: c_loading,} = useQuery(ALL_LESSONS);
+    const [mutateFunction,{ data: m_data, loading: m_loading, error: m_error, reset: m_reset },] = useMutation(CREATE_LESSON);
     const [name, changeName] = useState({ field: "", valid: null });
     const [link, changeLink] = useState({ field: "", valid: null });
     const [description, changeDescription] = useState({ field: "", valid: null });
     const [code, changeCode] = useState({ field: "", valid: null });
     const [validForm, changeValidForm] = useState(null);
     const expressions = {
-        name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+        name:  /^[a-zA-Z0-9\s_.*+|°,#/-]{4,50}$/, // Letras, números, guion y guion_bajo
     };
-    const handleSubmit = (e) => {
+    // useEffect(() => {
+    //     if (c_data) {
+    //       console.log(name);
+    //       console.log(c_data);
+    //       if (c_data.allLessons.edges.length > 0) {
+    //         console.log("Mismo nombre");
+    //         swal.fire({
+    //           icon: "error",
+    //           text: "Ya existe un curso con el mismo nombre",
+    //           color: "#fff",
+    //           background: "#000",
+    //           timer: "2000",
+    //         });
+    //       } else {
+    //         console.log("Todo ok");
+            
+    //         swal.fire({
+    //           icon: "success",
+    //           text: "Curso creado",
+    //           color: "#fff",
+    //           background: "#000",
+    //           timer: "2000",
+    //         });
+    
+    //         Navigate("/crudLesson");
+    //       }
+    //     }
+    //   }, [c_data]);
+      const handleSubmit = (e) => {
         e.preventDefault();
-    }
+        changeName(name.field);
+        if (
+          name.valid === "true"
+        ) {
+            mutateFunction({
+                variables: {
+                leName: name.field, 
+                leDescription: description.field,
+                leEvaluation: 0.0, 
+                leLinkVideo: link.field, 
+                courseId: params.id
+                },
+              });
+              swal.fire({
+                           icon: "success",
+                           text: "Leccion creada",
+                           color: "#fff",
+                           background: "#000",
+                           timer: "2000",
+                         });
+        } else {
+          swal.fire({
+            icon: "error",
+            text: "Llena el formulario correctamente por favor",
+            color: "#fff",
+            background: "#000",
+            timer: "2000",
+          });
+        }
+      };
     return <div id="content">
         <Container fluid id="container">
             <ToastContainer
@@ -52,17 +117,6 @@ export const LessonRegister = () => {
                     >
 
                         <Input
-                            state={code}
-                            changeState={changeCode}
-                            label="Código"
-                            placeholder="Ingrese el codigo de la Lección"
-                            type="text"
-                            name="code"
-                            errorLabel="El codigo no puede contener caracteres especiales ni ser vacío"
-                            regularExpresion={expressions.name}
-                        />
-
-                        <Input
                             state={name}
                             changeState={changeName}
                             label="Nombre"
@@ -83,13 +137,13 @@ export const LessonRegister = () => {
                             regularExpresion={expressions.name}
                         />
                         <Input
-                            state={description}
+                            state={link}
                             changeState={changeLink}
                             label="Link de video"
                             placeholder="Ingrese el link del video"
                             type="text"
                             name="link"
-                        
+
                         />
 
 

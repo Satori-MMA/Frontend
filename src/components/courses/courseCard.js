@@ -98,7 +98,7 @@ const CourseCard = ({ course, link, name }) => {
           <Button
             className="button-courses bottom mt-1"
             as={Link}
-            to={'/crudLesson'}
+            to={{ pathname: `/crudLesson/${course.id}` }}
             variant="outline-primary"
           >
             Gestionar Lecciones

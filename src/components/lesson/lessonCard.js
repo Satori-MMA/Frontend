@@ -6,7 +6,7 @@ import swal from "sweetalert2";
 import ReactPlayer from 'react-player'
 import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { useMutation } from "@apollo/client";
-const LessonCard = ({ course, link, name }) => {
+const LessonCard = ({ id ,lesson}) => {
   const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
     useMutation(UPDATE_COURSE);
   const desactivateCourse = (e) => {
@@ -30,8 +30,8 @@ const LessonCard = ({ course, link, name }) => {
           return mutate({
             variables: {
               isActive: false,
-              coTitle: course.coTitle,
-              id: course.id,
+              
+              id: id,
 
             },
           });
@@ -52,7 +52,7 @@ const LessonCard = ({ course, link, name }) => {
     }
   }
   return (
-    <Card key={course.id} bg="dark">
+    <Card key={id} bg="dark">
       <center>
       
       </center>
@@ -76,16 +76,16 @@ const LessonCard = ({ course, link, name }) => {
             Codigo <span className="text-danger"></span>
             {/* {course.coPrice} */}1231
             <br />
-            Evaluación: 4
+            Evaluación: {lesson.leEvaluation}
           </p>
-          <Button
+          {/* <Button
             className="button-login-r bottom mb-1"
             as={Link}
             to={{ pathname: `/${link}/${course.coTitle}` }}
             variant="primary"
           >
-            {name}
-          </Button>
+            {name} 
+          </Button>*/}
           <Button
             className="button-login-r bottom mb-1"
             onClick={desactivateCourse}
