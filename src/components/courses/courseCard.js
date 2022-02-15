@@ -54,7 +54,7 @@ const CourseCard = ({ course, link, name }) => {
     }
   }
   return (
-    <Card key={course.id} bg="dark">
+    <Card className="course-card" key={course.id} bg="dark">
       <center>
         <FightSVG fill={COLORS.rubyRed} width="70%" height="auto" />
       </center>
@@ -94,13 +94,13 @@ const CourseCard = ({ course, link, name }) => {
               </Button>
 
               <Button
-            className="button-courses bottom mt-1"
-            as={Link}
-            to={{ pathname: `/crudLesson/${course.id}` }}
-            variant="outline-primary"
-          >
-            Gestionar Lecciones
-          </Button>
+                className="button-courses bottom mt-1"
+                as={Link}
+                to={{ pathname: `/crudLesson/${course.id}` }}
+                variant="outline-primary"
+              >
+                Gestionar Lecciones
+              </Button>
             </>
           ) : (
             <></>

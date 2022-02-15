@@ -104,6 +104,7 @@ export const CoursesGestion = () => {
             </Form>
           </Offcanvas.Body>
         </Offcanvas>
+        <h1>Gestión de cursos</h1>
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>
@@ -119,8 +120,7 @@ export const CoursesGestion = () => {
           <Col></Col>
         </Row>
 
-        <Row>
-          <h1>Gestión de cursos</h1>
+        <Row>          
           {data.allCourses.edges
             .filter(
               (element) =>

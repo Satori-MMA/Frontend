@@ -16,8 +16,8 @@ const Divider = () => {
 export const Contacto = () => {
   return (
     <Container fluid>
-      <Row className="pt-5 text-center">
-        <h1> En Satori MMA nos importa tu opinión</h1>
+      <Row className="pt-3 text-center">
+        <h1 className="text-imperialRed"> En Satori MMA nos importa tu opinión</h1>
       </Row>
       <Row className="text-center mb-4" xs={1} sm={1} lg={2}>
         <Col>

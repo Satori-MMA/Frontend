@@ -79,22 +79,30 @@ export const LessonCRUD = () => {
             </Form>
           </Offcanvas.Body>
         </Offcanvas>
+        <h1>Gestión de lecciones</h1>
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>
             <Button
-              className="button-login-r"
+              className="button-login-r mb-2"
               variant="success"
               onClick={handlereturn}
             >
               Agregar un lección
             </Button>
+            <Button
+                className="button-courses bottom mt-0 mb-3 "
+                as={Link}
+                to={"/coursegestion"}
+                variant="outline-primary"
+              >
+                Volver a Gestión de Cursos
+              </Button>
           </Col>
           <Col></Col>
         </Row>
 
-        <Row>
-          <h1>Gestión de lecciones</h1>
+        <Row>          
           {data.allLessons.edges
             .filter(
               (element) =>

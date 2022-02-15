@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
 import swal from "sweetalert2";
 import "./courses.css";
 import Input from "../register/input";
@@ -227,8 +228,16 @@ export const CourseEdit = () => {
                 </Col>
               </Row>
 
-              <Button className="button-login-r" type="submit">
+              <Button className="button-login-r mb-1" type="submit">
                 Actualizar Curso
+              </Button>
+              <Button
+                className="button-courses bottom mt-2 "
+                as={Link}
+                to={"/coursegestion"}
+                variant="outline-primary"
+              >
+                Volver a Gestión de Cursos
               </Button>
             </Form>
           </Col>

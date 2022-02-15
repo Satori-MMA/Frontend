@@ -194,7 +194,7 @@ export const ProfileUpdate = () => {
                     </p>
                   </ErrorMessage>
                 )}
-                <Col className="text-center" mb-4="true">
+                <Col className="text-center mb-1 mt-2">
                   <Button
                     className="button-login-r"
                     id="register"
@@ -203,7 +203,7 @@ export const ProfileUpdate = () => {
                     Guardar
                   </Button>
                 </Col>
-                <Col className="text-center" mb-4="true">
+                <Col className="text-center mb-1 mt-3">
                   <Button
                     className="button-login"
                     variant="outline-primary"
@@ -215,6 +215,14 @@ export const ProfileUpdate = () => {
                   </Button>
                 </Col>
               </Row>
+              <Button
+                className="button-courses bottom mt-0 "
+                as={Link}
+                to={"/profile"}
+                variant="outline-primary"
+              >
+                Volver al Perfil
+              </Button>
             </Form>
           </Col>
         </Row>

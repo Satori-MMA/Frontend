@@ -1,24 +1,38 @@
-import { Row, Col, ListGroup, Badge } from "react-bootstrap";
+import { Row, Col, ListGroup, Badge, Container, Button } from "react-bootstrap";
 import { UserCard } from "./userCard";
 import USER_COURSES from "../../graphql/users/USER_COURSES";
 import { useGlobalState } from "../GlobalState";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 import CourseCard from "../courses/courseCard";
 export const Profile = () => {
   const [user] = useGlobalState("user");
   const { data, loading, error } = useQuery(USER_COURSES, {
     variables: { email: user.email },
   });
+  const rol = user?.rolUser?.edges[0]?.node.rolName;
   //console.log(data);
   return (
-    <div>
-      <h1 className="text-white"> Perfil de Usuario</h1>
+    <Container fluid>
+      <Row className="pt-0 mt-2 mb-3 text-center">
+        <h1 className="text-imperialRed"> Perfil de Usuario</h1>
+      </Row>
       <Row>
         <Col lg="3">
           <UserCard user={user} />
         </Col>
         <Col>
-          <h1>Tus cursos</h1>
+          <h1>Mis cursos</h1>
+          {rol === "TEACHER" ? (
+            <></>
+          ) : (
+            <>   <Button
+            className="btn-lg bg-ourBlack button-main button-courses2"
+            as={Link}
+            to="/courses"
+            variant="outline-success m-2"
+          >Explorar mas cursos</Button></>
+          )}
           <ListGroup as="ol" numbered>
             {data?.allUsers.edges[0].node.paymentSet.edges.map(({ node }) => (
               <ListGroup.Item
@@ -37,6 +51,6 @@ export const Profile = () => {
           </ListGroup>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };

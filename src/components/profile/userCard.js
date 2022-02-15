@@ -1,6 +1,7 @@
 import { Card, Button, Row } from "react-bootstrap";
 import { FcBusinessman } from "react-icons/fc";
 import { useGlobalState } from "../GlobalState";
+import { Link } from "react-router-dom";
 import { COLORS } from "../utilities/color";
 export const UserCard = ({user}) => {
   return (
@@ -35,6 +36,13 @@ export const UserCard = ({user}) => {
             </p>
           </Card.Text>
         </Row>
+        <Button
+            className="button-login-r bottom mb-1"
+            as={Link} to="/profileupdate"
+            variant="primary"
+          >
+            Actualizar Informacion
+          </Button>
       </Card.Body>
     </Card>
   );

@@ -19,7 +19,7 @@ export const About = () => {
   return (
     <div>
       <Container fluid className="text-white">
-        <Row className="pt-5 text-center">
+        <Row className="pt-3 text-center">
           <h1 className="text-imperialRed"> Sobre Nosotros</h1>
           <Divider />
         </Row>

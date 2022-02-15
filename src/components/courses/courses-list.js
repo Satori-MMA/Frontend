@@ -115,7 +115,7 @@ export const CoursesList = () => {
             </h3>
           ) : (
             <>
-              <h1>Programas de formación y Cursos</h1>
+              <h1 className="text-imperialRed">Programas de formación y Cursos</h1>
               <h3>Tenemos cursos para todos los niveles</h3>
             </>
           )}
