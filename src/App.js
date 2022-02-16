@@ -23,6 +23,7 @@ import { Welcome } from "./components/utilities/Welcome";
 import { RegisterCourse } from "./components/courses/register-course";
 import { LessonRegister } from "./components/lesson/lessonRegister";
 import { LessonCRUD } from "./components/lesson/lessonList";
+import { LessonsView } from "./components/lesson/lessonsListUser";
 function App() {
   
   
@@ -52,6 +53,7 @@ function App() {
             <Route path="/registerCourse" element={<RegisterCourse/>}/>
             <Route path="/registerLesson/:id" element={<LessonRegister/>}/>
             <Route path="/crudLesson/:id" element={<LessonCRUD/>}/>
+            <Route path="/lessons/:id" element={<LessonsView/>}/>
           </Routes>
         </Container>
       </header>
