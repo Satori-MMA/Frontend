@@ -9,6 +9,7 @@ query allLesson{
                     leName
                     leDescription
                     leEvaluation
+                    leLinkVideo
             }
         }
     }

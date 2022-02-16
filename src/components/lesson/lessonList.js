@@ -38,7 +38,6 @@ export const LessonCRUD = () => {
     setSearchString(e.target.value);
   };
   const handlereturn = (e)=>{
-    console.log("Llegooooooo");
     <LessonRegister />
     navigate({ pathname: `/registerLesson/${params.id}` });
   }

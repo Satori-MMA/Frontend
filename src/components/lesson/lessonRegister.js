@@ -11,14 +11,15 @@ import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import { useMutation, useQuery } from "@apollo/client";
 import CREATE_LESSON from "../../graphql/lessons/REGISTER_LESSON";
 import swal from "sweetalert2";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 // import { Link, useNavigate } from "react-router-dom";
 
 // import swal from "sweetalert2";
 // import { LoadingSpin } from "../utilities/LoadingSpin";
 
-export const LessonRegister = ({id}) => {
+export const LessonRegister = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const {data: c_data, error: c_error,loading: c_loading,} = useQuery(ALL_LESSONS);
     const [mutateFunction,{ data: m_data, loading: m_loading, error: m_error, reset: m_reset },] = useMutation(CREATE_LESSON);
     const [name, changeName] = useState({ field: "", valid: null });
@@ -73,12 +74,14 @@ export const LessonRegister = ({id}) => {
                 },
               });
               swal.fire({
-                           icon: "success",
-                           text: "Leccion creada",
-                           color: "#fff",
-                           background: "#000",
-                           timer: "2000",
-                         });
+                icon: "success",
+                text: "Leccion creada",
+                color: "#fff",
+                background: "#000",
+                timer: "2000",
+                });
+                navigate(`/crudLesson/${params.id}`);
+               
         } else {
           swal.fire({
             icon: "error",

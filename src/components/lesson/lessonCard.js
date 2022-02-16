@@ -14,7 +14,7 @@ const LessonCard = ({ id ,lesson}) => {
     swal
       .fire({
         title: "Desactivar curso",
-        text: "¿Estas seguro de desactivar este curso?",
+        text: "¿Estas seguro de desactivar esta lección?",
         icon: "question",
         color: "#fff",
         background: "#000",
@@ -59,9 +59,9 @@ const LessonCard = ({ id ,lesson}) => {
       {/* <Card.Img variant="top" src="" title="imagen" /> */}
       <Card.Body className="card-body">
         <Row className="mb-3">
-          <Card.Title>Lección</Card.Title>
+          <Card.Title>{lesson.leName}</Card.Title>
           <ReactPlayer
-          url='https://youtu.be/iW_b2srB3DI'
+          url={lesson.leLinkVideo}
           className='react-player'
           playing
           width='90%'
@@ -73,8 +73,8 @@ const LessonCard = ({ id ,lesson}) => {
         <Row className="bottom">
           <hr />
           <p>
-            Codigo <span className="text-danger"></span>
-            {/* {course.coPrice} */}1231
+            Descripción <span className="text-danger"></span>
+            {lesson.leDescription}
             <br />
             Evaluación: {lesson.leEvaluation}
           </p>
