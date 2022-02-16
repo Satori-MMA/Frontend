@@ -290,6 +290,26 @@ code {
   text-align: center;
 }
 
+.list-group-numbered{
+  margin-left: 1%;
+  background-color: #0b090a !important;
+  max-width: 90%;
+  border-color: #ba181b;
+  border-width: 2px;
+  
+}
+.list-group-item{
+  margin-bottom: 3px;
+  background-color: #0b090a !important;
+  border-color: #ba181b !important;
+  border-width: 2px !important;
+  color: #b1a7a6 !important;
+}
+.badge-course{
+  background-color: #ba181b !important;
+  
+}
+
 @media only screen and (max-width: 600px) {
   .popup-inner .close-btn {
     border-color: black;

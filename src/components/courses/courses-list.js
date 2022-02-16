@@ -133,7 +133,7 @@ export const CoursesList = () => {
               <CourseCard
                 course={node}
                 link={"buy"}
-                name={"Comprar"}
+                name={"Mas Informacion"}
                 key={node.id}
               />
               // renderCard(node)

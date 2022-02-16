@@ -85,22 +85,21 @@ const CourseCard = ({ course, link, name }) => {
             <></>
           ) : rol === "TEACHER" ? (
             <>
+            <Button
+                className="button-login-r bottom mb-2"
+                as={Link}
+                to={{ pathname: `/crudLesson/${course.id}` }}
+                variant="primary"
+              >
+                Gestionar Lecciones
+              </Button>
               <Button
                 className="button-courses"
                 variant="outline-primary"
                 onClick={changeStatusCourse}
               >
                 {course.isActive ? "Desactivar curso" : "Activar curso"}
-              </Button>
-
-              <Button
-                className="button-courses bottom mt-1"
-                as={Link}
-                to={{ pathname: `/crudLesson/${course.id}` }}
-                variant="outline-primary"
-              >
-                Gestionar Lecciones
-              </Button>
+              </Button>              
             </>
           ) : (
             <></>

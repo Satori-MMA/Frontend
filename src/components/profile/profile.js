@@ -21,12 +21,13 @@ export const Profile = () => {
         <Col lg="3">
           <UserCard user={user} />
         </Col>
-        <Col>
-          <h1>Mis cursos</h1>
+        <Col>         
           {rol === "TEACHER" ? (
             <></>
           ) : (
-            <>   <Button
+            <>   
+             <h1>Mis cursos</h1>
+            <Button
             className="btn-lg bg-ourBlack button-main button-courses2"
             as={Link}
             to="/courses"
@@ -43,7 +44,7 @@ export const Profile = () => {
                   <div className="fw-bold">{node.course.coTitle}</div>
                   {node.course.coDescription}
                 </div>
-                <Badge variant="primary" pill>
+                <Badge bg="danger" pill>
                   {node.course.coPrice}
                 </Badge>
               </ListGroup.Item>
