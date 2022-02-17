@@ -177,7 +177,7 @@ export const RegisterCourse = () => {
               />
               <Row>
                 <Col>
-                  <label htmlFor="file-upload" class="custom-file-upload">
+                  <label htmlFor="file-upload" className="custom-file-upload">
                     <AiOutlineCloudUpload color="red"></AiOutlineCloudUpload>
                     Seleccione una imagen:<span className="text-danger">*</span>
                   </label>
@@ -199,7 +199,7 @@ export const RegisterCourse = () => {
                     onChange={onChangeCategory}
                   >
                     {c_data.allCategories.edges.map(({ node }) => (
-                      <option value={node.id}>{node.catName}</option>
+                      <option value={node.id} key={node.id}>{node.catName}</option>
                     ))}
                   </Form.Select>
                 </Col>

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Row, Form, Col, Container, Button } from "react-bootstrap";
+import { Row, Form, Col, Container, Button, Image } from "react-bootstrap";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import swal from "sweetalert2";
@@ -13,6 +13,8 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
+import { CloudinaryUploader } from "../utilities/CloudinaryUploader";
+import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 
 export const CourseEdit = () => {
   const params = useParams();
@@ -29,6 +31,7 @@ export const CourseEdit = () => {
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [image, changeImage] = useState({ field: "", valid: null });
   const [price, changePrice] = useState({ field: "", valid: null });
+  const [showImage, setShowImage] = useState(false);
   const {
     data: c_data,
     error: c_error,
@@ -37,6 +40,12 @@ export const CourseEdit = () => {
   const [selects, setSelect] = useState();
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
+  const successCallBackUpload = (result) => {
+    changeImage({ field: result.info.url, valid: true });
+  };
+  const failureCallBackUpload = (result) => {
+    console.log("Algo salio mal con el envio en cloudinary");
+  };
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
@@ -67,7 +76,7 @@ export const CourseEdit = () => {
               id: id,
               coTitle: title.field,
               coDescription: description.field,
-              coImage: "TODO",
+              coImage: image.field,
               coPrice: price.field,
               categoryId: selects,
             },
@@ -181,7 +190,7 @@ export const CourseEdit = () => {
                 regularExpresion={expressions.title}
               />
               <label>
-                Descripcion<span className="text-danger">*</span>
+                Descripción<span className="text-danger">*</span>
               </label>
               <Form.Control
                 as="textarea"
@@ -200,16 +209,18 @@ export const CourseEdit = () => {
               />
               <Row>
                 <Col>
-                  <label htmlFor="file-upload" class="custom-file-upload">
-                    <AiOutlineCloudUpload color="red"></AiOutlineCloudUpload>
-                    Seleccione una imagen:<span className="text-danger">*</span>
-                  </label>
-                  <input
-                    id="file-upload"
-                    type="file"
-                    name="img"
-                    accept="image/*"
-                  ></input>
+                  <CloudinaryUploader
+                    successFunction={successCallBackUpload}
+                    failureFunction={failureCallBackUpload}
+                  />
+                  <Button
+                    className="button-login-r mb-1"
+                    onClick={() => {
+                      setShowImage(!showImage);
+                    }}
+                  >
+                    {showImage ? "Ocultar imagen" : "Visualizar imagen"}
+                  </Button>
                 </Col>
                 <Col>
                   <label>
@@ -222,10 +233,15 @@ export const CourseEdit = () => {
                     onChange={onChangeCategory}
                   >
                     {c_data?.allCategories?.edges?.map(({ node }) => (
-                      <option value={node.id}>{node.catName}</option>
+                      <option value={node.id} key={node.id}>
+                        {node.catName}
+                      </option>
                     ))}
                   </Form.Select>
                 </Col>
+              </Row>
+              <Row>
+                {image.valid && showImage ? <Image src={image.field}></Image> : <></>}
               </Row>
 
               <Button className="button-login-r mb-1" type="submit">
