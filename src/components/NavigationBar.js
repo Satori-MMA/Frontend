@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap";
 import logo from "../Assets/LogoPNG.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -145,16 +145,23 @@ export const NavigationBar = () => {
 
           {/* Perfil del Usuario - Inicio Sesion */}
           {user ? (
-            <>
+            <Row>
               {rol === "STUDENT" ? (
+                <Col className="col-navbar mt-2">
                 <FaUserGraduate color={COLORS.carnelian} size={40} />
+                </Col>
               ) : (
+                <Col className="col-navbar mt-2">
                 <FaUserNinja color={COLORS.carnelian} size={40} />
+                </Col>
               )}
+              <Col className="col-navbar mt-0">
               <Nav.Link className="text-gray"as={Link} to="/profile">
                 {user.firstName}
               </Nav.Link>
-              <NavDropdown               
+              </Col>
+              <Col className="text-rigth mt-2 pr-3">
+              <NavDropdown                               
                 title={<AiFillSetting color={COLORS.silverChalice} size={20} />}
                 id="basic-nav-dropdown"
               >
@@ -173,7 +180,8 @@ export const NavigationBar = () => {
                   Cerrar sesión
                 </NavDropdown.Item>
               </NavDropdown>
-            </>
+              </Col>
+            </Row>
           ) : (
             <Nav>
               <Button

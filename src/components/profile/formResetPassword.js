@@ -19,8 +19,8 @@ export const  PasswordReset= () => {
 
     const [validForm, changeValidForm] = useState(null);
     const expressions = {
-        password1: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
-        password2: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // 8 digitos al menos una letra y un numero
+        password1: /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 dígitos al menos una letra y un numero
+        password2: /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 dígitos al menos una letra y un numero
     };
     let navigate = useNavigate();
     //if (loading) return "Submitting...";
