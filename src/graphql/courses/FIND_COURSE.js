@@ -10,6 +10,7 @@ query findCourse($title:String){
             coTitle
             coPrice
             coDescription
+            coImage
             }
         }
     }

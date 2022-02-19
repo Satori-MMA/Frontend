@@ -13,6 +13,7 @@ const ALL_COURSES = gql`
             catName
           }
           isActive
+          coImage
         }
       }
     }

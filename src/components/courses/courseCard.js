@@ -1,4 +1,4 @@
-import { Card, Button, Row } from "react-bootstrap";
+import { Card, Button, Row, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ReactComponent as FightSVG } from "../../Assets/fight.svg";
 import { COLORS } from "../utilities/color";
@@ -56,7 +56,11 @@ const CourseCard = ({ course, link, name }) => {
   return (
     <Card className="course-card" key={course.id} bg="dark">
       <center>
-        <FightSVG fill={COLORS.rubyRed} width="70%" height="auto" />
+        {course.coImage !== "TODO" ? (
+          <Image width="100%" src={course.coImage}></Image>
+        ) : (
+          <FightSVG fill={COLORS.rubyRed} width="70%" height="auto" />
+        )}
       </center>
       {/* <Card.Img variant="top" src="" title="imagen" /> */}
       <Card.Body className="card-body">
@@ -85,7 +89,7 @@ const CourseCard = ({ course, link, name }) => {
             <></>
           ) : rol === "TEACHER" ? (
             <>
-            <Button
+              <Button
                 className="button-login-r bottom mb-2"
                 as={Link}
                 to={{ pathname: `/crudLesson/${course.id}` }}
@@ -99,7 +103,7 @@ const CourseCard = ({ course, link, name }) => {
                 onClick={changeStatusCourse}
               >
                 {course.isActive ? "Desactivar curso" : "Activar curso"}
-              </Button>              
+              </Button>
             </>
           ) : (
             <></>

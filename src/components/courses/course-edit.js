@@ -108,6 +108,11 @@ export const CourseEdit = () => {
           valid: "true",
         });
         setIsLoaded(true);
+        changeImage({
+          field: data.allCourses.edges[0].node.coImage,
+          valid: "true",
+        });
+        setShowImage(true)
       }
     }
   }, [data]);
@@ -141,7 +146,7 @@ export const CourseEdit = () => {
             id: id,
             coTitle: title.field,
             coDescription: description.field,
-            coImage: "TODO",
+            coImage: image.field,
             coPrice: price.field,
             categoryId: selects,
           },
@@ -241,7 +246,11 @@ export const CourseEdit = () => {
                 </Col>
               </Row>
               <Row>
-                {image.valid && showImage ? <Image src={image.field}></Image> : <></>}
+                {image.valid && showImage ? (
+                  <Image src={image.field}></Image>
+                ) : (
+                  <></>
+                )}
               </Row>
 
               <Button className="button-login-r mb-1" type="submit">
