@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Row, Form, Col, Container, Button } from "react-bootstrap";
+import { Row, Form, Col, Container, Button, Image } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import swal from "sweetalert2";
@@ -17,6 +17,7 @@ import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useGlobalState } from "../GlobalState";
+import { CloudinaryUploader } from "../utilities/CloudinaryUploader";
 
 export const RegisterCourse = () => {
   const {
@@ -40,8 +41,15 @@ export const RegisterCourse = () => {
   const [image, changeImage] = useState({ field: "", valid: null });
   const [price, changePrice] = useState({ field: "", valid: null });
   const [selects, setSelect] = useState();
+  const [showImage, setShowImage] = useState(false);
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
+  const successCallBackUpload = (result) => {
+    changeImage({ field: result.info.url, valid: true });
+  };
+  const failureCallBackUpload = (result) => {
+    console.log("Algo salio mal con el envio en cloudinary");
+  };
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
@@ -76,7 +84,7 @@ export const RegisterCourse = () => {
           variables: {
             coTitle: mytitle.field,
             coDescription: description.field,
-            coImage: "TODO",
+            coImage: image.field,
             coPrice: price.field,
             categoryId: selects,
           },
@@ -177,16 +185,18 @@ export const RegisterCourse = () => {
               />
               <Row>
                 <Col>
-                  <label htmlFor="file-upload" className="custom-file-upload">
-                    <AiOutlineCloudUpload color="red"></AiOutlineCloudUpload>
-                    Seleccione una imagen:<span className="text-danger">*</span>
-                  </label>
-                  <input
-                    id="file-upload"
-                    type="file"
-                    name="img"
-                    accept="image/*"
-                  ></input>
+                  <CloudinaryUploader
+                    successFunction={successCallBackUpload}
+                    failureFunction={failureCallBackUpload}
+                  />
+                  <Button
+                    className="button-login-r mb-1"
+                    onClick={() => {
+                      setShowImage(!showImage);
+                    }}
+                  >
+                    {showImage ? "Ocultar imagen" : "Visualizar imagen"}
+                  </Button>
                 </Col>
                 <Col>
                   <label>
@@ -199,10 +209,19 @@ export const RegisterCourse = () => {
                     onChange={onChangeCategory}
                   >
                     {c_data.allCategories.edges.map(({ node }) => (
-                      <option value={node.id} key={node.id}>{node.catName}</option>
+                      <option value={node.id} key={node.id}>
+                        {node.catName}
+                      </option>
                     ))}
                   </Form.Select>
                 </Col>
+              </Row>
+              <Row>
+                {image.valid && showImage ? (
+                  <Image src={image.field}></Image>
+                ) : (
+                  <></>
+                )}
               </Row>
 
               <Button className="button-login-r mb-0" type="submit">
