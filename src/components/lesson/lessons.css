@@ -1,0 +1,56 @@
+h1{
+    text-align: center;
+}
+.container{
+    padding: 0%;
+}
+
+#more{
+    width: 16rem;
+}
+.card{
+    width: 18rem;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.lesson-card{
+    width: 16rem;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.card p{
+    text-align: left;
+    font-size: small;
+}
+label{
+    margin: 1%;
+    display: inline-block;
+    font-size: medium;
+    font-weight: bold;
+	cursor: pointer;
+}
+.form-select {
+    width: 80%;
+    margin-bottom: 2%;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    margin-top: 5%;
+    margin-left: 0px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.button-login-r{
+    margin-top: 3%;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.bottom {
+    margin-top: auto;
+  }

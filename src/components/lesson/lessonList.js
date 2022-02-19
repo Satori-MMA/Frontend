@@ -2,7 +2,7 @@ import { Row, Col, Container, Form, Button, Offcanvas } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
-import "../courses/courses.css";
+import "./lessons.css";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useEffect, useState } from "react";
 import { MdManageSearch } from "react-icons/md";

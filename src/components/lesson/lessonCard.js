@@ -3,18 +3,20 @@ import { Link } from "react-router-dom";
 // import { ReactComponent as FightSVG } from "../../Assets/fight.svg";
 // import { COLORS } from "../utilities/color";
 import swal from "sweetalert2";
-import ReactPlayer from 'react-player'
-import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
+import ReactPlayer from "react-player";
+import UPDATE_LESSON from "../../graphql/lessons/UPDATE_LESSON";
 import { useMutation } from "@apollo/client";
-const LessonCard = ({ id ,lesson}) => {
+const LessonCard = ({ id, lesson }) => {
   const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
-    useMutation(UPDATE_COURSE);
-  const desactivateCourse = (e) => {
+    useMutation(UPDATE_LESSON);
+  const changeStatusLesson = (e) => {
+    console.log(lesson);
     e.preventDefault();
+    const estado = lesson.isActive ? "desactivar" : "activar";
     swal
       .fire({
-        title: "Desactivar curso",
-        text: "¿Estas seguro de desactivar esta lección?",
+        title: estado.charAt(0).toUpperCase() + estado.slice(1) + " Lección",
+        text: "¿Estas seguro de " + estado + " esta lección?",
         icon: "question",
         color: "#fff",
         background: "#000",
@@ -26,49 +28,45 @@ const LessonCard = ({ id ,lesson}) => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          console.log(result);
+          console.log("result:" + result);
           return mutate({
             variables: {
-              isActive: false,
-              
-              id: id,
-
+              isActive: !lesson.isActive,
+              leName: lesson.leName,
+              id: lesson.id,
             },
           });
         }
       });
   };
   if (typeof data != "undefined") {
+    // const estadoL = lesson.isActive ? "Activada" : "Desactivada";
     console.log(data);
-    if (data.courseUpdate.success) {
-      console.log("Correcto");
+    if (data.lessonUpdate) {
       swal.fire({
         icon: "success",
-        text: "El usuario ha sido dado de baja",
+        // text: "Leccion " + estadoL,
         color: "#fff",
         background: "#000",
-        timer: "2000",
+        timer: "3000",
       });
     }
   }
   return (
-    <Card key={id} bg="dark">
-      <center>
-      
-      </center>
+    <Card className="lesson-card" key={id} bg="dark">
+      <center></center>
       {/* <Card.Img variant="top" src="" title="imagen" /> */}
       <Card.Body className="card-body">
         <Row className="mb-3">
           <Card.Title>{lesson.leName}</Card.Title>
           <ReactPlayer
-          url={lesson.leLinkVideo}
-          className='react-player'
-          playing
-          width='90%'
-          height='auto'
-          muted = 'false'
-      />
-          
+            url={lesson.leLinkVideo}
+            className="react-player"
+            playing
+            width="90%"
+            height="auto"
+            muted="false"
+          />
         </Row>
         <Row className="bottom">
           <hr />
@@ -78,22 +76,21 @@ const LessonCard = ({ id ,lesson}) => {
             <br />
             Evaluación: {lesson.leEvaluation}
           </p>
-          {/* <Button
-            className="button-login-r bottom mb-1"
-            as={Link}
-            to={{ pathname: `/${link}/${course.coTitle}` }}
-            variant="primary"
-          >
-            {name} 
-          </Button>*/}
           <Button
-            className="button-login-r bottom mb-1"
-            onClick={desactivateCourse}
+            className="button-login-r bottom mb-2"
+            as={Link}
+            to={{ pathname: `/editLesson/${lesson.id}` }}
             variant="primary"
           >
-            Desactivar lección
+            Editar
           </Button>
-          
+          <Button
+            className="button-courses"
+            variant="outline-primary"
+            onClick={changeStatusLesson}
+          >
+            {lesson.isActive ? "Desactivar Lección" : "Activar Lección"}
+          </Button>
         </Row>
       </Card.Body>
     </Card>

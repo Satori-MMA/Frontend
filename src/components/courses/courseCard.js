@@ -42,14 +42,15 @@ const CourseCard = ({ course, link, name }) => {
   };
   if (typeof data != "undefined") {
     console.log(data);
-    if (data.courseUpdate.success) {
-      console.log("Correcto");
+    // const estadoC = course.isActive ? "Activado" : "Desactivado";
+    if (data.courseUpdate) {
+      console.log("Correcto");      
       swal.fire({
         icon: "success",
-        text: "El usuario ha sido dado de baja",
+        // text: "Curso " + estadoC,
         color: "#fff",
         background: "#000",
-        timer: "2000",
+        timer: "3000",
       });
     }
   }

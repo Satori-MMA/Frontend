@@ -10,6 +10,7 @@ query allLesson{
                     leDescription
                     leEvaluation
                     leLinkVideo
+                    isActive
             }
         }
     }
