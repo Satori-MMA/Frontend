@@ -7,6 +7,7 @@ import {
   Form,
   Button,
   Offcanvas,
+  Nav,
 } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -29,7 +30,7 @@ export const LessonsView = () => {
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
-  const [searchString, setSearchString] = useState("");
+  const [lesson, changeLesson] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -40,44 +41,71 @@ export const LessonsView = () => {
   if (loading || !data) return <LoadingSpin />;
   return (
     <div>
-      <Container fluid>
-        <Tab.Container defaultActiveKey="#link1">
+      <Container>
           <Row>
             <Col sm={4}>
-              <ListGroup>
-                {data.allLessons.edges.map(({ node }) => (
-                  <>
-                    <ListGroup.Item action href={"#" + node.id}>
-                      {node.leName}
-                    </ListGroup.Item>
-                  </>
-                ))}
-              </ListGroup>
+              {data.allLessons.edges.map(({ node }) => (
+                <Button className="button-login btn btn-outline-primary" variant="outline-primary" onClick={() => changeLesson(node.id)}>
+                  {node.leName}
+                </Button>
+              ))}
             </Col>
             <Col sm={8}>
-              <Tab.Content>
-                {data.allLessons.edges.map(({ node }) => (
+                {data.allLessons.edges.map(({ node }, index, array) => (
                   <>
-                    <Tab.Pane eventKey={"#" + node.id}>
-                      <h1>{node.leName}</h1>
-                      <ReactPlayer
-                        url="https://youtu.be/iW_b2srB3DI"
-                        className="react-player"
-                        playing
-                        width="90%"
-                        muted="false"
-                      />
+                    {lesson === node.id ? (
+                      <>
+                        <h1>{node.leName}</h1>
+                        <ReactPlayer
+                          url="https://youtu.be/iW_b2srB3DI"
+                          className="react-player"
+                          playing
+                          width="100%"
+                          muted="false"
+                        />
+                          <Row>
+                            <Col>
+                              <center>
+                                {index === 0 ? (
+                                  <></>
+                                ) : (
+                                  <Button className="button-login-r btn btn-success"
+                                    onClick={() =>
+                                      changeLesson(array[index - 1].node.id)
+                                    }
+                                  >
+                                    Lección anterior
+                                  </Button>
+                                )}
+                              </center>
+                            </Col>
+                            <Col>
+                              <center>
+                                {array.length - 1 === index ? (
+                                  <></>
+                                ) : (
+                                  <Button className="button-login-r btn btn-success"
+                                    onClick={() =>
+                                      changeLesson(array[index + 1].node.id)
+                                    }
+                                  >
+                                    Siguiente lección
+                                  </Button>
+                                )}
+                              </center>
+                            </Col>
+                          </Row>
 
-                      <p>{node.leDescription}</p>
-                    </Tab.Pane>
+                        <p>{node.leDescription}</p>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </>
                 ))}
 
-                <Tab.Pane eventKey="#link2">asd 2</Tab.Pane>
-              </Tab.Content>
             </Col>
           </Row>
-        </Tab.Container>
       </Container>
     </div>
   );
