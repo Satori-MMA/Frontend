@@ -6,7 +6,7 @@ import swal from "sweetalert2";
 import ReactPlayer from "react-player";
 import UPDATE_LESSON from "../../graphql/lessons/UPDATE_LESSON";
 import { useMutation } from "@apollo/client";
-const LessonCard = ({ id, lesson }) => {
+const LessonCard = ({ id, link, lesson }) => {
   const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
     useMutation(UPDATE_LESSON);
   const changeStatusLesson = (e) => {
@@ -79,7 +79,7 @@ const LessonCard = ({ id, lesson }) => {
           <Button
             className="button-login-r bottom mb-2"
             as={Link}
-            to={{ pathname: `/editLesson/${lesson.id}` }}
+            to={{ pathname: `/lesson-edit/${lesson.leName}` }}            
             variant="primary"
           >
             Editar

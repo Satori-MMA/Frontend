@@ -212,7 +212,7 @@ export const CourseEdit = () => {
                 errorLabel="El precio solo puede contener números y el maximo son 14 dígitos."
                 regularExpresion={expressions.price}
               />
-              <Row>
+              <Row className="mt-3">
                 <Col>
                   <CloudinaryUploader
                     successFunction={successCallBackUpload}

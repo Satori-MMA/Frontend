@@ -183,7 +183,7 @@ export const RegisterCourse = () => {
                 errorLabel="El precio solo puede contener números y el máximo son 14 dígitos."
                 regularExpresion={expressions.price}
               />
-              <Row>
+              <Row className="mt-3">
                 <Col>
                   <CloudinaryUploader
                     successFunction={successCallBackUpload}

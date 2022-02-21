@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "../register/register.css";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
-
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -71,6 +70,7 @@ export const LessonRegister = () => {
                 leEvaluation: 0.0, 
                 leLinkVideo: link.field, 
                 courseId: params.id
+                
                 },
               });
               swal.fire({
@@ -147,8 +147,7 @@ export const LessonRegister = () => {
                             type="text"
                             name="link"
 
-                        />
-
+                        />                       
 
                         <hr></hr>
                         <Row>

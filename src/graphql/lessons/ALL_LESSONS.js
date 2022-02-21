@@ -11,6 +11,10 @@ query allLesson{
                     leEvaluation
                     leLinkVideo
                     isActive
+                    course{
+                        id
+                        coTitle
+                    }
             }
         }
     }

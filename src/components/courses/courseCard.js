@@ -7,7 +7,7 @@ import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
 import { useMutation } from "@apollo/client";
 import { useGlobalState } from "../GlobalState";
 const CourseCard = ({ course, link, name }) => {
-  const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
+const [mutate, { data, loading: m_loading, error: m_error, reset: m_reset }] =
     useMutation(UPDATE_COURSE);
   const [user, updateUser] = useGlobalState("user");
   const rol = user?.rolUser?.edges[0]?.node.rolName;

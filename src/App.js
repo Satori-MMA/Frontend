@@ -24,6 +24,7 @@ import { RegisterCourse } from "./components/courses/register-course";
 import { LessonRegister } from "./components/lesson/lessonRegister";
 import { LessonCRUD } from "./components/lesson/lessonList";
 import { LessonsView } from "./components/lesson/lessonsListUser";
+import { LessonEdit } from "./components/lesson/lesson-edit";
 function App() {
   
   
@@ -54,6 +55,7 @@ function App() {
             <Route path="/registerLesson/:id" element={<LessonRegister/>}/>
             <Route path="/crudLesson/:id" element={<LessonCRUD/>}/>
             <Route path="/lessons/:id" element={<LessonsView/>}/>
+            <Route path="/lesson-edit/:id" element={<LessonEdit/>}/>
           </Routes>
         </Container>
       </header>

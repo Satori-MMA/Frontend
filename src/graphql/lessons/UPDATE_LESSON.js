@@ -13,6 +13,9 @@ mutation updateLesson($id:ID,$leName:String,$leDescription:String,$leLinkVideo:S
           isActive
           id
           leName
+          course{
+            id
+          }
       }
     }
   }`;

@@ -73,12 +73,12 @@ export const LessonCRUD = () => {
                 value={searchString}
                 onChange={handleSearchStringChange}
               />
-              {console.log("data")}
+              
             
             </Form>
           </Offcanvas.Body>
         </Offcanvas>
-        <h1>Gestión de lecciones</h1>
+        <h1>Gestión de Lecciones</h1>        
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>
@@ -107,7 +107,8 @@ export const LessonCRUD = () => {
               (element) =>
                 element.node.leName
                   .toLowerCase()
-                  .includes(searchString.toLowerCase())
+                  .includes(searchString.toLowerCase()) &&
+                  element.node.course.id === params.id
                 
             )
             .map(({ node }) => (
