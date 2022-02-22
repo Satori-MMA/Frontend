@@ -2,6 +2,7 @@ import { Row, Col, Container, Form, Button, Offcanvas } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
+import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./lessons.css";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useEffect, useState } from "react";
@@ -15,10 +16,13 @@ export const LessonCRUD = () => {
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
   });
-
-  const navigate = useNavigate();
+  const { data:data_c, loading:loading_c, error:error_c, refetch:refetch_c } = useQuery(ALL_COURSES, {
+    fetchPolicy: "network-only",
+  });
+    const navigate = useNavigate();
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
+  const [courseTitle, setcourseTitle] = useState(null)
   const [searchString, setSearchString] = useState("");
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
@@ -37,10 +41,26 @@ export const LessonCRUD = () => {
     // console.log("Buscando")
     setSearchString(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(data_c)
+    if(data_c){
+    const cTitle = data_c.allCourses.edges.filter(
+      (element) => element.node.id === params.id
+   );
+   setcourseTitle(cTitle[0].node.coTitle)
+   console.log(cTitle[0].node.coTitle)}
+
+  }, [data_c]);
+
   const handlereturn = (e)=>{
     <LessonRegister />
+    // console.log(params)
     navigate({ pathname: `/registerLesson/${params.id}` });
   }
+
+  // const [courseTitle] = data.allLessons.edges.filter(
+  //   (element) => element.node.course.coTitle)
 
   // console.log("la data es: " + data);
   if (error) return <div>errors</div>;
@@ -77,8 +97,8 @@ export const LessonCRUD = () => {
             
             </Form>
           </Offcanvas.Body>
-        </Offcanvas>
-        <h1>Gestión de Lecciones</h1>        
+        </Offcanvas>              
+        <h1>Gestión de Lecciones {courseTitle}</h1>        
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>
@@ -110,11 +130,11 @@ export const LessonCRUD = () => {
                   .includes(searchString.toLowerCase()) &&
                   element.node.course.id === params.id
                 
-            )
+            )            
             .map(({ node }) => (
-            <LessonCard
+            <LessonCard              
               lesson = {node}
-              id = {params.id}
+              id = {params.id}              
             />
             // renderCard(node)
             

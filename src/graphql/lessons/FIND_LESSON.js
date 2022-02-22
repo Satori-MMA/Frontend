@@ -9,7 +9,10 @@ query findLesson($name:String){
             id
             leName
             leLinkVideo
-          	leDescription            
+          	leDescription
+            course{
+              id
+            }            
             }
         }
     }

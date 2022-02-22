@@ -6,6 +6,9 @@ mutation createLesson($leName: String, $leDescription: String,$leEvaluation: Flo
         lesson{
             id
             leName
+            course{
+                id
+              }
         }
     }
 }`;

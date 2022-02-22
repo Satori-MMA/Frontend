@@ -26,8 +26,7 @@ export const LessonEdit = () => {
   const [name, changeName] = useState({ field: "", valid: null });
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [linkLesson, changelinkLesson] = useState({ field: "", valid: null });
-  const [validForm, changeValidForm] = useState(null);
-  const [curID, changecurID] = useState(null);
+  const [validForm, changeValidForm] = useState(null);  
 
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -36,6 +35,7 @@ export const LessonEdit = () => {
       navigate("/");
     }
   }, []);
+
   useEffect(() => {
     findLesson({ variables: { name: params.id } });
   }, []);
@@ -102,6 +102,13 @@ export const LessonEdit = () => {
 
   if (loading || !data) return <LoadingSpin />;
 
+  const handleBack = ()=>{           
+    console.log(data) 
+    navigate({
+        pathname: `/crudLesson/${data.allLessons.edges[0].node.course.id}`,
+    });
+  }
+
   const expressions = {
     text: /^[a-zA-Z0-9\s_.-]{4,30}$/, // Letras, numeros, guion y guion_bajo
   };
@@ -115,8 +122,7 @@ export const LessonEdit = () => {
     ) {
       if (params.id === name.field) {
         mutateFunction({
-          variables: {
-            id: id,
+          variables: {           
             leName: name.field,
             leDescription: description.field,
             leLinkVideo: linkLesson.field,
@@ -202,6 +208,15 @@ export const LessonEdit = () => {
                     type="submit"
                   >
                     Guardar
+                  </Button>
+                </Col>
+                <Col className="text-center" mb-2="true">
+                  <Button
+                    className="button-courses bottom mt-2 "                    
+                    variant="outline-primary" 
+                    onClick={handleBack}                 
+                  >
+                    Volver a Gestión de Lecciones
                   </Button>
                 </Col>
               </Row>
