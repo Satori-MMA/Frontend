@@ -98,7 +98,7 @@ export const LessonRegister = () => {
   }, [data]);
 
   const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{4,30}$/, // Letras, numeros, guion y guion_bajo
+    text: /^[a-zA-Z0-9\s_.-]{2,200}$/, // Letras, numeros, guion y guion_bajo
   };
 
   const handleBack = ()=>{       

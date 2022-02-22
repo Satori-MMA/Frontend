@@ -6,6 +6,7 @@ import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 import "./courses.css";
 import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { ErrorMessageLog } from "../utilities/ErrorMessageLog";
 import { useEffect, useState } from "react";
 import { MdManageSearch } from "react-icons/md";
 import { useGlobalState } from "../GlobalState";
@@ -51,7 +52,7 @@ export const CoursesGestion = () => {
   };
 
   // console.log("la data es: " + data);
-  if (error) return <div>errors</div>;
+  if (error) return <ErrorMessageLog></ErrorMessageLog>;
 
   if (category_load_ || loading || !data) return <LoadingSpin />;
   return (

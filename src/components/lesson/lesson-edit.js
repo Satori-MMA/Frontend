@@ -15,18 +15,21 @@ import { useGlobalState } from "../GlobalState";
 
 export const LessonEdit = () => {
   const params = useParams();
-  const [id, setId] = useState();
+  const [idCourse, setidCourse] = useState(null);
+  const [idLesson, setidLesson] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [findLesson, { data, loading }] = useLazyQuery(FIND_LESSON, {
     fetchPolicy: "network-only",
   });
-  const [mutateFunction,{ data: m_data, loading: m_loading, error: m_error, reset: m_reset },
+  const [
+    mutateFunction,
+    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
   ] = useMutation(UPDATE_LESSON);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [linkLesson, changelinkLesson] = useState({ field: "", valid: null });
-  const [validForm, changeValidForm] = useState(null);  
+  const [validForm, changeValidForm] = useState(null);
 
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -37,21 +40,36 @@ export const LessonEdit = () => {
   }, []);
 
   useEffect(() => {
+    console.log("here");
+    console.log(params.id);
     findLesson({ variables: { name: params.id } });
+    console.log(data);
   }, []);
 
   useEffect(() => {
-    if (m_data){
-    console.log(m_data.lessonUpdate.lesson.course.id)
-    navigate({ pathname: `/crudLesson/${m_data.lessonUpdate.lesson.course.id}` });
-  }  
+    console.log(m_data);
+    if (m_data) {
+      swal.fire({
+        icon: "success",
+        text: "Lección actualizada",
+        color: "#fff",
+        background: "#000",
+        timer: "2000",
+      });
+      console.log("intenta salir");
+      navigate({ pathname: `/crudLesson/${idCourse}` });
+    }
   }, [m_data]);
 
   useEffect(() => {
     if (isLoaded) {
       if (data) {
         console.log("Le llego esto: ", name.field);
-        if (data.allLessons.edges.length > 0) {
+        const repeat = data.allLessons.edges.filter(
+          (element) => element.node.course.id === idCourse
+        );
+        console.log(repeat.length);
+        if (repeat.length > 0) {
           console.log("Mismo nombre");
           swal.fire({
             icon: "error",
@@ -64,35 +82,35 @@ export const LessonEdit = () => {
           console.log("Todo ok");
           mutateFunction({
             variables: {
-              id: id,
+              id: idLesson,
               leName: name.field,
               leDescription: description.field,
               leLinkVideo: linkLesson.field,
             },
           });
-          swal.fire({
-            icon: "success",
-            text: "Lección actualizada",
-            color: "#fff",
-            background: "#000",
-            timer: "2000",
-          });          
-          console.log(m_data);                    
+          console.log("m_data" + m_data);
+          console.log(m_data);
         }
       }
     } else {
       if (data) {
-        setId(data.allLessons.edges[0].node.id);
+        const myLesson = data.allLessons.edges.filter(
+          (element) =>
+            element.node.course.id === window.localStorage.getItem("idCourse")
+        )[0];
+        console.log(myLesson);
+        setidCourse(myLesson.node.course.id);
+        setidLesson(myLesson.node.id);
         changeName({
-          field: data.allLessons.edges[0].node.leName,
+          field: myLesson.node.leName,
           valid: "true",
         });
         changeDescription({
-          field: data.allLessons.edges[0].node.leDescription,
+          field: myLesson.node.leDescription,
           valid: "true",
         });
         changelinkLesson({
-          field: data.allLessons.edges[0].node.leLinkVideo,
+          field: myLesson.node.leLinkVideo,
           valid: "true",
         });
         setIsLoaded(true);
@@ -102,15 +120,16 @@ export const LessonEdit = () => {
 
   if (loading || !data) return <LoadingSpin />;
 
-  const handleBack = ()=>{           
-    console.log(data) 
+  const handleBack = () => {
+    // console.log("data back"+data)
+    // console.log(data)
     navigate({
-        pathname: `/crudLesson/${data.allLessons.edges[0].node.course.id}`,
+      pathname: `/crudLesson/${idCourse}`,
     });
-  }
+  };
 
   const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{4,30}$/, // Letras, numeros, guion y guion_bajo
+    text: /^[a-zA-Z0-9\s_.-]{2,200}$/, // Letras, numeros, guion y guion_bajo
   };
 
   const handleSubmit = (e) => {
@@ -121,21 +140,15 @@ export const LessonEdit = () => {
       description.valid === "true"
     ) {
       if (params.id === name.field) {
+        console.log("mismo nombre ok");
         mutateFunction({
-          variables: {           
+          variables: {
+            id: idLesson,
             leName: name.field,
             leDescription: description.field,
             leLinkVideo: linkLesson.field,
           },
         });
-        swal.fire({
-          icon: "success",
-          text: "Lección actualizada",
-          color: "#fff",
-          background: "#000",
-          timer: "2000",
-        });
-        
       } else {
         console.log("le voy a mandar: ", name.field);
         findLesson({ variables: { name: name.field } });
@@ -212,9 +225,9 @@ export const LessonEdit = () => {
                 </Col>
                 <Col className="text-center" mb-2="true">
                   <Button
-                    className="button-courses bottom mt-2 "                    
-                    variant="outline-primary" 
-                    onClick={handleBack}                 
+                    className="button-courses bottom mt-2 "
+                    variant="outline-primary"
+                    onClick={handleBack}
                   >
                     Volver a Gestión de Lecciones
                   </Button>

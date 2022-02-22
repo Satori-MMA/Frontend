@@ -5,6 +5,7 @@ import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./lessons.css";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { ErrorMessageLog } from "../utilities/ErrorMessageLog";
 import { useEffect, useState } from "react";
 import { MdManageSearch } from "react-icons/md";
 import { useGlobalState } from "../GlobalState";
@@ -49,6 +50,7 @@ export const LessonCRUD = () => {
       (element) => element.node.id === params.id
    );
    setcourseTitle(cTitle[0].node.coTitle)
+   window.localStorage.setItem("idCourse", cTitle[0].node.id);
    console.log(cTitle[0].node.coTitle)}
 
   }, [data_c]);
@@ -63,7 +65,7 @@ export const LessonCRUD = () => {
   //   (element) => element.node.course.coTitle)
 
   // console.log("la data es: " + data);
-  if (error) return <div>errors</div>;
+  if (error) return <ErrorMessageLog></ErrorMessageLog>;
 
   if ( loading || !data) return <LoadingSpin />;
   return (

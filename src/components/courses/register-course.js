@@ -16,6 +16,7 @@ import CREATE_COURSE from "../../graphql/courses/CREATE_COURSE";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { ErrorMessageLog } from "../utilities/ErrorMessageLog";
 import { useGlobalState } from "../GlobalState";
 import { CloudinaryUploader } from "../utilities/CloudinaryUploader";
 
@@ -106,7 +107,7 @@ export const RegisterCourse = () => {
     text: /^[a-zA-Z0-9\s_.-]{4,30}$/, // Letras, numeros, guion y guion_bajo
     price: /^\d{3,14}$/, // 7 a 14 numeros.
   };
-  if (c_error) return <div>errors</div>;
+  if (c_error) return <ErrorMessageLog></ErrorMessageLog>;
 
   if (c_loading) return <LoadingSpin />;
 

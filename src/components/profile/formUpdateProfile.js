@@ -48,7 +48,7 @@ export const ProfileUpdate = () => {
     }
   }, [data]);
 
-  if (error) return <div>errors</div>;
+  if (error) return <ErrorMessage></ErrorMessage>;
 
   if (loading || !data) return <LoadingSpin />;
 

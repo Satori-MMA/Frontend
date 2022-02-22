@@ -4,6 +4,7 @@ import ALL_COURSES from "../../graphql/courses/ALL_COURSES";
 import "./courses.css";
 import CourseCard from "./courseCard";
 import { LoadingSpin } from "../utilities/LoadingSpin";
+import { ErrorMessageLog } from "../utilities/ErrorMessageLog";
 import { useState, useEffect } from "react";
 import { MdManageSearch } from "react-icons/md";
 import { useParams } from "react-router-dom";
@@ -49,7 +50,7 @@ export const CoursesList = () => {
     setCategory(e.target.name);
   };
   console.log("la data es: " + data);
-  if (error) return <div>errors</div>;
+  if (error) return <ErrorMessageLog></ErrorMessageLog>;
 
   if (loading || !data) return <LoadingSpin />;
   return (

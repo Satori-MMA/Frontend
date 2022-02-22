@@ -65,7 +65,7 @@ const LessonCard = ({ id, link, lesson }) => {
             playing
             width="90%"
             height="auto"
-            muted="false"
+            muted={true}
           />
         </Row>
         <Row className="bottom">
