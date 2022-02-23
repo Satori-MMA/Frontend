@@ -21,18 +21,21 @@ export const Profile = () => {
         <Col lg="3">
           <UserCard user={user} />
         </Col>
-        <Col>         
+        <Col>
           {rol === "TEACHER" ? (
             <></>
           ) : (
-            <>   
-             <h1>Mis cursos</h1>
-            <Button
-            className="btn-lg bg-ourBlack button-main button-courses2"
-            as={Link}
-            to="/courses"
-            variant="outline-success m-2"
-          >Explorar mas cursos</Button></>
+            <>
+              <h1>Mis cursos</h1>
+              <Button
+                className="btn-lg bg-ourBlack button-main button-courses2"
+                as={Link}
+                to="/courses"
+                variant="outline-success m-2"
+              >
+                Explorar mas cursos
+              </Button>
+            </>
           )}
           <ListGroup as="ol" numbered>
             {data?.allUsers.edges[0].node.paymentSet.edges.map(({ node }) => (
@@ -47,6 +50,14 @@ export const Profile = () => {
                 <Badge bg="danger" pill>
                   {node.course.coPrice}
                 </Badge>
+                <Button
+                  className="profileCourseButton m-2 mt-4"
+                  as={Link}
+                  to={{ pathname: `/lessons/${node.course.id}` }}
+                  variant="danger"
+                >
+                  Ir al curso
+                </Button>
               </ListGroup.Item>
             ))}
           </ListGroup>

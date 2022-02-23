@@ -8,7 +8,7 @@ body {
 }
 .button-courses {
   color: #fff !important;
-  border-color: #ba181b !important;  
+  border-color: #ba181b !important;
   cursor: pointer;
   width: 100%;
   margin-top: 4%;
@@ -121,8 +121,8 @@ body {
 #basic-nav-dropdown {
   color: #fff !important;
 }
-.col-navbar{
-  flex: 0 0 !important
+.col-navbar {
+  flex: 0 0 !important;
 }
 
 .button-toggle {
@@ -252,7 +252,7 @@ code {
 .text-left {
   text-align: left !important;
 }
-.text-rigth{
+.text-rigth {
   text-align: right !important;
 }
 
@@ -405,4 +405,14 @@ code {
   background-color: #ba181b !important;
   border-color: #e5383b !important;
   font-size: large !important;
+}
+
+.profileCourseButton {
+  color: #fff !important;
+  border-color: #ba181b !important;
+  border: none;
+
+  background-color: #ba181b !important;
+  border-color: #e5383b !important;
+  border-radius: 50px !important;
 }
