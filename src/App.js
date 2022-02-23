@@ -33,7 +33,7 @@ function App() {
       {window.localStorage.getItem('alreadyLoad')?<></>:<Welcome/>}
       <NavigationBar />
       <header className="App-header bg-ourGray">
-        <Container fluid className="pb-3 pt-3">
+        <Container fluid className="p-0">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

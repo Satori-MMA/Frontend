@@ -8,6 +8,7 @@ import {
   Button,
   Offcanvas,
   Nav,
+  ProgressBar,
 } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -32,6 +33,16 @@ export const LessonsView = () => {
   const [show, setShow] = useState(false);
   const [lesson, changeLesson] = useState("");
 
+  useEffect(() => {
+    if (data) {
+      changeLesson(
+        data.allLessons.edges.filter(
+          (element) =>
+            element.node.course.id === window.localStorage.getItem("idCourse")
+        )[0].node.id
+      );
+    }
+  }, [data]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSubmit = (e) => {
@@ -41,9 +52,27 @@ export const LessonsView = () => {
   if (loading || !data) return <LoadingSpin />;
   return (
     <div>
-      <Container>
+      <div className="courseContainer bg-ourBlack text-white">
+        <h1>
+          {
+            data.allLessons.edges.filter(
+              (element) =>
+                element.node.course.id ===
+                window.localStorage.getItem("idCourse")
+            )[0].node.course.coTitle
+          }
+        </h1>
+        <ProgressBar
+          className="p-0"
+          striped
+          variant="danger"
+          animated
+          now={12}
+        />
+      </div>
+      <div className="courseContainer">
         <Row>
-          <Col sm={4}>
+          <Col sm={3} className="bg-ourBlack text-white">
             {data.allLessons.edges
               .filter(
                 (element) =>
@@ -123,7 +152,7 @@ export const LessonsView = () => {
               ))}
           </Col>
         </Row>
-      </Container>
+      </div>
     </div>
   );
 };

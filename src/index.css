@@ -416,3 +416,8 @@ code {
   border-color: #e5383b !important;
   border-radius: 50px !important;
 }
+
+.courseContainer{
+  padding: 0% !important;
+  margin: 0% !important;
+}
