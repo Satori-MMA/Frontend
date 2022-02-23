@@ -56,7 +56,7 @@ export const About = () => {
               ¡ ENTRENA CON NOSOTROS !
             </Button>
         </Row>
-        <h2 className="text-center mt-3">En Satori Encontraras...</h2>
+        <h2 className="text-center mt-3">En satori encontrarás...</h2>
         <Row xs={1} sm={2} lg={3}>
           <Col>
             <Divider />           
@@ -127,7 +127,7 @@ export const About = () => {
         </Row>
         <Row className="m-3 mb-0" xs={1} sm={1} md={2} lg={2}>
           <Col>
-            <h3 className="text-center text-imperialRed mt-2">Jesus Fernando Pinzon</h3>
+            <h3 className="text-center text-imperialRed mt-2">Jesús Fernando Pinzón</h3>
             <p className="Justify-Text">
               30 años de experiencia en práctica de artes marciales y 15 años de
               experiencia como instructor de artes marciales
@@ -145,8 +145,8 @@ export const About = () => {
           </Col>
           <Col className="text-center">
             <img
-              alt="Instructor 1: Jesus Fernando Pinzon"
-              title="Instructor 1: Jesus Fernando Pinzon"
+              alt="Instructor 1: Jesús Fernando Pinzón"
+              title="Instructor 1: Jesús Fernando Pinzón"
               width="80%"
               height="auto"
               src={instructor1}
@@ -157,11 +157,11 @@ export const About = () => {
         </Row>
         <br></br>
         <Divider />
-        <Row className="m-3" xs={1} sm={1} md={2} lg={2}>
+        <Row className="m-3 mb-0" xs={1} sm={1} md={2} lg={2}>
           <Col className="text-center">
             <img
-              alt="Instructor 2: Brayan Andres Pinzon"
-              title="Instructor 2: Brayan Andres Pinzon"
+              alt="Instructor 2: Brayan Andrés Pinzón"
+              title="Instructor 2: Brayan Andrés Pinzón"
               width="80%"
               height="auto"
               src={instructor2}
@@ -173,7 +173,7 @@ export const About = () => {
             </i>
           </Col>
           <Col>
-            <h3 className="text-center text-imperialRed mt-2">Brayan Andres Pinzon</h3>
+            <h3 className="text-center text-imperialRed mt-2">Brayan Andrés Pinzón</h3>
             <p className="Justify-Text">
               8 años de experiencia en práctica de artes marciales y 1 año de
               experiencia como instructor artes marciales

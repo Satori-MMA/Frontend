@@ -53,7 +53,14 @@ export const LessonsView = () => {
   return (
     <div>
       <div className="courseContainer bg-ourBlack text-white">
-        <h1>
+      <ProgressBar
+          className="p-0"
+          striped
+          variant="danger"
+          animated
+          now={50}
+        />
+        <h1 className="pt-3 pb-3">
           {
             data.allLessons.edges.filter(
               (element) =>
@@ -61,18 +68,13 @@ export const LessonsView = () => {
                 window.localStorage.getItem("idCourse")
             )[0].node.course.coTitle
           }
-        </h1>
-        <ProgressBar
-          className="p-0"
-          striped
-          variant="danger"
-          animated
-          now={12}
-        />
+        </h1>        
       </div>
       <div className="courseContainer">
         <Row>
           <Col sm={3} className="bg-ourBlack text-white">
+            <h2 className="text-center pt-2 pb-2">Lecciones              
+            </h2>
             {data.allLessons.edges
               .filter(
                 (element) =>
@@ -88,6 +90,13 @@ export const LessonsView = () => {
                   {node.leName}
                 </Button>
               ))}
+          <Button
+                  className="button-login-r btn btn-outline-primary mt-4"
+                  variant="outline-primary"
+                  // onClick={}
+                >
+                 Descargar Cronograma
+                </Button>    
           </Col>
           <Col sm={8}>
             {data.allLessons.edges
@@ -101,8 +110,9 @@ export const LessonsView = () => {
                   {lesson === node.id ? (
                     <>
                       <h1>{node.leName}</h1>
+                      {console.log(node)}
                       <ReactPlayer
-                        url="https://youtu.be/iW_b2srB3DI"
+                        url={node.leLinkVideo}
                         className="react-player"
                         playing
                         width="100%"

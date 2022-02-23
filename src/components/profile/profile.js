@@ -14,7 +14,7 @@ export const Profile = () => {
   //console.log(data);
   return (
     <Container fluid>
-      <Row className="pt-0 mt-2 mb-3 text-center">
+      <Row className="pt-2 mb-3 text-center">
         <h1 className="text-imperialRed"> Perfil de Usuario</h1>
       </Row>
       <Row>
@@ -51,7 +51,7 @@ export const Profile = () => {
                   {node.course.coPrice}
                 </Badge>
                 <Button
-                  className="profileCourseButton m-2 mt-4"
+                  className="profileCourseButton m-2 mt-5"
                   as={Link}
                   to={{ pathname: `/lessons/${node.course.id}` }}
                   onClick={() =>
