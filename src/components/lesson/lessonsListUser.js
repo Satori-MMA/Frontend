@@ -42,70 +42,87 @@ export const LessonsView = () => {
   return (
     <div>
       <Container>
-          <Row>
-            <Col sm={4}>
-              {data.allLessons.edges.map(({ node }) => (
-                <Button className="button-login btn btn-outline-primary" variant="outline-primary" onClick={() => changeLesson(node.id)}>
+        <Row>
+          <Col sm={4}>
+            {data.allLessons.edges
+              .filter(
+                (element) =>
+                  element.node.course.id ===
+                  window.localStorage.getItem("idCourse")
+              )
+              .map(({ node }) => (
+                <Button
+                  className="button-login btn btn-outline-primary"
+                  variant="outline-primary"
+                  onClick={() => changeLesson(node.id)}
+                >
                   {node.leName}
                 </Button>
               ))}
-            </Col>
-            <Col sm={8}>
-                {data.allLessons.edges.map(({ node }, index, array) => (
-                  <>
-                    {lesson === node.id ? (
-                      <>
-                        <h1>{node.leName}</h1>
-                        <ReactPlayer
-                          url="https://youtu.be/iW_b2srB3DI"
-                          className="react-player"
-                          playing
-                          width="100%"
-                          muted="false"
-                        />
-                          <Row>
-                            <Col>
-                              <center>
-                                {index === 0 ? (
-                                  <></>
-                                ) : (
-                                  <Button className="button-login-r btn btn-success"
-                                    onClick={() =>
-                                      changeLesson(array[index - 1].node.id)
-                                    }
-                                  >
-                                    Lección anterior
-                                  </Button>
-                                )}
-                              </center>
-                            </Col>
-                            <Col>
-                              <center>
-                                {array.length - 1 === index ? (
-                                  <></>
-                                ) : (
-                                  <Button className="button-login-r btn btn-success"
-                                    onClick={() =>
-                                      changeLesson(array[index + 1].node.id)
-                                    }
-                                  >
-                                    Siguiente lección
-                                  </Button>
-                                )}
-                              </center>
-                            </Col>
-                          </Row>
+          </Col>
+          <Col sm={8}>
+            {data.allLessons.edges
+              .filter(
+                (element) =>
+                  element.node.course.id ===
+                  window.localStorage.getItem("idCourse")
+              )
+              .map(({ node }, index, array) => (
+                <>
+                  {lesson === node.id ? (
+                    <>
+                      <h1>{node.leName}</h1>
+                      <ReactPlayer
+                        url="https://youtu.be/iW_b2srB3DI"
+                        className="react-player"
+                        playing
+                        width="100%"
+                        muted="false"
+                      />
+                      <Row>
+                        <Col>
+                          <center>
+                            {index === 0 ? (
+                              <></>
+                            ) : (
+                              <Button
+                                className="button-login-r btn btn-success"
+                                onClick={() =>
+                                  changeLesson(array[index - 1].node.id)
+                                }
+                              >
+                                Lección anterior
+                              </Button>
+                            )}
+                          </center>
+                        </Col>
+                        <Col>
+                          <center>
+                            {array.length - 1 === index ? (
+                              <></>
+                            ) : (
+                              <Button
+                                className="button-login-r btn btn-success"
+                                onClick={() =>
+                                  changeLesson(array[index + 1].node.id)
+                                }
+                              >
+                                Siguiente lección
+                              </Button>
+                            )}
+                          </center>
+                        </Col>
+                      </Row>
 
-                        <p>{node.leDescription}</p>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                ))}
-
-            </Col>
-          </Row>
+                      <p>{node.leDescription}</p>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ))}
+          </Col>
+        </Row>
       </Container>
     </div>
   );

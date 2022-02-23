@@ -54,6 +54,9 @@ export const Profile = () => {
                   className="profileCourseButton m-2 mt-4"
                   as={Link}
                   to={{ pathname: `/lessons/${node.course.id}` }}
+                  onClick={() =>
+                    window.localStorage.setItem("idCourse", node.course.id)
+                  }
                   variant="danger"
                 >
                   Ir al curso
