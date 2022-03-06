@@ -158,7 +158,7 @@ code {
 }
 
 .text-white {
-  color: #f5f3f4;
+  color: #f5f3f4 !important;
 }
 
 .text-gray {

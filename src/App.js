@@ -25,6 +25,7 @@ import { LessonRegister } from "./components/lesson/lessonRegister";
 import { LessonCRUD } from "./components/lesson/lessonList";
 import { LessonsView } from "./components/lesson/lessonsListUser";
 import { LessonEdit } from "./components/lesson/lesson-edit";
+import { MensualityRegister } from "./components/payments/mensualityRegister";
 function App() {
   
   
@@ -42,6 +43,7 @@ function App() {
             <Route path="/courses/:cat" element={<CoursesList />} />
             <Route path="/coursegestion" element={<CoursesGestion />} />
             <Route path="/mensuality" element={<Mensuality />} />
+            <Route path="/registerMonthly" element={<MensualityRegister/>}/>
             <Route path="/profile" element={<Profile />} />
             <Route path="/profileupdate" element={<ProfileUpdate />} />
             <Route path="/passwordupdate" element={<PasswordUpdate />} />
