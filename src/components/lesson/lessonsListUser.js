@@ -9,6 +9,7 @@ import {
   Offcanvas,
   Nav,
   ProgressBar,
+  Modal
 } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -21,7 +22,7 @@ import { useGlobalState } from "../GlobalState";
 import LessonCard from "./lessonCard";
 import { LessonRegister } from "./lessonRegister";
 import ReactPlayer from "react-player";
-
+import AddComment from "../comments/addComment";
 export const LessonsView = () => {
   const params = useParams();
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
@@ -32,6 +33,11 @@ export const LessonsView = () => {
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [lesson, changeLesson] = useState("");
+
+  const [showM, setShowM] = useState(false);
+
+  const handleCloseM = () => setShowM(false);
+  const handleShowM = () => setShowM(true);
 
   useEffect(() => {
     if (data) {
@@ -52,8 +58,9 @@ export const LessonsView = () => {
   if (loading || !data) return <LoadingSpin />;
   return (
     <div>
+
       <div className="courseContainer bg-ourBlack text-white">
-      <ProgressBar
+        <ProgressBar
           className="p-0"
           striped
           variant="danger"
@@ -68,12 +75,12 @@ export const LessonsView = () => {
                 window.localStorage.getItem("idCourse")
             )[0].node.course.coTitle
           }
-        </h1>        
+        </h1>
       </div>
       <div className="courseContainer">
         <Row>
           <Col sm={3} className="bg-ourBlack text-white">
-            <h2 className="text-center pt-2 pb-2">Lecciones              
+            <h2 className="text-center pt-2 pb-2">Lecciones
             </h2>
             {data.allLessons.edges
               .filter(
@@ -90,13 +97,14 @@ export const LessonsView = () => {
                   {node.leName}
                 </Button>
               ))}
-          <Button
-                  className="button-login-r btn btn-outline-primary mt-4"
-                  variant="outline-primary"
-                  // onClick={}
-                >
-                 Descargar Cronograma
-                </Button>    
+            <Button
+              className="button-login-r btn btn-outline-primary mt-4"
+              variant="outline-primary"
+            // onClick={}
+            >
+              Descargar Cronograma
+            </Button>
+
           </Col>
           <Col sm={8}>
             {data.allLessons.edges
@@ -110,6 +118,21 @@ export const LessonsView = () => {
                   {lesson === node.id ? (
                     <>
                       <h1>{node.leName}</h1>
+                      <Modal show={showM} onHide={handleCloseM}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Envianos tu opinión</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body><AddComment idLesson={node.id}/></Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleCloseM}>
+                            Cerrar
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                       {console.log(node)}
                       <ReactPlayer
                         url={node.leLinkVideo}
@@ -118,6 +141,13 @@ export const LessonsView = () => {
                         width="100%"
                         muted="false"
                       />
+                      <Button
+                        onClick={handleShowM}
+                        className="button-login-r btn btn-outline-primary mt-4"
+                        style={{ width: "150px" }}
+                      >
+                        Dejar comentario
+                      </Button>
                       <Row>
                         <Col>
                           <center>
