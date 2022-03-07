@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Form, Row, Col, Container,Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
-import REVIEW_REGISTER from "../../graphql/comments/REVIEW_REGISTER.JS";
+import swal from "sweetalert2";
+import { LoadingSpin } from "../utilities/LoadingSpin";
+import REVIEW_REGISTER from "../../graphql/comments/REVIEW_REGISTER.js";
 export const AddComment = ({idLesson}) => {
     const [mutateFunction, { data, loading, error, reset }] = useMutation(REVIEW_REGISTER);
     const [comment, changeComment] = useState({ field: "", valid: null });
     const [appreciation, setAprreciation] = useState({ value: "malo" });
+    
+    if (loading) return <LoadingSpin />;
 
     const handleInputChange = (e) => {
         changeComment({ ...comment, field: e.target.value, valid: "true" });
@@ -15,7 +19,33 @@ export const AddComment = ({idLesson}) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        if(
+            comment.field.length > 0
+        ){
+            mutateFunction({
+                variables: {
+                    opComment:comment.field,
+                    opQualification:appreciation.value,
+                    lessonId:idLesson
+                },
+              });
+              swal.fire({
+                icon: "success",
+                text: "Opinion guardada",
+                color: "#fff",
+                background: "#000",
+                timer: "2000",
+              });
+        }else{
+            swal.fire({
+                icon: "error",
+                text: "Se ha presentado un error ineperado",
+                color: "#fff",
+                background: "#000",
+                timer: "2000",
+              });
+        }
+        reset();
     };
     return (
         <Container>
@@ -50,7 +80,7 @@ export const AddComment = ({idLesson}) => {
                         </Col>
                     </Row>
                     <Button className="button-login-r mb-0" type="submit">
-                        Guardar comentario
+                        Guardar opinión
                     </Button>
                 </Form>
             </Row>
