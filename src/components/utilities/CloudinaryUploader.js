@@ -10,8 +10,10 @@ export const CloudinaryUploader = ({successFunction, failureFunction}) => {
       <Widget
         sources={["local", "url"]}
         
-        resourceType={"image"} 
+        resourceType={"auto"} 
         cloudName={"roninsatorimma"}
+    
+
         
         
         uploadPreset={"dipkmwet"}

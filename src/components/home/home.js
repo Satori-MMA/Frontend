@@ -106,7 +106,7 @@ export const Home = () => {
       <Divider />
 
       {/* Seccion de Informacion Cursos */}
-      <Row className="pt-2 text-center">
+      <Row className="text-white m-3">
         <h1 className="text-imperialRed"> Programas de Formación y Cursos</h1>
         <p>Tenemos muchos cursos para todas las categorías y niveles</p>
       </Row>
@@ -170,7 +170,7 @@ export const Home = () => {
           className="btn-lg bg-ourBlack button-main button-courses"
           as={Link}
           to={{ pathname: `/courses/Acondicionamiento Fisico` }}
-          variant="outline-success m-2"
+          variant="outline-success m-2 mb-5"
         >
           Acondicionamiento Fisico
         </Button>
@@ -178,7 +178,7 @@ export const Home = () => {
       <Divider />
 
       {/* Seccion horarios de entreno */}
-      <Row className="pt-2 text-center">
+      <Row className="text-center m-3">
         <h1 className="text-imperialRed"> Horarios de Entreno</h1>
       </Row>
       <Container fluid className="text-white">

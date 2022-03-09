@@ -9,7 +9,8 @@ import {
   Offcanvas,
   Nav,
   ProgressBar,
-  Modal
+  Modal,
+  Image
 } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -59,7 +60,6 @@ export const LessonsView = () => {
   if (loading || !data) return <LoadingSpin />;
   return (
     <div>
-
       <div className="courseContainer bg-ourBlack text-white">
         <ProgressBar
           className="p-0"
@@ -81,8 +81,7 @@ export const LessonsView = () => {
       <div className="courseContainer">
         <Row>
           <Col sm={3} className="bg-ourBlack text-white">
-            <h2 className="text-center pt-2 pb-2">Lecciones
-            </h2>
+            <h2 className="text-center pt-2 pb-2">Lecciones</h2>
             {data.allLessons.edges
               .filter(
                 (element) =>
@@ -101,11 +100,13 @@ export const LessonsView = () => {
             <Button
               className="button-login-r btn btn-outline-primary mt-4"
               variant="outline-primary"
-            // onClick={}
+              href="https://drive.google.com/file/d/1Aot6sCSvXBnkbwMWErKdPyvZ505F6grU/view?usp=sharing"
+              target="blank"  
             >
               Descargar Cronograma
             </Button>
-
+            <Image publicId="SatoriMMA/os8s8yt04k2kmipit63c.pdf" >
+            </Image>           
           </Col>
           <Col sm={8}>
             {data.allLessons.edges
@@ -119,7 +120,9 @@ export const LessonsView = () => {
                   {lesson === node.id ? (
                     <>
                       <h1>{node.leName}</h1>
-                      <Modal show={showM} onHide={handleCloseM}
+                      <Modal
+                        show={showM}
+                        onHide={handleCloseM}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
@@ -127,14 +130,18 @@ export const LessonsView = () => {
                         <Modal.Header closeButton>
                           <Modal.Title>Envianos tu opinión</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body><AddComment idLesson={node.id}/></Modal.Body>
+                        <Modal.Body>
+                          <AddComment idLesson={node.id} />
+                        </Modal.Body>
                         <Modal.Footer>
                           <Button variant="secondary" onClick={handleCloseM}>
                             Cerrar
                           </Button>
                         </Modal.Footer>
                       </Modal>
-                      <Modal show={show} onHide={handleClose}
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
@@ -142,7 +149,9 @@ export const LessonsView = () => {
                         <Modal.Header closeButton>
                           <Modal.Title>Comentarios</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body><ListComment idLesson={node.id}/></Modal.Body>
+                        <Modal.Body>
+                          <ListComment idLesson={node.id} />
+                        </Modal.Body>
                         <Modal.Footer>
                           <Button variant="secondary" onClick={handleClose}>
                             Cerrar

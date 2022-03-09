@@ -1,10 +1,12 @@
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import imgAbout1 from "../../Assets/Foto13.jpg";
+import ReactPlayer from 'react-player'
+import vidAbout1 from "../../Assets/Intro.mp4";
 import imgAbout2 from "../../Assets/about2.png";
 import instructor1 from "../../Assets/about1.jpg";
 import instructor2 from "../../Assets/Foto7.jpg";
 import { ReactComponent as DividerSvg } from "../../Assets/divider.svg";
+import { CarouselV } from "../home/CarouselV";
 import { COLORS } from "../utilities/color";
 
 const Divider = () => {
@@ -43,7 +45,7 @@ export const About = () => {
             </p>
           </Col>
           <Col>
-            <img alt="" width="100%" height="auto" src={imgAbout1} />
+          <CarouselV></CarouselV>          
           </Col>
         </Row>
         <Row className="pt-1 text-center">
@@ -51,7 +53,7 @@ export const About = () => {
               className="btn-lg bg-ourBlack button-main button-courses2 mt-1"
               as={Link}
               to="/contacto"
-              variant="outline-success m-2"
+              variant="outline-success"
             >
               ¡ ENTRENA CON NOSOTROS !
             </Button>
@@ -118,7 +120,7 @@ export const About = () => {
         </Row>
         <Row className="text-center mt-5">
           <Divider />
-          <h2 className="text-center text-imperialRed">INSTRUCTORES</h2>
+          <h2 className="text-center text-imperialRed mt-4">INSTRUCTORES</h2>
           <p>
             Contamos con instructores dispuestos a enseñar con dedicación y
             empeño para que nuestros clientes tengan la mejor experiencia
@@ -157,7 +159,7 @@ export const About = () => {
         </Row>
         <br></br>
         <Divider />
-        <Row className="m-3 mb-0" xs={1} sm={1} md={2} lg={2}>
+        <Row className="m-3 mb-0 pb-4" xs={1} sm={1} md={2} lg={2}>
           <Col className="text-center">
             <img
               alt="Instructor 2: Brayan Andrés Pinzón"

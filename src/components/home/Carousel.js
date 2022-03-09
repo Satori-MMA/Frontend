@@ -4,11 +4,12 @@ import Carousel from "react-bootstrap/Carousel";
 import Carrusel1 from "../../Assets/Foto4.jpg";
 import Carrusel2 from "../../Assets/Foto1.jpg";
 import Carrusel3 from "../../Assets/Foto3.jpg";
-import Carrusel4 from "../../Assets/Foto12.jpg";
+import Carrusel4 from "../../Assets/Foto12.jpg";;
 
 export const CarouselI = () => {
   return (
-    <Carousel className="mb-2">
+    <Carousel className="mb-2" >
+    
       <Carousel.Item>
         <img
           className="d-block w-100"
