@@ -1,7 +1,6 @@
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player'
-import vidAbout1 from "../../Assets/Intro.mp4";
 import imgAbout2 from "../../Assets/about2.png";
 import instructor1 from "../../Assets/about1.jpg";
 import instructor2 from "../../Assets/Foto7.jpg";

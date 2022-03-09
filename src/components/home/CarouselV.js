@@ -1,6 +1,6 @@
 import ReactPlayer from 'react-player'
 import Carousel from "react-bootstrap/Carousel";
-import Carrusel0 from "../../Assets/Intro.mp4";
+// import Carrusel0 from "../../Assets/Intro.mp4";
 
 export const CarouselV = () => {
   return (
@@ -8,12 +8,11 @@ export const CarouselV = () => {
       <Carousel.Item  >
       <div>
         <ReactPlayer
-          url={Carrusel0}          
+          url="https://youtu.be/brj2QkrjInY"
           className='react-player'
-          playing={true}
-          volume={0.05}
-          width='100%'
-          height='100%'
+          playing
+          loop={true}
+          volume={0.1}
           controls={true}
         />
       </div>             
