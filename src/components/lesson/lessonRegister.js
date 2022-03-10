@@ -98,7 +98,8 @@ export const LessonRegister = () => {
   }, [data]);
 
   const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{2,200}$/, // Letras, numeros, guion y guion_bajo
+    text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
   };
 
   const handleBack = ()=>{       
@@ -107,10 +108,6 @@ export const LessonRegister = () => {
        pathname: `/crudLesson/${params.id}`,
     });
   }
-
-  const handleInputChange = (e) => {
-    changelinkLesson({ ...linkLesson, field: e.target.value, valid: "true" });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -139,7 +136,7 @@ export const LessonRegister = () => {
     <div>
       <Container>
         <Row>
-          <h3>Crear Lección</h3>
+          <h3 className="mt-3">Crear Lección</h3>
           <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
             <Form
               className="bg-ourBlack form-border"
@@ -164,19 +161,18 @@ export const LessonRegister = () => {
                 type="text"
                 name="description"
                 errorLabel="La descripción no puede contener caracteres especiales ni ser vacío"
-                regularExpresion={expressions.text}
+                regularExpresion={expressions.longText}
               />
-              <label className="mt-3">
-                Link del video<span className="text-danger">*</span>
-              </label>
-              <Form.Control
-                label="Link de video"
-                placeholder="Ingrese el link del video"
+               <Input
+                state={linkLesson}
+                changeState={changelinkLesson}
+                label="Link de la Lección"
+                placeholder="Ingrese el link de la lección"
                 type="text"
-                name="link"
-                value={linkLesson.field}
-                onChange={handleInputChange}
-              />
+                name="linkLesson"
+                errorLabel="El link no puede ser vacío"
+                regularExpresion={expressions.longText}
+              />              
 
               <hr></hr>
               <Row>
@@ -189,7 +185,7 @@ export const LessonRegister = () => {
                     </p>
                   </ErrorMessage>
                 )}
-                <Col className="text-center" mb-2="true">
+                <Col className="text-center">
                   <Button
                     className="button-login-r"
                     id="register"
@@ -198,7 +194,7 @@ export const LessonRegister = () => {
                     Guardar
                   </Button>
                 </Col>
-                <Col className="text-center" mb-2="true">
+                <Col className="text-center">
                   <Button
                     className="button-courses bottom mt-2 "                    
                     variant="outline-primary" 

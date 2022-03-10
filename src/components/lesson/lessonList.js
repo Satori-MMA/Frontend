@@ -100,7 +100,7 @@ export const LessonCRUD = () => {
             </Form>
           </Offcanvas.Body>
         </Offcanvas>              
-        <h1>Gestión de Lecciones {courseTitle}</h1>        
+        <h1 className="pt-3">Gestión de Lecciones {courseTitle}</h1>        
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>

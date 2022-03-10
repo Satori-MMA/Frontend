@@ -41,6 +41,7 @@ export const RegisterCourse = () => {
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [image, changeImage] = useState({ field: "", valid: null });
   const [price, changePrice] = useState({ field: "", valid: null });
+  const [linkCronogram, changelinkCronogram] = useState({ field: "", valid: null });
   const [selects, setSelect] = useState();
   const [showImage, setShowImage] = useState(false);
   const navigate = useNavigate();
@@ -104,7 +105,8 @@ export const RegisterCourse = () => {
   }, [f_data]);
 
   const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{4,30}$/, // Letras, numeros, guion y guion_bajo
+    text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
     price: /^\d{3,14}$/, // 7 a 14 numeros.
   };
   if (c_error) return <ErrorMessageLog></ErrorMessageLog>;
@@ -123,9 +125,6 @@ export const RegisterCourse = () => {
     setSelect(e.target.value);
   };
 
-  const handleInputChange = (e) => {
-    changeDescription({ ...description, field: e.target.value, valid: "true" });
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     setTitle(mytitle.field);
@@ -150,7 +149,7 @@ export const RegisterCourse = () => {
     <div>
       <Container>
         <Row>
-          <h3>Crear un nuevo curso</h3>
+          <h3 className="pt-4">Crear un nuevo curso</h3>
           <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
             <Form
               className="bg-ourBlack form-border"
@@ -160,21 +159,22 @@ export const RegisterCourse = () => {
               <Input
                 state={mytitle}
                 changeState={changeTitle}
-                label="Titulo"
+                label="Título"
                 type="text"
                 name="title"
                 errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
                 regularExpresion={expressions.text}
+              />              
+              <Input 
+                state={description}
+                changeState={changeDescription}
+                label="Descripción"
+                type="textarea" 
+                name="description"                   
+                errorLabel="La descripcion no puede contener caracteres especiales ni ser vacía"
+                regularExpresion={expressions.longText}             
               />
-              <label>
-                Descripcion<span className="text-danger">*</span>
-              </label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={description.field}
-                onChange={handleInputChange}
-              />
+
               <Input
                 state={price}
                 changeState={changePrice}
@@ -184,6 +184,17 @@ export const RegisterCourse = () => {
                 errorLabel="El precio solo puede contener números y el máximo son 14 dígitos."
                 regularExpresion={expressions.price}
               />
+
+              <Input
+                state={linkCronogram}
+                changeState={changelinkCronogram}
+                label="Link del Cronograma"
+                type="text"
+                name="linkC"
+                errorLabel="La descripcion no puede contener caracteres especiales ni ser vacio"
+                regularExpresion={expressions.longText}
+              />
+        
               <Row className="mt-3">
                 <Col>
                   <CloudinaryUploader

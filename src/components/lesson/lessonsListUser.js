@@ -1,13 +1,7 @@
 import {
   Row,
   Col,
-  Container,
-  Tab,
-  ListGroup,
-  Form,
-  Button,
-  Offcanvas,
-  Nav,
+   Button,
   ProgressBar,
   Modal,
   Image
@@ -79,9 +73,9 @@ export const LessonsView = () => {
         </h1>
       </div>
       <div className="courseContainer">
-        <Row>
-          <Col sm={3} className="bg-ourBlack text-white">
-            <h2 className="text-center pt-2 pb-2">Lecciones</h2>
+        <Row className="m-3 mb-0">
+          <Col sm={4} className="bg-ourGray col-course-user text-white">
+            <h2 className="text-center pt-2 p-4 mr-3">Lecciones</h2>
             {data.allLessons.edges
               .filter(
                 (element) =>
@@ -108,7 +102,7 @@ export const LessonsView = () => {
             <Image publicId="SatoriMMA/os8s8yt04k2kmipit63c.pdf" >
             </Image>           
           </Col>
-          <Col sm={8}>
+          <Col sm={8}  className="col-course-user">
             {data.allLessons.edges
               .filter(
                 (element) =>
@@ -164,23 +158,28 @@ export const LessonsView = () => {
                         className="react-player"
                         playing
                         width="100%"
-                        muted="false"
+                        volume={0.4}
+                        muted={false}
+                        controls={true}
                       />
+                      <Row className="mb-4">
                       <Button
                         onClick={handleShowM}
-                        className="button-login-r btn btn-outline mt-4"
-                        style={{ width: "150px" }}
+                        className="button-login-r btn btn-outline mt-4 mb-2 btn-course-user-l"
+                        style={{ width: "30%" }}
                       >
                         Dejar comentario
                       </Button>
                       <Button
                         id="button-list-comments"
                         onClick={handleShow}
-                        className="button-login-r btn btn-outline-primary mt-4"
-                        style={{ width: "150px" }}
+                        className="button-login-r btn btn-outline-primary mt-4 mb-2 btn-course-user-r"
+                        style={{ width: "30%" }}
                       >
+                        
                         Ver comentarios
                       </Button>
+                      </Row>
                       <Row>
                         <Col>
                           <center>

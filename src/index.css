@@ -314,6 +314,18 @@ code {
   background-color: #ba181b !important;
 }
 
+.col-course-user{
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.btn-course-user-r{
+  margin-right: auto !important;  
+}
+
+.btn-course-user-l{  
+  margin-left: auto !important;
+}
 @media only screen and (max-width: 600px) {
   .popup-inner .close-btn {
     border-color: black;

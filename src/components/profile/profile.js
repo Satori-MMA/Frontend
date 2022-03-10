@@ -18,7 +18,7 @@ export const Profile = () => {
         <h1 className="text-imperialRed"> Perfil de Usuario</h1>
       </Row>
       <Row>
-        <Col lg="3">
+        <Col className="mt-5 pt-3"lg="3">
           <UserCard user={user} />
         </Col>
         <Col>

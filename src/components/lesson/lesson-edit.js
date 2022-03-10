@@ -129,7 +129,8 @@ export const LessonEdit = () => {
   };
 
   const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{2,200}$/, // Letras, numeros, guion y guion_bajo
+    text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
   };
 
   const handleSubmit = (e) => {
@@ -167,7 +168,7 @@ export const LessonEdit = () => {
     <div>
       <Container>
         <Row>
-          <h3>Actualizar Lección</h3>
+          <h3 className="mt-3">Actualizar Lección</h3>
           <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
             <Form
               className="bg-ourBlack form-border"
@@ -192,16 +193,18 @@ export const LessonEdit = () => {
                 type="text"
                 name="description"
                 errorLabel="La descripción no puede contener caracteres especiales ni ser vacío"
-                regularExpresion={expressions.name}
+                regularExpresion={expressions.longText}
               />
               <Input
                 state={linkLesson}
                 changeState={changelinkLesson}
-                label="Link de video"
-                placeholder="Ingrese el link del video"
+                label="Link de la Lección"
+                placeholder="Ingrese el link de la lección"
                 type="text"
-                name="link"
-              />
+                name="linkLesson"
+                errorLabel="El link no puede ser vacío"
+                regularExpresion={expressions.longText}
+              />         
 
               <hr></hr>
               <Row>

@@ -15,11 +15,11 @@ const InputComponent = ({ state,changeState,label, name, placeholder, type, erro
         }
     }
     return (
-        <Col className='form-group' >
+        <Col className='form-group mb-2' >
             <Label>{label}<span className='text-danger'>*</span></Label>
-            <GroupInput>            
+            <GroupInput >            
             <Input
-                className='form-control'
+                className='form-control mt-0'
                 type={type}
                 name={name}
                 value={state.field}
@@ -33,7 +33,7 @@ const InputComponent = ({ state,changeState,label, name, placeholder, type, erro
 					valid={state.valid}
 				/>
                 </GroupInput>
-            <LeyendaError valid={state.valid}><span></span>{errorLabel}</LeyendaError>
+            <LeyendaError  valid={state.valid}><span></span>{errorLabel}</LeyendaError>
         </Col>
     );
 }
