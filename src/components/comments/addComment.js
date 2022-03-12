@@ -4,11 +4,14 @@ import { useMutation } from "@apollo/client";
 import swal from "sweetalert2";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import REVIEW_REGISTER from "../../graphql/comments/REVIEW_REGISTER.js";
+import { useGlobalState } from "../GlobalState";
 export const AddComment = ({idLesson}) => {
     const [mutateFunction, { data, loading, error, reset }] = useMutation(REVIEW_REGISTER);
     const [comment, changeComment] = useState({ field: "", valid: null });
     const [appreciation, setAprreciation] = useState({ value: "malo" });
-    
+    const [user, updateUser] = useGlobalState("user");
+    const userId = user?.id;
+    console.log(userId)
     if (loading) return <LoadingSpin />;
 
     const handleInputChange = (e) => {
@@ -26,7 +29,8 @@ export const AddComment = ({idLesson}) => {
                 variables: {
                     opComment:comment.field,
                     opQualification:appreciation.value,
-                    lessonId:idLesson
+                    lessonId:idLesson,
+                    userId:userId
                 },
               });
               swal.fire({
