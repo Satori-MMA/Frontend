@@ -2,20 +2,19 @@ import { gql } from "@apollo/client";
 
 const ALL_MONTHLY = gql`
   query allMonthly {
-    allMonthlypayment {
+    allMonthlypayments {
       edges {
         node {
           id
           moStartDate
           moFinishDate
           moType
-          payment {
+          moPrice
+          user {
             id
-            user {
-              id
-              firstName
-              lastName
-            }
+            email
+            firstName
+            lastName
           }
         }
       }

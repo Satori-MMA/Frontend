@@ -12,6 +12,10 @@ export const Mensuality = () => {
   const { data, loading, error, refetch } = useQuery(ALL_MONTHLY, {
     fetchPolicy: "network-only",
   });
+  const expressions = {
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    phone: /^\d$/, // 7 a 14 números.
+  };
 
   useEffect(() => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
@@ -22,26 +26,32 @@ export const Mensuality = () => {
     <div>
       <h1 className="text-white text-center"> Gestión de Mensualidades </h1>
       <Button
-              className="button-login-r"
-              variant="success"
-              as={Link}
-              to="/registerMonthly"
-            >
-              Agregar un curso
-            </Button>
-      <ListGroup as="ol" numbered >
-        {data?.allMonthlypayment?.edges.map((element) => (
+        className="button-login-r"
+        variant="success"
+        as={Link}
+        to="/registerMonthly"
+      >
+        Agregar mensualidad
+      </Button>
+      <ListGroup as="ol" numbered>
+        {data?.allMonthlypayments?.edges.map((element) => (
           <ListGroup.Item
             as="li"
             className="d-flex justify-content-between align-items-start"
+            key={element.node.id}
           >
             <div className="ms-2 me-auto">
-              <div className="fw-bold">Pago realizado por: {element.node.payment.user.firstName} {element.node.payment.user.lastName}</div>
-              Fecha de inicio: {element.node.moStartDate} | Fecha de finalización: {element.node.moFinishDate} 
-              <br/>Tipo de mensualidad: {element.node.moType}
+              <div className="fw-bold">
+                Pago realizado por: {element.node.user.firstName}{" "}
+                {element.node.user.lastName} ( {element.node.user.email})
+              </div>
+              Fecha de inicio: {element.node.moStartDate} | Fecha de
+              finalización: {element.node.moFinishDate}
+              <br />
+              Tipo de mensualidad: {element.node.moType}
             </div>
             <Badge bg="primary" pill>
-              14
+              ${element.node.moPrice}
             </Badge>
           </ListGroup.Item>
         ))}
