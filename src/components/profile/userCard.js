@@ -3,21 +3,24 @@ import { FcBusinessman } from "react-icons/fc";
 import { useGlobalState } from "../GlobalState";
 import { Link } from "react-router-dom";
 import { COLORS } from "../utilities/color";
+import Logo from "../../Assets/Logo2.png";
 export const UserCard = ({user}) => {
   return (
     <Card className="no-border-card">
       <Card.Body className="bg-ourBlack form-border m-0">
         <Row>
           <div>
-            <FcBusinessman
-              className="bg-cultured circle"
-              color={COLORS.carnelian}
-              size={125}
-            />
+          <img
+          className="mt-3 mb-3"
+          alt="Centro de entrenamiento Satori - Horario"
+          width="40%"
+          height="auto"
+          src={Logo}
+        />
           </div>
 
           <Card.Title>
-            {user.firstName} {user?.rolUser?.edges[0]?.node.rolName}
+            {user?.rolUser?.edges[0]?.node.rolName} {user.firstName}
           </Card.Title>
           <Card.Text className="p-2">
             <p>

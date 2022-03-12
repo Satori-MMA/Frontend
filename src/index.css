@@ -318,6 +318,12 @@ code {
   margin-right: auto !important;
   margin-left: auto !important;
 }
+.chackBox-lesson{
+  margin-right: auto !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  padding-top: auto !important; 
+}
 
 .btn-course-user-r{
   margin-right: auto !important;  
@@ -435,4 +441,27 @@ code {
 .courseContainer{
   padding: 0% !important;
   margin: 0% !important;
+}
+
+input[type="checkbox"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.checkbox {
+  display: inline-block; 
+  height: 20px;
+  width: 20px;
+  background: #fff;
+  border: 2px #ddd solid;
+  margin-right: 4px;
+}
+
+.checkbox--active {
+  border-color: #ba181b;
+  background: #ba181b;
 }

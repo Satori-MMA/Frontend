@@ -5,6 +5,7 @@ import { useGlobalState } from "../GlobalState";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import CourseCard from "../courses/courseCard";
+import Logo from "../../Assets/Logo2.png";
 export const Profile = () => {
   const [user] = useGlobalState("user");
   const { data, loading, error } = useQuery(USER_COURSES, {
@@ -18,7 +19,7 @@ export const Profile = () => {
         <h1 className="text-imperialRed"> Perfil de Usuario</h1>
       </Row>
       <Row>
-        <Col className="mt-5 pt-3"lg="3">
+        <Col className="mt-5 pt-3" lg="3">
           <UserCard user={user} />
         </Col>
         <Col>
@@ -43,24 +44,38 @@ export const Profile = () => {
                 as="li"
                 className="d-flex justify-content-between align-items-start"
               >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">{node.course.coTitle}</div>
-                  {node.course.coDescription}
-                </div>
-                <Badge bg="danger" pill>
-                  {node.course.coPrice}
-                </Badge>
+                <Col className="m-auto p-auto" lg="2">
+                  <img
+                    className="mt-3 mb-3"
+                    alt="Centro de entrenamiento Satori - Horario"
+                    width="90%"
+                    height="auto"
+                    src={Logo}
+                  />
+                </Col>
+                <Col>
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">{node.course.coTitle}</div>
+                    {node.course.coDescription}
+                  </div>
+                  Porcentaje de avance en vez de precio 
+                  <Badge className="m-auto p-auto" bg="danger" pill>
+                    {node.course.coPrice}
+                  </Badge>                  
+                </Col>
+                <Col className="ml-3">
                 <Button
-                  className="profileCourseButton m-2 mt-5"
-                  as={Link}
-                  to={{ pathname: `/lessons/${node.course.id}` }}
-                  onClick={() =>
-                    window.localStorage.setItem("idCourse", node.course.id)
-                  }
-                  variant="danger"
-                >
-                  Ir al curso
-                </Button>
+                    className="profileCourseButton m-5"
+                    as={Link}
+                    to={{ pathname: `/lessons/${node.course.id}` }}
+                    onClick={() =>
+                      window.localStorage.setItem("idCourse", node.course.id)
+                    }
+                    variant="danger"
+                  >
+                    Ir al curso
+                  </Button>
+                  </Col>
               </ListGroup.Item>
             ))}
           </ListGroup>

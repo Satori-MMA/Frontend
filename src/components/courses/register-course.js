@@ -41,7 +41,13 @@ export const RegisterCourse = () => {
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [image, changeImage] = useState({ field: "", valid: null });
   const [price, changePrice] = useState({ field: "", valid: null });
-  const [linkCronogram, changelinkCronogram] = useState({ field: "", valid: null });
+  const [instructor, changeInstructor] = useState({ field: "", valid: null });
+  const [dificultad, changeDificultad] = useState({ field: "", valid: null });
+
+  const [linkCronogram, changelinkCronogram] = useState({
+    field: "",
+    valid: null,
+  });
   const [selects, setSelect] = useState();
   const [showImage, setShowImage] = useState(false);
   const navigate = useNavigate();
@@ -106,7 +112,7 @@ export const RegisterCourse = () => {
 
   const expressions = {
     text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
     price: /^\d{3,14}$/, // 7 a 14 numeros.
   };
   if (c_error) return <ErrorMessageLog></ErrorMessageLog>;
@@ -123,6 +129,9 @@ export const RegisterCourse = () => {
 
   const onChangeCategory = (e) => {
     setSelect(e.target.value);
+  };
+  const onChangeDificultad = (e) => {
+    changeDificultad(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -160,24 +169,38 @@ export const RegisterCourse = () => {
                 state={mytitle}
                 changeState={changeTitle}
                 label="Título"
+                placeholder="Ingrese el titulo del curso"
                 type="text"
                 name="title"
                 errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
                 regularExpresion={expressions.text}
-              />              
-              <Input 
+              />
+              <Input
                 state={description}
                 changeState={changeDescription}
                 label="Descripción"
-                type="textarea" 
-                name="description"                   
+                placeholder="Ingrese la descripcion del curso"
+                type="textarea"
+                name="description"
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacía"
-                regularExpresion={expressions.longText}             
+                regularExpresion={expressions.longText}
+              />
+
+              <Input
+                state={instructor}
+                changeState={changeInstructor}
+                label="Nombre del instructor"
+                placeholder="Ingrese el nombre del instructor"
+                type="text"
+                name="instructor"
+                errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
+                regularExpresion={expressions.text}
               />
 
               <Input
                 state={price}
                 changeState={changePrice}
+                placeholder="Ingrese el precio del curso: $"
                 label="Precio"
                 type="text"
                 name="price"
@@ -189,12 +212,34 @@ export const RegisterCourse = () => {
                 state={linkCronogram}
                 changeState={changelinkCronogram}
                 label="Link del Cronograma"
+                placeholder="Ingrese el link del cronograma del curso"
                 type="text"
                 name="linkC"
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacio"
                 regularExpresion={expressions.longText}
               />
-        
+              <Row className="mt-4">
+              <Col>
+              <label>
+                Seleccione la dificultad del curso:
+                <span className="text-danger">*</span>
+              </label>
+              </Col>
+              <Col>
+              <Form.Select                
+                aria-label="Default select example"
+                value={dificultad}
+                onChange={onChangeDificultad}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Select>
+              </Col>
+              </Row>
               <Row className="mt-3">
                 <Col>
                   <CloudinaryUploader
@@ -228,6 +273,7 @@ export const RegisterCourse = () => {
                   </Form.Select>
                 </Col>
               </Row>
+
               <Row>
                 {image.valid && showImage ? (
                   <Image src={image.field}></Image>

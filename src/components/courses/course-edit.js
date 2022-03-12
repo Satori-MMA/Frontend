@@ -41,6 +41,8 @@ export const CourseEdit = () => {
   const [selects, setSelect] = useState();
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
+  const [instructor, changeInstructor] = useState({ field: "", valid: null });
+  const [dificultad, changeDificultad] = useState({ field: "", valid: null });
   const successCallBackUpload = (result) => {
     changeImage({ field: result.info.url, valid: true });
   };
@@ -121,12 +123,15 @@ export const CourseEdit = () => {
   const onChangeCategory = (e) => {
     setSelect(e.target.value);
   };
+  const onChangeDificultad = (e) => {
+    changeDificultad(e.target.value);
+  };
 
   if (loading || !data) return <LoadingSpin />;
 
   const expressions = {
     text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos    
     price: /^\d{3,14}$/, // 7 a 14 numeros.
   };
 
@@ -219,6 +224,28 @@ export const CourseEdit = () => {
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacio"
                 regularExpresion={expressions.longText}
               />
+               <Row className="mt-4">
+              <Col>
+              <label>
+                Seleccione la dificultad del curso:
+                <span className="text-danger">*</span>
+              </label>
+              </Col>
+              <Col>
+              <Form.Select                
+                aria-label="Default select example"
+                value={dificultad}
+                onChange={onChangeDificultad}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Select>
+              </Col>
+              </Row>
               <Row className="mt-3">
                 <Col>
                   <CloudinaryUploader
