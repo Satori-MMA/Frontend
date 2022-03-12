@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { Row, Form, Col, Container, Button } from "react-bootstrap";
+import { Row, Form, Col, Container, Button, Dropdown } from "react-bootstrap";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { ErrorMessage } from "../register/inputDinamicStyle";
 import { MdError } from "react-icons/md";
 import swal from "sweetalert2";
-import CREATE_LESSON from "../../graphql/lessons/REGISTER_LESSON";
 import FIND_USER from "../../graphql/users/FIND_USER";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
@@ -17,15 +16,12 @@ export const MensualityRegister = () => {
   const [findUser, { data, loading }] = useLazyQuery(FIND_USER, {
     fetchPolicy: "network-only",
   });
-  const [
-    mutateFunction,
-    { data: data_m, loading: loading_m, error: error, reset: m_reset },
-  ] = useMutation(REGISTER_MENSUALITY);
+  const [mutateFunction, { data: data_m }] = useMutation(REGISTER_MENSUALITY);
 
   const [rangeDate, changeDate] = useState([new Date(), new Date()]);
   const [usuario, changeUsuario] = useState("");
+  const [tipo, changeTipo] = useState("");
   const [valor, changeValor] = useState(0);
-  const [validForm, changeValidForm] = useState(null);
 
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -41,9 +37,9 @@ export const MensualityRegister = () => {
         console.log("Fueeeee");
         mutateFunction({
           variables: {
-            moStartDate: rangeDate[0].toISOString().split('T')[0],
-            moFinishDate: rangeDate[1].toISOString().split('T')[0],
-            moType: "semanal",
+            moStartDate: rangeDate[0].toISOString().split("T")[0],
+            moFinishDate: rangeDate[1].toISOString().split("T")[0],
+            moType: tipo,
             moPrice: parseFloat(valor),
             userId: data.users.edges[0].node.id,
           },
@@ -68,23 +64,15 @@ export const MensualityRegister = () => {
     }
   }, [data_m]);
 
-  const expressions = {
-    text: /^[a-zA-Z0-9\s_.-]{2,200}$/, // Letras, numeros, guion y guion_bajo
-  };
-
   const handleBack = () => {
     navigate({
       pathname: `/mensuality`,
     });
   };
 
-  const handleInputChange = (e) => {
-    //changelinkLesson({ ...linkLesson, field: e.target.value, valid: "true" });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!valor || !usuario) {
+    if (!valor || !usuario || !tipo) {
       swal.fire({
         icon: "error",
         text: "Debe llenar los campos",
@@ -153,18 +141,26 @@ export const MensualityRegister = () => {
                     changeValor(e.target.value);
                   }}
                 />
+                <Dropdown className="mt-4">
+                  <Dropdown.Toggle variant="danger" className="bg-carnelian">
+                    Seleccione el tipo de mensualidad
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => changeTipo("semanal")}>
+                      Semanal
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => changeTipo("quincenal")}>
+                      Quincenal
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => changeTipo("Mensual")}>
+                      Mensual
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
 
                 <hr></hr>
                 <Row>
-                  {validForm === false && (
-                    <ErrorMessage>
-                      <p>
-                        <MdError color="red" />
-                        <b>Error:</b> Por favor rellena el formulario
-                        correctamente.
-                      </p>
-                    </ErrorMessage>
-                  )}
                   <Col className="text-center" mb-2="true">
                     <Button
                       className="button-login-r"
