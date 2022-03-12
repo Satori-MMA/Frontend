@@ -2,22 +2,32 @@ import { gql } from "@apollo/client";
 
 const ALL_LESSONS = gql`
 query allLesson{
-        allLessons{
-            edges{
-                node{
+    allLessons{
+        edges{
+            node{
+                id
+                leName
+                leDescription
+                leEvaluation
+                leLinkVideo
+                isActive
+                course{
                     id
-                    leName
-                    leDescription
-                    leEvaluation
-                    leLinkVideo
-                    isActive
-                    course{
-                        id
-                        coTitle
+                    coTitle
+                }
+              lessonuserSet{
+                edges{
+                  node{
+                    
+                    user{
+                      email
                     }
-            }
+                  }
+                }
+              }
         }
     }
+}
 }`;
 
 export default ALL_LESSONS;

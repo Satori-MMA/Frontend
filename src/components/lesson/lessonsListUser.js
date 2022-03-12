@@ -1,14 +1,11 @@
 import { Row, Col, Button, ProgressBar, Modal, Image } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import "../courses/courses.css";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useEffect, useState } from "react";
-import { MdManageSearch } from "react-icons/md";
 import { useGlobalState } from "../GlobalState";
-import LessonCard from "./lessonCard";
-import { LessonRegister } from "./lessonRegister";
 import ReactPlayer from "react-player";
 import AddComment from "../comments/addComment";
 import ListComment from "../comments/listComments";
@@ -45,10 +42,7 @@ export const LessonsView = () => {
   }, [data]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setShow(false);
-  };
+
   if (loading || !data) return <LoadingSpin />;
   return (
     <div>
@@ -110,39 +104,8 @@ export const LessonsView = () => {
                 <>
                   {lesson === node.id ? (
                     <>
-                      <Row>
-                        <Col>
-                          <h1 className="pb-2">{node.leName}</h1>
-                        </Col>
-                        <Col className="chackBox-lesson">
-                          <div>
-                            <label>
-                              <input                                
-                                type="checkbox"
-                                onChange={() => {
-                                  setIsChecked(!isChecked);
-                                }}
-                              />
-                              <svg
-                                className={`checkbox ${
-                                  isChecked ? "checkbox--active" : ""
-                                }`}
-                                // This element is purely decorative so
-                                // we hide it for screen readers
-                                aria-hidden="true"
-                                viewBox="0 0 15 11"
-                                fill="none"
-                              >
-                                <path
-                                  d="M1 4.5L5 9L14 1"
-                                  strokeWidth="2"
-                                  stroke={isChecked ? "#fff" : "none"} // only show the checkmark when `isCheck` is `true`
-                                />
-                              </svg>
-                              Lección Tomada
-                            </label>
-                          </div>
-                        </Col>
+                      <Row>                        
+                          <h1 className="pb-2">{node.leName}</h1>                        
                       </Row>
                       <Modal
                         show={showM}
@@ -226,6 +189,44 @@ export const LessonsView = () => {
                           </center>
                         </Col>
                       </Row>
+                      
+                      {node.lessonuserSet.edges.filter(
+                        (element) => element.node.user?.email===  user.email                  
+                      ).length===1?<></>:
+                      <Row>
+                      <Col>                          
+                      </Col>
+                      <Col className="chackBox-lesson">
+                        <div>
+                          <label>
+                            <input                                
+                              type="checkbox"
+                              onChange={() => {
+                                setIsChecked(!isChecked);
+                              }}
+                            />
+                            <svg
+                              className={`checkbox ${
+                                isChecked ? "checkbox--active" : ""
+                              }`}
+                              // This element is purely decorative so
+                              // we hide it for screen readers
+                              aria-hidden="true"
+                              viewBox="0 0 15 11"
+                              fill="none"
+                            >
+                              <path
+                                d="M1 4.5L5 9L14 1"
+                                strokeWidth="2"
+                                stroke={isChecked ? "#fff" : "none"} // only show the checkmark when `isCheck` is `true`
+                              />
+                            </svg>
+                            Lección Tomada
+                          </label>
+                        </div>
+                      </Col>
+                    </Row>
+                      }
 
                       <p>{node.leDescription}</p>
 
