@@ -6,8 +6,7 @@ import { useGlobalState } from "../GlobalState";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import CourseCard from "../courses/courseCard";
-import Logo from "../../Assets/Logo2.png";
+
 export const Profile = () => {
   const [user] = useGlobalState("user");
   const { data, loading, error } = useQuery(USER_COURSES, {
@@ -23,40 +22,33 @@ export const Profile = () => {
     fetchPolicy: "network-only",
   });
   const rol = user?.rolUser?.edges[0]?.node.rolName;
-  const [leccT, setleccT] = useState(0);
-  const [progress, setProgress] = useState(0);
+  
+  // useEffect(() => {
+  //   if (m_data) {
+  //     const L = m_data.allLessons.edges.filter(
+  //       (element) =>
+  //         element.node.course.id === window.localStorage.getItem("idCourse")
+  //     );      
+  //   }
+  // }, [m_data]);
 
-  useEffect(() => {
-    console.log("Hi");
-    setleccT(0);
-    if (m_data) {
-      setleccT(
-        m_data.allLessons.edges.filter(
-          (element) =>
-            element.node.course.id === window.localStorage.getItem("idCourse")
-        ).length
+  const calcularProgreso = () => {
+    const L = m_data.allLessons.edges.filter(
+      (element) =>
+        element.node.course.id === window.localStorage.getItem("idCourse")
+    );
+    let cont = 0;
+    for (var i = 0; i < L.length; i++) {
+      let n = L[i].node.lessonuserSet.edges.filter(
+        (element) => element.node.user?.email === user.email
       );
-      let cont = 0;
-      for (var i = 0; i < leccT; i++) {
-        let n = m_data.allLessons.edges
-          .filter(
-            (element) =>
-              element.node.course.id === window.localStorage.getItem("idCourse")
-          )
-          [i].node.lessonuserSet.edges.filter(
-            (element) => element.node.user?.email === user.email
-          ).length;
-        if (n === 1) {
-          console.log("i " + i);
-          cont++;
-        }
+      if (n.length === 1) {
+        console.log("i " + i);
+        cont++;
       }
-      setProgress(cont);
-      console.log("totales " + leccT);
-      console.log("progress " + progress);
-      console.log("calculo" + (100 * progress) / leccT);
     }
-  }, [m_data]);
+    return (100 * cont) / L.length;
+  };
 
   //console.log(data);
   return (
@@ -108,7 +100,7 @@ export const Profile = () => {
                   </div>
                  
                   <Badge className="m-auto p-auto" bg="danger" pill>
-                    {(100 * progress) / leccT}%
+                  {m_data ? calcularProgreso() : 0}%
                   </Badge>
                 </Col>
                 <Col className="ml-3">

@@ -13,9 +13,7 @@ export const LessonsView = () => {
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [lesson, changeLesson] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [leccT, setLeccT] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);  
   const [showM, setShowM] = useState(false);
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
