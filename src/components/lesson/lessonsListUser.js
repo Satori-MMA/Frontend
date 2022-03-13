@@ -10,6 +10,13 @@ import ReactPlayer from "react-player";
 import AddComment from "../comments/addComment";
 import ListComment from "../comments/listComments";
 export const LessonsView = () => {
+  const [user] = useGlobalState("user");
+  const [show, setShow] = useState(false);
+  const [lesson, changeLesson] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [leccT, setLeccT] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [showM, setShowM] = useState(false);
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
   });
@@ -19,60 +26,37 @@ export const LessonsView = () => {
     { data: m_data, loading: m_loading, error: m_error, refetch: m_refetch },
   ] = useMutation(REGISTER_USER_LESSON);
 
-  const [user] = useGlobalState("user");
-  const [show, setShow] = useState(false);
-  const [lesson, changeLesson] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [leccT, setleccT] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [showM, setShowM] = useState(false);
-
   const handleCloseM = () => setShowM(false);
   const handleShowM = () => setShowM(true);
+  const calcularProgreso = () => {
+    const L = data.allLessons.edges.filter(
+      (element) =>
+        element.node.course.id === window.localStorage.getItem("idCourse")
+    );
+    let cont = 0;
+    for (var i = 0; i < L.length; i++) {
+      let n = L[i].node.lessonuserSet.edges.filter(
+        (element) => element.node.user?.email === user.email
+      );
+      if (n.length === 1) {
+        console.log("i " + i);
+        cont++;
+      }
+    }
+    return (100 * cont) / L.length;
+  };
 
   useEffect(() => {
     setIsChecked(false);
   }, [m_data]);
 
   useEffect(() => {
-    console.log("Hi")    
     if (data) {
-      const L= (data.allLessons.edges.filter(
+      const L = data.allLessons.edges.filter(
         (element) =>
           element.node.course.id === window.localStorage.getItem("idCourse")
-      ));
-      console.log(L.length)
-      console.log(window.localStorage.getItem("idCourse"))
-      setleccT(4);
-      console.log("Hi2")
-      console.log(user.email)
-      changeLesson(
-        data.allLessons.edges.filter(
-          (element) =>
-            element.node.course.id === window.localStorage.getItem("idCourse")
-        )[0].node.id
-      );         
-      console.log(leccT)
-      let cont = 0
-      for (var i = 0; i < leccT; i++) {
-        let n = data.allLessons.edges
-          .filter(
-            (element) =>
-              element.node.course.id === window.localStorage.getItem("idCourse")
-          )
-          [i].node.lessonuserSet.edges.filter(
-            (element) => element.node.user?.email === user.email
-          ).length;
-        if (n === 1) {
-          
-          console.log("i "+i)
-          cont++
-        }       
-      }
-      setProgress(cont)
-      console.log("totales "+leccT)
-        console.log("progress "+progress)
-        console.log("calculo"+(100 * progress) / leccT)
+      );
+      changeLesson(L[0].node.id);
     }
   }, [data]);
   const handleClose = () => setShow(false);
@@ -98,7 +82,7 @@ export const LessonsView = () => {
           striped
           variant="danger"
           animated
-          now={(100 * progress) / leccT}
+          now={data ? calcularProgreso() : 0}
         />
         <h1 className="pt-3 pb-3">
           {
