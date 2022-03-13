@@ -34,7 +34,7 @@ export const Mensuality = () => {
         Agregar mensualidad
       </Button>
       <ListGroup as="ol" numbered>
-        {data?.allMonthlypayments?.edges.map((element) => (
+        {data?.allMonthlypayments?.edges.reverse().map((element) => (
           <ListGroup.Item
             as="li"
             className="d-flex justify-content-between align-items-start"
