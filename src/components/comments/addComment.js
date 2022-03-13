@@ -1,53 +1,74 @@
 import { useState } from "react";
-import { Form, Row, Col, Container,Button } from "react-bootstrap";
+import { Form, Row, Col, Container, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import swal from "sweetalert2";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import REVIEW_REGISTER from "../../graphql/comments/REVIEW_REGISTER.js";
 import { useGlobalState } from "../GlobalState";
-export const AddComment = ({idLesson}) => {
+export const AddComment = ({ idLesson }) => {
     const [mutateFunction, { data, loading, error, reset }] = useMutation(REVIEW_REGISTER);
     const [comment, changeComment] = useState({ field: "", valid: null });
-    const [appreciation, setAprreciation] = useState({ value: "malo" });
     const [user, updateUser] = useGlobalState("user");
     const userId = user?.id;
-    console.log(userId)
+    let qualification = "malo";
+    const options = [
+        {
+            label: "Malo",
+            value: "malo",
+        },
+        {
+            label: "Regular",
+            value: "regular",
+        },
+        {
+            label: "Muy bueno",
+            value: "muy bueno",
+        },
+        {
+            label: "Execelente",
+            value: "excelente",
+        },
+    ]
+    
     if (loading) return <LoadingSpin />;
 
     const handleInputChange = (e) => {
         changeComment({ ...comment, field: e.target.value, valid: "true" });
     };
+    
     const onChangeCategory = (e) => {
-        setAprreciation(e.target.value);
+        qualification = e.target.value
+        console.log(qualification)
     };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(
+        if (
             comment.field.length > 0
-        ){
+        ) {
             mutateFunction({
                 variables: {
-                    opComment:comment.field,
-                    opQualification:appreciation.value,
-                    lessonId:idLesson,
-                    userId:userId
+                    opComment: comment.field,
+                    opQualification: qualification,
+                    lessonId: idLesson,
+                    userId: userId
                 },
-              });
-              swal.fire({
+            });
+            swal.fire({
                 icon: "success",
                 text: "Opinion guardada",
                 color: "#fff",
                 background: "#000",
                 timer: "2000",
-              });
-        }else{
+            });
+        } else {
             swal.fire({
                 icon: "error",
                 text: "Se ha presentado un error ineperado",
                 color: "#fff",
                 background: "#000",
                 timer: "2000",
-              });
+            });
         }
         reset();
     };
@@ -55,7 +76,7 @@ export const AddComment = ({idLesson}) => {
         <Container>
             <Row>
                 <Form
-                    
+
                     action=""
                     onSubmit={handleSubmit}>
                     <Row>
@@ -71,15 +92,11 @@ export const AddComment = ({idLesson}) => {
                         <Col>
                             <label>Selecciona que tal te parecio</label>
                             <Form.Select
-                                aria-label="Default select example"
-                                value={appreciation.value}
                                 onChange={onChangeCategory}
                             >
-                                <option value="malo">Malo</option>
-                                <option value="bueno">Bueno</option>
-                                <option value="regular">Regular</option>
-                                <option value="muy bueno">Muy Bueno</option>
-                                <option value="excelente">Excelente</option>
+                                {options.map((option) => (
+                                    <option value={option.value}>{option.label}</option>
+                                ))}
                             </Form.Select>
                         </Col>
                     </Row>
