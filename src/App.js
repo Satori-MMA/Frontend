@@ -18,6 +18,7 @@ import { Profile } from "./components/profile/profile";
 import { ProfileUpdate } from "./components/profile/formUpdateProfile";
 import {PasswordUpdate} from './components/profile/formUpdatePassword';
 import { CourseEdit } from "./components/courses/course-edit";
+import { CourseInformation } from "./components/courses/course-information";
 import { CoursesList } from "./components/courses/courses-list";
 import { Welcome } from "./components/utilities/Welcome";
 import { RegisterCourse } from "./components/courses/register-course";
@@ -39,9 +40,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contacto />} />
-            <Route path="/courses" element={<CoursesList />} />
+            <Route path="/courses" element={<CoursesList />} />            
             <Route path="/courses/:cat" element={<CoursesList />} />
-            <Route path="/coursegestion" element={<CoursesGestion />} />
+            <Route path="/coursegestion" element={<CoursesGestion />} />            
             <Route path="/mensuality" element={<Mensuality />} />
             <Route path="/registerMonthly" element={<MensualityRegister/>}/>
             <Route path="/profile" element={<Profile />} />
@@ -53,6 +54,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/password-reset/:token" element={<PasswordReset />} />
             <Route path="/course-edit/:id" element={<CourseEdit/>}/>
+            <Route path="/information/:id" element={<CourseInformation />} />
             <Route path="/registerCourse" element={<RegisterCourse/>}/>
             <Route path="/registerLesson/:id" element={<LessonRegister/>}/>
             <Route path="/crudLesson/:id" element={<LessonCRUD/>}/>

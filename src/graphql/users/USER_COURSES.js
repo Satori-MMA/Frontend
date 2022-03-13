@@ -13,6 +13,7 @@ const USER_COURSES = gql`
                   coTitle
                   coPrice
                   coDescription
+                  coImage
                   category {
                     catName
                   }

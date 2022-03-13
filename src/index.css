@@ -470,3 +470,9 @@ input[type="checkbox"] {
   border-color: #ba181b;
   background: #ba181b;
 }
+
+.button-leccions2 {
+  min-width: 100%;  
+  color: #e5383b !important;
+  border-color: #e5383b !important;
+}

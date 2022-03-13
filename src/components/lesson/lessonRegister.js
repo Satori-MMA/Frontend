@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ErrorMessage } from "../register/inputDinamicStyle";

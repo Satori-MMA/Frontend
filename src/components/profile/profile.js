@@ -50,13 +50,14 @@ export const Profile = () => {
                     alt="Centro de entrenamiento Satori - Horario"
                     width="90%"
                     height="auto"
-                    src={Logo}
+                    src={node.course.coImage}
                   />
                 </Col>
                 <Col>
                   <div className="ms-2 me-auto">
-                    <div className="fw-bold">{node.course.coTitle}</div>
-                    {node.course.coDescription}
+                    <div className="fw-bold">
+                      <h2>{node.course.coTitle}</h2></div>
+                    <h5>{node.course.coDescription}</h5>
                   </div>
                   Porcentaje de avance en vez de precio 
                   <Badge className="m-auto p-auto" bg="danger" pill>
