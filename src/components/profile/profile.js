@@ -1,9 +1,11 @@
 import { Row, Col, ListGroup, Badge, Container, Button } from "react-bootstrap";
 import { UserCard } from "./userCard";
 import USER_COURSES from "../../graphql/users/USER_COURSES";
+import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import { useGlobalState } from "../GlobalState";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import CourseCard from "../courses/courseCard";
 import Logo from "../../Assets/Logo2.png";
 export const Profile = () => {
@@ -11,7 +13,51 @@ export const Profile = () => {
   const { data, loading, error } = useQuery(USER_COURSES, {
     variables: { email: user.email },
   });
+
+  const {
+    data: m_data,
+    loading: m_loading,
+    error: m_error,
+    refetch: m_refetch,
+  } = useQuery(ALL_LESSONS, {
+    fetchPolicy: "network-only",
+  });
   const rol = user?.rolUser?.edges[0]?.node.rolName;
+  const [leccT, setleccT] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    console.log("Hi");
+    setleccT(0);
+    if (m_data) {
+      setleccT(
+        m_data.allLessons.edges.filter(
+          (element) =>
+            element.node.course.id === window.localStorage.getItem("idCourse")
+        ).length
+      );
+      let cont = 0;
+      for (var i = 0; i < leccT; i++) {
+        let n = m_data.allLessons.edges
+          .filter(
+            (element) =>
+              element.node.course.id === window.localStorage.getItem("idCourse")
+          )
+          [i].node.lessonuserSet.edges.filter(
+            (element) => element.node.user?.email === user.email
+          ).length;
+        if (n === 1) {
+          console.log("i " + i);
+          cont++;
+        }
+      }
+      setProgress(cont);
+      console.log("totales " + leccT);
+      console.log("progress " + progress);
+      console.log("calculo" + (100 * progress) / leccT);
+    }
+  }, [m_data]);
+
   //console.log(data);
   return (
     <Container fluid>
@@ -56,16 +102,17 @@ export const Profile = () => {
                 <Col>
                   <div className="ms-2 me-auto">
                     <div className="fw-bold">
-                      <h2>{node.course.coTitle}</h2></div>
+                      <h2>{node.course.coTitle}</h2>
+                    </div>
                     <h5>{node.course.coDescription}</h5>
                   </div>
-                  Porcentaje de avance en vez de precio 
+                 
                   <Badge className="m-auto p-auto" bg="danger" pill>
-                    {node.course.coPrice}
-                  </Badge>                  
+                    {(100 * progress) / leccT}%
+                  </Badge>
                 </Col>
                 <Col className="ml-3">
-                <Button
+                  <Button
                     className="profileCourseButton m-5"
                     as={Link}
                     to={{ pathname: `/lessons/${node.course.id}` }}
@@ -76,7 +123,7 @@ export const Profile = () => {
                   >
                     Ir al curso
                   </Button>
-                  </Col>
+                </Col>
               </ListGroup.Item>
             ))}
           </ListGroup>

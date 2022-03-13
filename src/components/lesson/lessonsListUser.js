@@ -1,6 +1,5 @@
 import { Row, Col, Button, ProgressBar, Modal, Image } from "react-bootstrap";
 import { useMutation, useQuery } from "@apollo/client";
-import { useNavigate, useParams } from "react-router-dom";
 import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import REGISTER_USER_LESSON from "../../graphql/lessons/REGISTER_USER_LESSON";
 import "../courses/courses.css";
@@ -36,18 +35,49 @@ export const LessonsView = () => {
   }, [m_data]);
 
   useEffect(() => {
-    if (data) {      
+    console.log("Hi")    
+    if (data) {
+      const L= (data.allLessons.edges.filter(
+        (element) =>
+          element.node.course.id === window.localStorage.getItem("idCourse")
+      ));
+      console.log(L.length)
+      console.log(window.localStorage.getItem("idCourse"))
+      setleccT(4);
+      console.log("Hi2")
+      console.log(user.email)
       changeLesson(
         data.allLessons.edges.filter(
           (element) =>
             element.node.course.id === window.localStorage.getItem("idCourse")
         )[0].node.id
-      );
+      );         
+      console.log(leccT)
+      let cont = 0
+      for (var i = 0; i < leccT; i++) {
+        let n = data.allLessons.edges
+          .filter(
+            (element) =>
+              element.node.course.id === window.localStorage.getItem("idCourse")
+          )
+          [i].node.lessonuserSet.edges.filter(
+            (element) => element.node.user?.email === user.email
+          ).length;
+        if (n === 1) {
+          
+          console.log("i "+i)
+          cont++
+        }       
+      }
+      setProgress(cont)
+      console.log("totales "+leccT)
+        console.log("progress "+progress)
+        console.log("calculo"+(100 * progress) / leccT)
     }
   }, [data]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleCheck = (UsID, lesID, lesLen) => {    
+  const handleCheck = (UsID, lesID, lesLen) => {
     setIsChecked(!isChecked);
     console.log(isChecked);
     mutateFunction({
@@ -63,37 +93,12 @@ export const LessonsView = () => {
   return (
     <div>
       <div className="courseContainer bg-ourBlack text-white">
-       
-        {/* {setleccT(
-          data.allLessons.edges.filter(
-            (element) =>
-              element.node.course.id === window.localStorage.getItem("idCourse")
-          ).length)
-        }
-        {data.allLessons.edges
-          .filter(
-            (element) =>
-              element.node.course.id === window.localStorage.getItem("idCourse")
-          )
-          .map(({ node }) => (
-            <>
-              {setProgress(
-                node.lessonuserSet.edges.filter(
-                  (element) => element.node.user?.email === user.email
-                ).length
-              )}
-            </>
-          ))}
-
-        {console.log(
-          100*leccT/progress
-        )} */}
         <ProgressBar
           className="p-0"
           striped
           variant="danger"
           animated
-          now={50}
+          now={(100 * progress) / leccT}
         />
         <h1 className="pt-3 pb-3">
           {

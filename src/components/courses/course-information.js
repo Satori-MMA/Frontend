@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { Row, Badge, Col, Container, Button } from "react-bootstrap";
 import { useLazyQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
+import BuyCursePopup from "./BuyCoursePopup.js"
+import SchedulePopup from "../home/schedulePopup.js"
 
 export const CourseInformation = () => {
   const params = useParams();
@@ -15,22 +17,22 @@ export const CourseInformation = () => {
     fetchPolicy: "network-only",
   });
 
-  const navigate = useNavigate();
-  const [user] = useGlobalState("user");
+  const [btnPopup, setbtnPopup] = useState(false);
 
-  useEffect(() => {
-    if (user?.rolUser?.edges[0]?.node.rolName !== "STUDENT") {
-      navigate("/register");
-    }
-  }, []);
   useEffect(() => {
     findCourse({ variables: { title: params.id } });
   }, []);
 
   if (loading || !data) return <LoadingSpin />;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  
+  const handleComprar = () => {
+    console.log(btnPopup)
+    setbtnPopup(true);    
+  };
+
+  const handleTomar = (e) => {
+    setbtnPopup("Nada aun");    
   };
   return (
     <div>
@@ -51,7 +53,11 @@ export const CourseInformation = () => {
                 <h1>{data.allCourses.edges[0].node.coTitle}</h1>
               </Col>
               <Col>
-                <Badge className="m-auto p-auto mt-2 text-rigth" bg="danger" pill>
+                <Badge
+                  className="m-auto p-auto mt-2 text-rigth"
+                  bg="danger"
+                  pill
+                >
                   ${data.allCourses.edges[0].node.coPrice}
                 </Badge>
               </Col>
@@ -64,16 +70,24 @@ export const CourseInformation = () => {
                 <h3 className="text-left">Instructor: Nombre Instructor</h3>
               </Col>
               <Col>
-              <h3>Dificultad: * * * * *</h3>
+                <h3>Dificultad: * * * * *</h3>
               </Col>
             </Row>
           </Col>
           <Row className="mt-4">
             <Col>
-              <Button className="button-login-r mt-1" onClick={handleSubmit}>
-                Comprar Curso
-              </Button>
+              {console.log(data.allCourses.edges[0].node.coPrice)}
+              {data.allCourses.edges[0].node.coPrice === 0 ? (
+                <Button className="button-login-r mt-1" onClick={handleTomar}>
+                  Tomar Curso
+                </Button>
+              ) : (
+                <Button className="button-login-r mt-1" onClick={handleComprar}>
+                  Comprar Curso
+                </Button>
+              )}
             </Col>
+            <BuyCursePopup trigger={btnPopup} setTrigger={setbtnPopup}></BuyCursePopup>
             <Col>
               <Button
                 className="button-courses bottom mt-0"
