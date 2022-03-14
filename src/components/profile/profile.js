@@ -5,6 +5,7 @@ import ALL_LESSONS from "../../graphql/lessons/ALL_LESSONS";
 import { useGlobalState } from "../GlobalState";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
+import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useEffect, useState } from "react";
 
 export const Profile = () => {
@@ -15,28 +16,17 @@ export const Profile = () => {
 
   const {
     data: m_data,
-    loading: m_loading,
-    error: m_error,
-    refetch: m_refetch,
   } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
   });
   const rol = user?.rolUser?.edges[0]?.node.rolName;
   
-  // useEffect(() => {
-  //   if (m_data) {
-  //     const L = m_data.allLessons.edges.filter(
-  //       (element) =>
-  //         element.node.course.id === window.localStorage.getItem("idCourse")
-  //     );      
-  //   }
-  // }, [m_data]);
-
-  const calcularProgreso = () => {
+   const calcularProgreso = (idCou) => {
     const L = m_data.allLessons.edges.filter(
       (element) =>
-        element.node.course.id === window.localStorage.getItem("idCourse")
+        element.node.course.id === idCou
     );
+    if(L.length >0){
     let cont = 0;
     for (var i = 0; i < L.length; i++) {
       let n = L[i].node.lessonuserSet.edges.filter(
@@ -47,10 +37,17 @@ export const Profile = () => {
         cont++;
       }
     }
+    console.log(cont)
+
     return (100 * cont) / L.length;
+  }
+  else{
+    return 0
+  }
   };
 
   //console.log(data);
+  if (loading || !data || !m_data) return <LoadingSpin />;
   return (
     <Container fluid>
       <Row className="pt-2 mb-3 text-center">
@@ -100,7 +97,7 @@ export const Profile = () => {
                   </div>
                  
                   <Badge className="m-auto p-auto" bg="danger" pill>
-                  {m_data ? calcularProgreso() : 0}%
+                  {m_data ? calcularProgreso(node.course.id) : 0}%
                   </Badge>
                 </Col>
                 <Col className="ml-3">

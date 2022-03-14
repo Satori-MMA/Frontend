@@ -263,6 +263,10 @@ code {
 .text-rigth {
   text-align: right !important;
 }
+.text-justify {
+  text-align: justify !important;
+}
+
 
 .no-border-card {
   border: 0px !important;
@@ -373,6 +377,7 @@ code {
   .icon-welcome {
     font-size: 35px !important;
   }
+
   .navbar {
     padding: 3% !important;
   }

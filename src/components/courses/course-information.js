@@ -1,38 +1,63 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Row, Badge, Col, Container, Button } from "react-bootstrap";
-import { useLazyQuery } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import "./courses.css";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
+import REGISTER_PAYMENT from "../../graphql/payment/REGISTER_PAYMENT";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
-import BuyCursePopup from "./BuyCoursePopup.js"
-import SchedulePopup from "../home/schedulePopup.js"
+import BuyCursePopup from "./BuyCoursePopup.js";
+import ALL_PAYMENTS from "../../graphql/payment/ALL_PAYMENTS";
 
 export const CourseInformation = () => {
   const params = useParams();
+  const [user] = useGlobalState("user");
+  let navigate = useNavigate();
   const [findCourse, { data, loading }] = useLazyQuery(FIND_COURSE, {
     fetchPolicy: "network-only",
   });
+  const [allPayments, { data: p_data, loading: p_loading }] = useLazyQuery(
+    ALL_PAYMENTS,
+    {
+      fetchPolicy: "network-only",
+    }
+  );
+  const [mutateFunction, { data: data_m }] = useMutation(REGISTER_PAYMENT);
 
   const [btnPopup, setbtnPopup] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {    
+
     findCourse({ variables: { title: params.id } });
+    allPayments();
   }, []);
 
-  if (loading || !data) return <LoadingSpin />;
+  if (loading || !data || !p_data) return <LoadingSpin />;
 
-  
   const handleComprar = () => {
-    console.log(btnPopup)
-    setbtnPopup(true);    
+    console.log(btnPopup);
+    setbtnPopup(true);
+  };
+
+  const handleGoCourse = () => {
+    console.log("Go")
+    window.localStorage.setItem("idCourse", data.allCourses.edges[0].node.id);
+    navigate({ pathname: `/lessons/${data.allCourses.edges[0].node.id}` });    
   };
 
   const handleTomar = (e) => {
-    setbtnPopup("Nada aun");    
+    const hoy = new Date(Date.now());      
+    mutateFunction({
+      variables: {
+        pDate: hoy.toISOString().split("T")[0],
+        uId: user.id,
+        cID: data.allCourses.edges[0].node.id,
+      },
+    });
+    handleGoCourse()  
   };
   return (
     <div>
@@ -78,16 +103,51 @@ export const CourseInformation = () => {
             <Col>
               {console.log(data.allCourses.edges[0].node.coPrice)}
               {data.allCourses.edges[0].node.coPrice === 0 ? (
-                <Button className="button-login-r mt-1" onClick={handleTomar}>
-                  Tomar Curso
-                </Button>
+                <>                                   
+                  {p_data.allPayments.edges.filter(
+                    (element) =>
+                    element.node.course.id === data.allCourses.edges[0].node.id &&
+                    element.node.user.email === user.email).length === 1 ? (
+                    <Button
+                      className="button-login-r mt-1"
+                      onClick={handleGoCourse}
+                    >
+                      Ir al Curso
+                    </Button>
+                  ) : (
+                    <Button
+                      className="button-login-r mt-1"
+                      onClick={handleTomar}
+                    >
+                      Tomar Curso
+                    </Button>
+                  )}
+                </>
               ) : (
-                <Button className="button-login-r mt-1" onClick={handleComprar}>
+                <>                                   
+                {p_data.allPayments.edges.filter(
+                  (element) =>
+                  element.node.course.id === data.allCourses.edges[0].node.id &&
+                  element.node.user.email === user.email).length === 1 ? (
+                  <Button
+                    className="button-login-r mt-1"
+                    onClick={handleGoCourse}
+                  >
+                    Ir al Curso
+                  </Button>
+                ) : (
+                  <Button className="button-login-r mt-1" onClick={handleComprar}>
                   Comprar Curso
                 </Button>
+                )}
+              </>                
               )}
+              <BuyCursePopup
+                trigger={btnPopup}
+                setTrigger={setbtnPopup}
+              ></BuyCursePopup>
             </Col>
-            <BuyCursePopup trigger={btnPopup} setTrigger={setbtnPopup}></BuyCursePopup>
+
             <Col>
               <Button
                 className="button-courses bottom mt-0"

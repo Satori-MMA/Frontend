@@ -1,10 +1,13 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import { COLORS } from "../utilities/color";
-import Logo from "../../Assets/Logo2.png";
+import Nequi from "../../Assets/Nequi.png";
+import imgWhatsapp from "../../Assets/whatsapp1.png";
 import {
   BsWhatsapp,
   BsFillXSquareFill,
+  BsFacebook,
+  BsInstagram,
 } from "react-icons/bs";
 
 export const BuyCursePopup = (props) => {
@@ -15,42 +18,64 @@ export const BuyCursePopup = (props) => {
     <div className="popup">
       <Container
         fluid
-        className="container-popup-schedule text-center mt-2 mb-2 popup-inner-schedule"
+        className="container-popup text-center mt-2 mb-2 popup-inner"
       >
-        <button onClick={handleClose} className="close-btn-schedule">
-          <BsFillXSquareFill color={COLORS.carnelian} />
-        </button>
+
+        <button onClick={handleClose} className="close-btn"><BsFillXSquareFill color={COLORS.carnelian} /></button>
         {props.children}
-        <h1 className="text-center text-white mt-4">Bienvenido a SATORI MMA</h1>
+        <h1 className="text-center text-white mt-4">¿Quieres comprar nuestro curso?</h1>
+        <h5 className="text-welcome-messagge text-justify">
+          En este momento nuestra plataforma de pago no esta en funcionamiento, pero tenemos algunas opciones para ti:
+        </h5>
         <img
           className="mt-3 mb-3"
           alt="Centro de entrenamiento Satori - Horario"
-          width="30%"
+          width="20%"
           height="auto"
-          src={Logo}
-        />
-        <h5 className="text-welcome-messagge">
-          Si es la primera vez que accedes a nuestra aplicación, tenemos muchas
-          sorpresas para ti 😃
+          src={Nequi}
+        />        
+        <h5 className="text-welcome-messagge text-justify">
+        Si quieres comprar alguno de nuestros cursos, puedes realizar la consignacion del curso a nuestro   <span className="text-danger">Nequi: 301 252 4990</span>.
+        Despues nos envias un mensaje de whatsapp con la foto de la consignacion, el nombre del curso, tu nombre y el correo con el que te registraste en nuestra aplicacion.
+        Una vez realices esto, nosotros activaremos el curso para ti y estará listo en tu perfil para que lo puedas toomar en cualquier momento.           
         </h5>
-        <h5 className="text-welcome-messagge">
-        Tienes derecho a una lección presencial totalmente gratis para que
-          conozcas nuestras instalaciones y la metodología a utilizar, además en
-          la aplicación encontraras muchos cursos donde aprenderás cosas
-          muy interesantes.
+        
+        <a
+            href="https://wa.me/573012524990"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image width="30%" src={imgWhatsapp} fluid />
+          </a>
 
-        </h5>
-        <h4 className="text-welcome-messagge mb-3">Contáctate con nosotros:</h4>
+        <h5 className="text-welcome-messagge mt-3">Tambien puedes contactarte con nosotros si tienes alguna duda o para buscar otros metods de pago:</h5>
 
         <a
           className="m-1"
           h href="https://wa.me/573012524990"
           target="_blank"
+          rel="noopener noreferrer"          
+        >
+          <BsWhatsapp className="icon-welcome"  color={COLORS.carnelian} />
+        </a>
+        <a
+          className="m-1"
+          href="https://www.facebook.com/Roninsatorimma/"
+          target="_blank"
           rel="noopener noreferrer"
         >
-          <BsWhatsapp className="icon-welcome" color={COLORS.carnelian} />
+          <BsFacebook  className="icon-welcome" color={COLORS.carnelian} />
         </a>
-       
+        <a
+          className="m-1"
+          href="https://www.instagram.com/roninsatorimma/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <BsInstagram className="icon-welcome"  color={COLORS.carnelian} />
+        </a>
+        
+        
       </Container>
     </div>
   ) : (

@@ -13,7 +13,7 @@ export const LessonsView = () => {
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [lesson, changeLesson] = useState("");
-  const [isChecked, setIsChecked] = useState(false);  
+  const [isChecked, setIsChecked] = useState(false);
   const [showM, setShowM] = useState(false);
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
@@ -54,7 +54,11 @@ export const LessonsView = () => {
         (element) =>
           element.node.course.id === window.localStorage.getItem("idCourse")
       );
-      changeLesson(L[0].node.id);
+      if (L.length > 0) {
+        console.log(L);
+        console.log(window.localStorage.getItem("idCourse"));
+        changeLesson(L[0].node.id);
+      }
     }
   }, [data]);
   const handleClose = () => setShow(false);
@@ -84,11 +88,16 @@ export const LessonsView = () => {
         />
         <h1 className="pt-3 pb-3">
           {
-            data.allLessons.edges.filter(
+            data?.allLessons?.edges?.filter(
               (element) =>
                 element.node.course.id ===
                 window.localStorage.getItem("idCourse")
-            )[0].node.course.coTitle
+            ).length > 0?
+            data?.allLessons?.edges?.filter(
+              (element) =>
+                element.node.course.id ===
+                window.localStorage.getItem("idCourse")
+            )[0].node.course.coTitle: "Curso Sin Lecciones"
           }
         </h1>
       </div>
