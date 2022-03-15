@@ -6,13 +6,13 @@ import { Rating } from 'react-simple-star-rating'
 
 export const CommentCard = ({opComment,opQualification,email}) => {
     let count = 1;
-    if(opQualification==="EXCELENTE")
+    if(opQualification.toUpperCase() ==="EXCELENTE")
       count = 5;
-    if(opQualification==="MUY BUENO")
+    if(opQualification.toUpperCase() ==="MUY BUENO")
       count = 4;
-    if(opQualification==="BUENO")
+    if(opQualification.toUpperCase() ==="BUENO")
       count = 3;
-    if(opQualification==="REGULAR")
+    if(opQualification.toUpperCase() ==="REGULAR")
       count = 2;
     return <Card border="secondary" style={{  margin:'1em' }}>
     <Card.Header>
