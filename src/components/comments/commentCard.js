@@ -8,7 +8,7 @@ export const CommentCard = ({opComment,opQualification,email}) => {
     let count = 1;
     if(opQualification.toUpperCase() ==="EXCELENTE")
       count = 5;
-    if(opQualification.toUpperCase() ==="MUY BUENO")
+    if(opQualification.toUpperCase() ==="MUY_BUENO")
       count = 4;
     if(opQualification.toUpperCase() ==="BUENO")
       count = 3;
