@@ -92,10 +92,10 @@ export const CourseInformation = () => {
             </div>
             <Row>
               <Col>
-                <h3 className="text-left">Instructor: Nombre Instructor</h3>
+                <h3 className="text-left">Instructor: {data.allCourses.edges[0].node.coInstructor}</h3>
               </Col>
               <Col>
-                <h3>Dificultad: * * * * *</h3>
+                <h3>Dificultad:</h3>
               </Col>
             </Row>
           </Col>

@@ -10,7 +10,14 @@ query findCourse($title:String){
             coTitle
             coPrice
             coDescription
+            coInstructor
+            coCalendar
+            coDifficulty
             coImage
+            category{
+                id
+                catName
+            }
             }
         }
     }

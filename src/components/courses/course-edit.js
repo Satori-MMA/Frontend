@@ -18,31 +18,37 @@ import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 
 export const CourseEdit = () => {
   const params = useParams();
-  const [id, setId] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [user] = useGlobalState("user");
+
   const [findCourse, { data, loading }] = useLazyQuery(FIND_COURSE, {
     fetchPolicy: "network-only",
   });
-  const [
-    mutateFunction,
-    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
-  ] = useMutation(UPDATE_COURSE);
-  const [title, changeTitle] = useState({ field: "", valid: null });
-  const [description, changeDescription] = useState({ field: "", valid: null });
-  const [image, changeImage] = useState({ field: "", valid: null });
-  const [price, changePrice] = useState({ field: "", valid: null });
-  const [linkCronogram, changelinkCronogram] = useState({ field: "", valid: null });
-  const [showImage, setShowImage] = useState(false);
   const {
     data: c_data,
     error: c_error,
     loading: c_loading,
   } = useQuery(ALL_CATEGORIES);
-  const [selects, setSelect] = useState();
-  const navigate = useNavigate();
-  const [user] = useGlobalState("user");
+  const [
+    mutateFunction,
+    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
+  ] = useMutation(UPDATE_COURSE);
+
+  const [id, setId] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [title, changeTitle] = useState({ field: "", valid: null });
+  const [description, changeDescription] = useState({ field: "", valid: null });
+  const [image, changeImage] = useState({ field: "", valid: null });
+  const [price, changePrice] = useState({ field: "", valid: null });
+  const [linkCronogram, changelinkCronogram] = useState({
+    field: "",
+    valid: null,
+  });
   const [instructor, changeInstructor] = useState({ field: "", valid: null });
   const [dificultad, changeDificultad] = useState({ field: "", valid: null });
+  const [showImage, setShowImage] = useState(false);
+  const [selects, setSelect] = useState();  
+  const navigate = useNavigate();
+
   const successCallBackUpload = (result) => {
     changeImage({ field: result.info.url, valid: true });
   };
@@ -61,10 +67,10 @@ export const CourseEdit = () => {
   useEffect(() => {
     if (isLoaded) {
       if (data) {
-        console.log("Le llego esto: ", title.field);
-        console.log(data);
+        // console.log("Le llego esto: ", title.field);
+        // console.log(data);
         if (data.allCourses.edges.length > 0) {
-          console.log("Mismo nombre");
+          // console.log("Mismo nombre"); 
           swal.fire({
             icon: "error",
             text: "Ya existe un curso con el mismo nombre",
@@ -73,7 +79,8 @@ export const CourseEdit = () => {
             timer: "2000",
           });
         } else {
-          console.log("Todo ok");
+          // console.log("Todo ok 2"); 
+
           mutateFunction({
             variables: {
               id: id,
@@ -82,6 +89,9 @@ export const CourseEdit = () => {
               coImage: image.field,
               coPrice: price.field,
               categoryId: selects,
+              coInstructor: instructor.field,
+              coDifficulty: dificultad,
+              coCalendar: linkCronogram.field,
             },
           });
           swal.fire({
@@ -97,7 +107,9 @@ export const CourseEdit = () => {
       }
     } else {
       if (data) {
+        console.log(data); 
         setId(data.allCourses.edges[0].node.id);
+
         changeTitle({
           field: data.allCourses.edges[0].node.coTitle,
           valid: "true",
@@ -106,16 +118,28 @@ export const CourseEdit = () => {
           field: data.allCourses.edges[0].node.coDescription,
           valid: "true",
         });
+        changeInstructor({
+          field: data.allCourses.edges[0].node.coInstructor,
+          valid: "true",
+        });
         changePrice({
           field: data.allCourses.edges[0].node.coPrice,
           valid: "true",
         });
+        changelinkCronogram({
+          field: data.allCourses.edges[0].node.coCalendar,
+          valid: "true",
+        });        
+        setSelect(
+          data.allCourses.edges[0].node.category.id,          
+        )
+        changeDificultad(data.allCourses.edges[0].node.coDifficulty.split("_")[1])
         setIsLoaded(true);
         changeImage({
           field: data.allCourses.edges[0].node.coImage,
           valid: "true",
         });
-        setShowImage(true)
+        setShowImage(true);
       }
     }
   }, [data]);
@@ -123,7 +147,8 @@ export const CourseEdit = () => {
   const onChangeCategory = (e) => {
     setSelect(e.target.value);
   };
-  const onChangeDificultad = (e) => {
+
+   const onChangeDificultad = (e) => {
     changeDificultad(e.target.value);
   };
 
@@ -131,7 +156,7 @@ export const CourseEdit = () => {
 
   const expressions = {
     text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos    
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
     price: /^\d{1,14}$/, // 7 a 14 numeros.
   };
 
@@ -152,6 +177,9 @@ export const CourseEdit = () => {
             coImage: image.field,
             coPrice: price.field,
             categoryId: selects,
+            coInstructor: instructor.field,
+            coDifficulty: dificultad,
+            coCalendar: linkCronogram.field,
           },
         });
         swal.fire({
@@ -164,7 +192,7 @@ export const CourseEdit = () => {
 
         navigate("/coursegestion");
       } else {
-        console.log("le voy a mandar: ", title.field);
+        // console.log("le voy a mandar: ", title.field); 
         findCourse({ variables: { title: title.field } });
       }
     } else {
@@ -197,14 +225,23 @@ export const CourseEdit = () => {
                 errorLabel="El nombre no puede contener caracteres especiales ni ser vacio"
                 regularExpresion={expressions.title}
               />
-              <Input 
+              <Input
                 state={description}
                 changeState={changeDescription}
                 label="Descripción"
-                type="textarea" 
-                name="description"                   
+                type="textarea"
+                name="description"
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacía"
-                regularExpresion={expressions.longText}             
+                regularExpresion={expressions.longText}
+              />
+              <Input
+                state={instructor}
+                changeState={changeInstructor}
+                label="Nombre del instructor"
+                type="text"
+                name="instructor"
+                errorLabel="El nombre no puede contener caracteres especiales ni ser vacío"
+                regularExpresion={expressions.text}
               />
               <Input
                 state={price}
@@ -224,27 +261,27 @@ export const CourseEdit = () => {
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacio"
                 regularExpresion={expressions.longText}
               />
-               <Row className="mt-4">
-              <Col>
-              <label>
-                Seleccione la dificultad del curso:
-                <span className="text-danger">*</span>
-              </label>
-              </Col>
-              <Col>
-              <Form.Select                
-                aria-label="Default select example"
-                value={dificultad}
-                onChange={onChangeDificultad}
-              >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </Form.Select>
-              </Col>
+              <Row className="mt-4">
+                <Col>
+                  <label>
+                    Seleccione la dificultad del curso:
+                    <span className="text-danger">*</span>
+                  </label>
+                </Col>
+                <Col>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={dificultad}
+                    onChange={onChangeDificultad}
+                  >
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </Form.Select>
+                </Col>
               </Row>
               <Row className="mt-3">
                 <Col>
@@ -266,16 +303,17 @@ export const CourseEdit = () => {
                     Seleccione una categoria:
                     <span className="text-danger">*</span>
                   </label>
+                      
                   <Form.Select
                     aria-label="Default select example"
                     value={selects}
                     onChange={onChangeCategory}
                   >
-                    {c_data?.allCategories?.edges?.map(({ node }) => (
-                      <option value={node.id} key={node.id}>
-                        {node.catName}
-                      </option>
-                    ))}
+                    {c_data?.allCategories?.edges?.map(({ node }) =>                                         
+                      <option value={node.id} key={node.id} selected={selects}>                                                    
+                          {node.catName}
+                        </option>
+                    )}
                   </Form.Select>
                 </Col>
               </Row>

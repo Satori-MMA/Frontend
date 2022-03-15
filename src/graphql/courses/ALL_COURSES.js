@@ -9,7 +9,11 @@ const ALL_COURSES = gql`
           coTitle
           coPrice
           coDescription
+          coInstructor
+          coCalendar
+          coDifficulty
           category{
+            id
             catName
           }
           isActive

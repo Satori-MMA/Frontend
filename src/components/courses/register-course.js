@@ -49,6 +49,7 @@ export const RegisterCourse = () => {
     valid: null,
   });
   const [selects, setSelect] = useState();
+  const [difficulty, setDifficulty] = useState();
   const [showImage, setShowImage] = useState(false);
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -67,7 +68,7 @@ export const RegisterCourse = () => {
   useEffect(() => {
     async function loading() {
       if (c_data !== undefined) {
-        setSelect(c_data.allCategories.edges[0].node.id);
+        setSelect(c_data.allCategories.edges[0].node.id);        
       }
     }
     loading();
@@ -88,6 +89,7 @@ export const RegisterCourse = () => {
         });
       } else {
         console.log("Todo ok");
+       
         mutateFunction({
           variables: {
             coTitle: mytitle.field,
@@ -95,6 +97,9 @@ export const RegisterCourse = () => {
             coImage: image.field,
             coPrice: price.field,
             categoryId: selects,
+            coInstructor: instructor.field,
+            coDifficulty:  difficulty,
+            coCalendar: linkCronogram.field
           },
         });
         swal.fire({
@@ -132,6 +137,7 @@ export const RegisterCourse = () => {
   };
   const onChangeDificultad = (e) => {
     changeDificultad(e.target.value);
+    setDifficulty(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -214,7 +220,7 @@ export const RegisterCourse = () => {
                 label="Link del Cronograma"
                 placeholder="Ingrese el link del cronograma del curso"
                 type="text"
-                name="linkC"
+                name="linkC"                
                 errorLabel="La descripcion no puede contener caracteres especiales ni ser vacio"
                 regularExpresion={expressions.longText}
               />
