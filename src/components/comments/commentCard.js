@@ -1,33 +1,34 @@
 import { Card } from "react-bootstrap";
 
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating'
 
 
 
-export const CommentCard = ({opComment},{opQualification}) => {
+export const CommentCard = ({opComment,opQualification,email}) => {
     let count = 1;
-    if(opQualification==="Excelente")
+    if(opQualification.toUpperCase() ==="EXCELENTE")
       count = 5;
-    if(opQualification==="Muy bueno")
+    if(opQualification.toUpperCase() ==="MUY_BUENO")
       count = 4;
-    if(opQualification==="Bueno")
+    if(opQualification.toUpperCase() ==="BUENO")
       count = 3;
-    if(opQualification==="Regular")
+    if(opQualification.toUpperCase() ==="REGULAR")
       count = 2;
-    return <Card border="secondary" style={{ width: '18rem', margin:'1em' }}>
-    <Card.Header>Usuario</Card.Header>
-    <Card.Body>
+    return <Card border="secondary" style={{  margin:'1em' }}>
+    <Card.Header>
       <Card.Title>
-      <ReactStars
-        count={count}
-        size={24}
-        activeColor='null'
-        color="#E5383B"
-      />
-        </Card.Title>
-      <Card.Text>
-        {opComment}
-      </Card.Text>
+        Usuario: {email}
+      </Card.Title>
+    </Card.Header>
+    <Card.Body>
+    
+      <Card.Title> 
+      <Rating  fillColor="#E5383B"  initialValue={count} readonly={true} allowHover={false}/>
+      
+      </Card.Title>
+      <Card.Title>
+      {opComment} 
+      </Card.Title>
     </Card.Body>
   </Card>
 };

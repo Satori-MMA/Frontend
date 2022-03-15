@@ -18,6 +18,7 @@ export const ListComment = ({idLesson}) => {
             <CommentCard
             opQualification={node.opQualification}
             opComment={node.opComment}
+            email = {node.user.email}
             
             />
             // renderCard(node)
