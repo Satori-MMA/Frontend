@@ -8,6 +8,9 @@ query allReview ($lessonId: ID){
                 id
                 opComment
                 opQualification
+                user{
+                    email
+                }
                 lesson {
                     id
                 }
