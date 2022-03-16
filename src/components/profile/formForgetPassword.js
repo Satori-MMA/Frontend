@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import Input from "../register/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 import EMAIL_RESET_PASSWORD from "../../graphql/users/EMAIL_RESET_PASSWORD";
 
@@ -14,9 +15,13 @@ export const PasswordForget = () => {
     const [mutateFunction, { data, reset }] = useMutation(EMAIL_RESET_PASSWORD);
     const [email, changeEmail] = useState({ field: "", valid: null });
     const [validForm, changeValidForm] = useState(null);
+    let navigate = useNavigate();
     const expressions = {
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     };
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+      }
 
 
     //if (loading) return "Submitting...";
@@ -26,7 +31,8 @@ export const PasswordForget = () => {
     if (data !== undefined) {
         console.log(data);
         if (data.sendPasswordReset.success) {
-            toast.success("Revisa tu correo para restablecer la contraseña");
+            toast.success("Revisa tu correo para restablecer la contraseña")
+            delay(3000).then(() => navigate("/login"));
         } else {
             toast.error(
                 "Un error inesperado ha ocurrido: " +

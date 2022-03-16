@@ -93,7 +93,7 @@ export const Profile = () => {
                     <div className="fw-bold">
                       <h2>{node.course.coTitle}</h2>
                     </div>
-                    <h5>{node.course.coDescription}</h5>
+                    <h5 className="text-justify">{node.course.coDescription}</h5>
                   </div>
                  
                   <Badge className="m-auto p-auto" bg="danger" pill>

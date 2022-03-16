@@ -111,8 +111,8 @@ export const CoursesList = () => {
               element.node.category.catName.includes(category) &&
               element.node.isActive
           ).length === 0 ? (
-            <h3>
-              Por el momento no tenemos cursos que concuerden con su busqueda
+            <h3 className="pt-5">
+              Por el momento no tenemos cursos que concuerden con su búsqueda.
             </h3>
           ) : (
             <>

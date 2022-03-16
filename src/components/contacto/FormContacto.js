@@ -19,13 +19,13 @@ export const FormContacto = () => {
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 numeros.
-    comment: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
+    comment: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:.,.¿.!.¡]{1,200}$/, // Letras, numeros, guion, guion bajo y acentos    
   };
 
   useEffect( ()=> {
     
     if (data) {
-      console.log("Correcto");
+      // console.log("Correcto");
       swal.fire({
         icon: "success",
         text: "Comentario Enviado",
@@ -34,7 +34,7 @@ export const FormContacto = () => {
         timer: "2000",
       });
     } else {
-      console.log(data);
+      // console.log(data);
       toast.error("Un error inesperado ha ocurrido: ");
     }
 

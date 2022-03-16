@@ -6,9 +6,9 @@ import { LoadingSpin } from "../utilities/LoadingSpin";
 import REVIEW_REGISTER from "../../graphql/comments/REVIEW_REGISTER.js";
 import { useGlobalState } from "../GlobalState";
 export const AddComment = ({ idLesson }) => {
-    const [mutateFunction, { data, loading, error, reset }] = useMutation(REVIEW_REGISTER);
+    const [mutateFunction, {  loading,  reset }] = useMutation(REVIEW_REGISTER);
     const [comment, changeComment] = useState({ field: "", valid: null });
-    const [user, updateUser] = useGlobalState("user");
+    const [user] = useGlobalState("user");
     const userId = user?.id;
     let qualification = "malo";
     const options = [
@@ -38,7 +38,7 @@ export const AddComment = ({ idLesson }) => {
     
     const onChangeCategory = (e) => {
         qualification = e.target.value
-        console.log(qualification)
+        // console.log(qualification)
     };
     
     const handleSubmit = (e) => {

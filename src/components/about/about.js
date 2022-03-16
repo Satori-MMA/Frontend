@@ -1,6 +1,5 @@
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ReactPlayer from 'react-player'
 import imgAbout2 from "../../Assets/about2.png";
 import instructor1 from "../../Assets/about1.jpg";
 import instructor2 from "../../Assets/Foto7.jpg";
@@ -44,6 +43,7 @@ export const About = () => {
             </p>
           </Col>
           <Col>
+         
           <CarouselV></CarouselV>          
           </Col>
         </Row>
@@ -176,7 +176,7 @@ export const About = () => {
           <Col>
             <h3 className="text-center text-imperialRed mt-2">Brayan Andrés Pinzón</h3>
             <p className="Justify-Text">
-              8 años de experiencia en práctica de artes marciales y 1 año de
+              9 años de experiencia en práctica de artes marciales y 1 año de
               experiencia como instructor artes marciales
             </p>
             <p className="Justify-Text">

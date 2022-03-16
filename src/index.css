@@ -393,6 +393,9 @@ code {
     text-align: center;
   }
 }
+.Suscribe_youtube{
+  font-size: 4px;
+}
 
 @media only screen and (min-width: 600px) {
   .close-btn-schedule {

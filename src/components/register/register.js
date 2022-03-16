@@ -49,16 +49,16 @@ export const Register = () => {
     return new Promise(resolve => setTimeout(resolve, time));
   }
   if (typeof data != "undefined") {
-    console.log(data);
+    // console.log(data);
     if (data.userRegister.success) {
-      console.log("Correcto");
+      // console.log("Correcto");
       toast.success("Revisa tu correo para continuar con el registro")
       delay(3000).then(() => navigate("/login"));
 
     } else {
-      console.log(data.userRegister.errors);
+      // console.log(data.userRegister.errors);
       toast.error(
-        "Un error inesperado ha ocurrido: " +
+        "" +
         data.userRegister.errors.email[0].message
       );
     }

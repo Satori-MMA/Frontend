@@ -52,11 +52,12 @@ export const LessonRegister = () => {
   useEffect(() => {
     if (data) {
       console.log("Le llego esto: ", name.field);
-      console.log(data);
+      console.log(data);   
       const repeat = data.allLessons.edges.filter(
         (element) => element.node.course.id === params.id
       );
       console.log(repeat.length);
+
       if (repeat.length > 0) {
         console.log("Mismo nombre");
         swal.fire({
@@ -66,13 +67,14 @@ export const LessonRegister = () => {
           background: "#000",
           timer: "2000",
         });
-      } else {
+      } else {        
         if (
           name.valid === "true" &&
           linkLesson.valid === "true" &&
           description.valid === "true"
         ) {
           console.log("Todo ok");
+          console.log(dificultad)
           mutateFunction({
             variables: {
               leName: name.field,
@@ -97,8 +99,8 @@ export const LessonRegister = () => {
   }, [data]);
 
   const expressions = {
-    text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
+    text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,100}$/, // Letras, numeros, guion, guion bajo y acentos
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-.=.?.&.:.,(.)./]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
   };
 
   const handleBack = () => {
