@@ -30,6 +30,7 @@ export const LessonEdit = () => {
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [linkLesson, changelinkLesson] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
+  const [dificultad, changeDificultad] = useState({ field: "", valid: null });
 
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -86,6 +87,7 @@ export const LessonEdit = () => {
               leName: name.field,
               leDescription: description.field,
               leLinkVideo: linkLesson.field,
+              leDifficulty: dificultad,
             },
           });
           console.log("m_data" + m_data);
@@ -113,12 +115,17 @@ export const LessonEdit = () => {
           field: myLesson.node.leLinkVideo,
           valid: "true",
         });
+        changeDificultad(myLesson.node.leDifficulty.split("_")[1])
         setIsLoaded(true);
       }
     }
   }, [data]);
 
   if (loading || !data) return <LoadingSpin />;
+
+  const onChangeDificultad = (e) => {
+    changeDificultad(e.target.value);
+  };
 
   const handleBack = () => {
     // console.log("data back"+data)
@@ -148,6 +155,7 @@ export const LessonEdit = () => {
             leName: name.field,
             leDescription: description.field,
             leLinkVideo: linkLesson.field,
+            leDifficulty: dificultad,
           },
         });
       } else {
@@ -204,7 +212,28 @@ export const LessonEdit = () => {
                 name="linkLesson"
                 errorLabel="El link no puede ser vacío"
                 regularExpresion={expressions.longText}
-              />         
+              />     
+              <Row className="mt-4">
+                <Col>
+                  <label>
+                    Seleccione la dificultad de la lección:
+                    <span className="text-danger">*</span>
+                  </label>
+                </Col>
+                <Col>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={dificultad}
+                    onChange={onChangeDificultad}
+                  >                    
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </Form.Select>
+                </Col>
+                </Row>    
 
               <hr></hr>
               <Row>

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 import BuyCursePopup from "./BuyCoursePopup.js";
 import ALL_PAYMENTS from "../../graphql/payment/ALL_PAYMENTS";
+import {AiFillStar,  AiOutlineStar} from "react-icons/ai";
 
 export const CourseInformation = () => {
   const params = useParams();
@@ -33,6 +34,7 @@ export const CourseInformation = () => {
 
     findCourse({ variables: { title: params.id } });
     allPayments();
+    
   }, []);
 
   if (loading || !data || !p_data) return <LoadingSpin />;
@@ -95,7 +97,17 @@ export const CourseInformation = () => {
                 <h3 className="text-left">Instructor: {data.allCourses.edges[0].node.coInstructor}</h3>
               </Col>
               <Col>
-                <h3>Dificultad:</h3>
+                <h3>Dificultad: 
+                {new Array(parseInt(data.allCourses.edges[0].node.coDifficulty[2]))
+                .fill(1).concat(new Array(5-parseInt(data.allCourses.edges[0].node.coDifficulty[2]))
+                .fill(0))
+                .map((c) => 
+                c===1?
+                <AiFillStar></AiFillStar>
+                :
+                <AiOutlineStar></AiOutlineStar>
+              )}
+              </h3>
               </Col>
             </Row>
           </Col>

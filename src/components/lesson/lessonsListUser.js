@@ -9,16 +9,17 @@ import { useGlobalState } from "../GlobalState";
 import ReactPlayer from "react-player";
 import AddComment from "../comments/addComment";
 import ListComment from "../comments/listComments";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 export const LessonsView = () => {
   const [user] = useGlobalState("user");
   const [show, setShow] = useState(false);
   const [lesson, changeLesson] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [showM, setShowM] = useState(false);
+  const [showM, setShowM] = useState(false); 
+  const [cronograma, changeCronograma] = useState("");
   const { data, loading, error, refetch } = useQuery(ALL_LESSONS, {
     fetchPolicy: "network-only",
   });
-
   const [
     mutateFunction,
     { data: m_data, loading: m_loading, error: m_error, refetch: m_refetch },
@@ -37,7 +38,7 @@ export const LessonsView = () => {
         (element) => element.node.user?.email === user.email
       );
       if (n.length === 1) {
-        console.log("i " + i);
+        // console.log("i " + i);
         cont++;
       }
     }
@@ -56,8 +57,9 @@ export const LessonsView = () => {
       );
       if (L.length > 0) {
         console.log(L);
-        console.log(window.localStorage.getItem("idCourse"));
+        // console.log(window.localStorage.getItem("idCourse"));
         changeLesson(L[0].node.id);
+        changeCronograma(L[0].node.course.coCalendar)
       }
     }
   }, [data]);
@@ -65,7 +67,7 @@ export const LessonsView = () => {
   const handleShow = () => setShow(true);
   const handleCheck = (UsID, lesID, lesLen) => {
     setIsChecked(!isChecked);
-    console.log(isChecked);
+    // console.log(isChecked);
     mutateFunction({
       variables: {
         userID: UsID,
@@ -87,18 +89,16 @@ export const LessonsView = () => {
           now={data ? calcularProgreso() : 0}
         />
         <h1 className="pt-3 pb-3">
-          {
-            data?.allLessons?.edges?.filter(
-              (element) =>
-                element.node.course.id ===
-                window.localStorage.getItem("idCourse")
-            ).length > 0?
-            data?.allLessons?.edges?.filter(
-              (element) =>
-                element.node.course.id ===
-                window.localStorage.getItem("idCourse")
-            )[0].node.course.coTitle: "Curso Sin Lecciones"
-          }
+          {data?.allLessons?.edges?.filter(
+            (element) =>
+              element.node.course.id === window.localStorage.getItem("idCourse")
+          ).length > 0
+            ? data?.allLessons?.edges?.filter(
+                (element) =>
+                  element.node.course.id ===
+                  window.localStorage.getItem("idCourse")
+              )[0].node.course.coTitle
+            : "Curso Sin Lecciones"}
         </h1>
       </div>
       <div className="courseContainer">
@@ -134,15 +134,17 @@ export const LessonsView = () => {
                   )}
                 </>
               ))}
-            <Button
+            { cronograma.includes('https://drive.google')?
+              <Button
               className="button-login-r btn btn-outline-primary mt-4"
               variant="outline-primary"
               href="https://drive.google.com/file/d/1Aot6sCSvXBnkbwMWErKdPyvZ505F6grU/view?usp=sharing"
               target="blank"
             >
               Descargar Cronograma
-            </Button>
-            <Image publicId="SatoriMMA/os8s8yt04k2kmipit63c.pdf"></Image>
+            </Button>:<></>           
+            }            
+            
           </Col>
           <Col sm={8} className="col-course-user">
             {data.allLessons.edges
@@ -156,7 +158,28 @@ export const LessonsView = () => {
                   {lesson === node.id ? (
                     <>
                       <Row>
-                        <h1 className="pb-2">{node.leName}</h1>
+                        <Col>
+                          <h1 className="pb-2">{node.leName}</h1>
+                        </Col>
+                        <Col>
+                          <h3>
+                            Dificultad:
+                            {new Array(parseInt(node.leDifficulty[2]))
+                              .fill(1)
+                              .concat(
+                                new Array(
+                                  5 - parseInt(node.leDifficulty[2])
+                                ).fill(0)
+                              )
+                              .map((c) =>
+                                c === 1 ? (
+                                  <AiFillStar></AiFillStar>
+                                ) : (
+                                  <AiOutlineStar></AiOutlineStar>
+                                )
+                              )}
+                          </h3>
+                        </Col>
                       </Row>
                       <Modal
                         show={showM}

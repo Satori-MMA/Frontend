@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 
 export const LessonRegister = () => {
-  const params = useParams(); 
+  const params = useParams();
   const [findLesson, { data, loading }] = useLazyQuery(FIND_LESSON, {
     fetchPolicy: "network-only",
   });
@@ -26,6 +26,7 @@ export const LessonRegister = () => {
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [linkLesson, changelinkLesson] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
+  const [dificultad, changeDificultad] = useState({ field: "", valid: null });
 
   const navigate = useNavigate();
   const [user] = useGlobalState("user");
@@ -52,11 +53,9 @@ export const LessonRegister = () => {
     if (data) {
       console.log("Le llego esto: ", name.field);
       console.log(data);
-      const repeat = data.allLessons.edges
-      .filter(
-        (element) =>             
-            element.node.course.id === params.id,          
-      );   
+      const repeat = data.allLessons.edges.filter(
+        (element) => element.node.course.id === params.id
+      );
       console.log(repeat.length);
       if (repeat.length > 0) {
         console.log("Mismo nombre");
@@ -80,6 +79,7 @@ export const LessonRegister = () => {
               leDescription: description.field,
               leEvaluation: 0.0,
               leLinkVideo: linkLesson.field,
+              leDifficulty: dificultad,
               courseId: params.id,
             },
           });
@@ -98,15 +98,19 @@ export const LessonRegister = () => {
 
   const expressions = {
     text: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-]{1,30}$/, // Letras, numeros, guion, guion bajo y acentos
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos    
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
   };
 
-  const handleBack = ()=>{       
-    console.log(params) 
+  const handleBack = () => {
+    console.log(params);
     navigate({
-       pathname: `/crudLesson/${params.id}`,
+      pathname: `/crudLesson/${params.id}`,
     });
-  }
+  };
+
+  const onChangeDificultad = (e) => {
+    changeDificultad(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -162,7 +166,7 @@ export const LessonRegister = () => {
                 errorLabel="La descripción no puede contener caracteres especiales ni ser vacío"
                 regularExpresion={expressions.longText}
               />
-               <Input
+              <Input
                 state={linkLesson}
                 changeState={changelinkLesson}
                 label="Link de la Lección"
@@ -171,8 +175,28 @@ export const LessonRegister = () => {
                 name="linkLesson"
                 errorLabel="El link no puede ser vacío"
                 regularExpresion={expressions.longText}
-              />              
-
+              />
+              <Row className="mt-4">
+                <Col>
+                  <label>
+                    Seleccione la dificultad de la lección:
+                    <span className="text-danger">*</span>
+                  </label>
+                </Col>
+                <Col>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={dificultad}
+                    onChange={onChangeDificultad}
+                  >                    
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </Form.Select>
+                </Col>
+                </Row>
               <hr></hr>
               <Row>
                 {validForm === false && (
@@ -195,9 +219,9 @@ export const LessonRegister = () => {
                 </Col>
                 <Col className="text-center">
                   <Button
-                    className="button-courses bottom mt-2 "                    
-                    variant="outline-primary" 
-                    onClick={handleBack}                 
+                    className="button-courses bottom mt-2 "
+                    variant="outline-primary"
+                    onClick={handleBack}
                   >
                     Volver a Gestión de Lecciones
                   </Button>

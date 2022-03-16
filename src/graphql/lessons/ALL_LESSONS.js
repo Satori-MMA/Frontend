@@ -11,7 +11,9 @@ query allLesson{
                 leEvaluation
                 leLinkVideo
                 isActive
+                leDifficulty
                 course{
+                    coCalendar
                     id
                     coTitle
                 }

@@ -273,8 +273,7 @@ export const CourseEdit = () => {
                     aria-label="Default select example"
                     value={dificultad}
                     onChange={onChangeDificultad}
-                  >
-                    <option value="0">0</option>
+                  >                    
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

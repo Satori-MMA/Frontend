@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import ALL_MONTHLY from "../../graphql/mensuality/ALL_MONTHLY";
 import { Link, useNavigate } from "react-router-dom";
-import { ListGroup, Badge, Button } from "react-bootstrap";
+import { ListGroup, Badge, Button, Row, Col } from "react-bootstrap";
 import { useGlobalState } from "../GlobalState";
 import { LoadingMessage } from "../utilities/LoadingMessage";
 
@@ -25,14 +25,19 @@ export const Mensuality = () => {
   return (
     <div>
       <h1 className="text-white text-center"> Gestión de Mensualidades </h1>
-      <Button
-        className="button-login-r"
-        variant="success"
-        as={Link}
-        to="/registerMonthly"
-      >
-        Agregar mensualidad
-      </Button>
+      <Row>
+          <Col></Col>
+          <Col xs={12} md={8}>
+            <Button
+              className="button-login-r"
+              variant="success"
+              as={Link}
+              to="/registerMonthly"
+            >Agregar mensualidad
+            </Button>
+          </Col>
+          <Col></Col>
+        </Row>      
       <ListGroup as="ol" numbered>
         {data?.allMonthlypayments?.edges.reverse().map((element) => (
           <ListGroup.Item
@@ -40,17 +45,17 @@ export const Mensuality = () => {
             className="d-flex justify-content-between align-items-start"
             key={element.node.id}
           >
-            <div className="ms-2 me-auto">
+            <div className="ms-2 me-auto">            
               <div className="fw-bold">
-                Pago realizado por: {element.node.user.firstName}{" "}
-                {element.node.user.lastName} ( {element.node.user.email})
+                Pago realizado por: <strong className="text-carnelian"> {element.node.user.firstName}{" "}
+                {element.node.user.lastName} ( {element.node.user.email}) </strong>
               </div>
-              Fecha de inicio: {element.node.moStartDate} | Fecha de
-              finalización: {element.node.moFinishDate}
+              Fecha de inicio: <strong> {element.node.moStartDate} </strong> | Fecha de
+              finalización: <strong> {element.node.moFinishDate} </strong>
               <br />
-              Tipo de mensualidad: {element.node.moType}
+              Tipo de mensualidad: <strong> {element.node.moType} </strong>
             </div>
-            <Badge bg="primary" pill>
+            <Badge bg="danger" pill>
               ${element.node.moPrice}
             </Badge>
           </ListGroup.Item>
