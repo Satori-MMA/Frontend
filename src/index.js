@@ -21,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 const httpLink = createHttpLink({
-  uri: "https://apisatori.herokuapp.com/graphql",
+  uri: "https://apisatorimma.herokuapp.com/graphql",
 });
 const client = new ApolloClient({
   cache: new InMemoryCache(),
