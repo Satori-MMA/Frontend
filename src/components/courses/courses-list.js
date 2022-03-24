@@ -16,9 +16,7 @@ export const CoursesList = () => {
   });
 
   const {
-    data: category_data,
-    loading: category_load_,
-    refetch: category_refecth,
+    data: category_data,    
   } = useQuery(ALL_CATEGORIES, {
     fetchPolicy: "network-only",
   });

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 import BuyCursePopup from "./BuyCoursePopup.js";
 import ALL_PAYMENTS from "../../graphql/payment/ALL_PAYMENTS";
-import {AiFillStar,  AiOutlineStar} from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 export const CourseInformation = () => {
   const params = useParams();
@@ -20,22 +20,18 @@ export const CourseInformation = () => {
   const [findCourse, { data, loading }] = useLazyQuery(FIND_COURSE, {
     fetchPolicy: "network-only",
   });
-  const [allPayments, { data: p_data, loading: p_loading }] = useLazyQuery(
-    ALL_PAYMENTS,
-    {
-      fetchPolicy: "network-only",
-    }
-  );
+  const [allPayments, { data: p_data }] = useLazyQuery(ALL_PAYMENTS, {
+    fetchPolicy: "network-only",
+  });
   const [mutateFunction, { data: data_m }] = useMutation(REGISTER_PAYMENT);
 
   const [btnPopup, setbtnPopup] = useState(false);
 
-  useEffect(() => {    
-
+  useEffect(() => {
     findCourse({ variables: { title: params.id } });
     allPayments();
-    
   }, []);
+
 
   if (loading || !data || !p_data) return <LoadingSpin />;
 
@@ -45,21 +41,28 @@ export const CourseInformation = () => {
   };
 
   const handleGoCourse = () => {
-    console.log("Go")
+    console.log("Go");
     window.localStorage.setItem("idCourse", data.allCourses.edges[0].node.id);
-    navigate({ pathname: `/lessons/${data.allCourses.edges[0].node.id}` });    
+    navigate({ pathname: `/lessons/${data.allCourses.edges[0].node.id}` });
   };
 
-  const handleTomar = (e) => {
-    const hoy = new Date(Date.now());      
-    mutateFunction({
-      variables: {
-        pDate: hoy.toISOString().split("T")[0],
-        uId: user.id,
-        cID: data.allCourses.edges[0].node.id,
-      },
-    });
-    handleGoCourse()  
+  const handleTomar = () => {
+    if (user) {
+      const hoy = new Date(Date.now());
+      mutateFunction({
+        variables: {
+          pDate: hoy.toISOString().split("T")[0],
+          uId: user.id,
+          cID: data.allCourses.edges[0].node.id,
+        },
+      });
+      // console.log(data_m)
+      handleGoCourse();
+    }
+    else{
+      navigate("/login");
+    }
+    
   };
   return (
     <div>
@@ -94,32 +97,49 @@ export const CourseInformation = () => {
             </div>
             <Row>
               <Col>
-                <h3 className="text-left">Instructor: {data.allCourses.edges[0].node.coInstructor}</h3>
+                <h3 className="text-left">
+                  Instructor: {data.allCourses.edges[0].node.coInstructor}
+                </h3>
               </Col>
               <Col>
-                <h3>Dificultad: 
-                {new Array(parseInt(data.allCourses.edges[0].node.coDifficulty[2]))
-                .fill(1).concat(new Array(5-parseInt(data.allCourses.edges[0].node.coDifficulty[2]))
-                .fill(0))
-                .map((c) => 
-                c===1?
-                <AiFillStar></AiFillStar>
-                :
-                <AiOutlineStar></AiOutlineStar>
-              )}
-              </h3>
+                <h3>
+                  Dificultad:
+                  {new Array(
+                    parseInt(data.allCourses.edges[0].node.coDifficulty[2])
+                  )
+                    .fill(1)
+                    .concat(
+                      new Array(
+                        5 -
+                          parseInt(
+                            data.allCourses.edges[0].node.coDifficulty[2]
+                          )
+                      ).fill(0)
+                    )
+                    .map((c) =>
+                      c === 1 ? (
+                        <AiFillStar></AiFillStar>
+                      ) : (
+                        <AiOutlineStar></AiOutlineStar>
+                      )
+                    )}
+                </h3>
               </Col>
             </Row>
           </Col>
           <Row className="mt-4">
             <Col>
               {console.log(data.allCourses.edges[0].node.coPrice)}
+              {console.log(p_data)}
+              {console.log(p_data)}
               {data.allCourses.edges[0].node.coPrice === 0 ? (
-                <>                                   
+                <>
                   {p_data.allPayments.edges.filter(
                     (element) =>
-                    element.node.course.id === data.allCourses.edges[0].node.id &&
-                    element.node.user.email === user.email).length === 1 ? (
+                      element.node.course.id ===
+                        data.allCourses.edges[0].node.id &&
+                      element.node.user.email === user?.email
+                  ).length === 1 ? (
                     <Button
                       className="button-login-r mt-1"
                       onClick={handleGoCourse}
@@ -136,23 +156,28 @@ export const CourseInformation = () => {
                   )}
                 </>
               ) : (
-                <>                                   
-                {p_data.allPayments.edges.filter(
-                  (element) =>
-                  element.node.course.id === data.allCourses.edges[0].node.id &&
-                  element.node.user.email === user.email).length === 1 ? (
-                  <Button
-                    className="button-login-r mt-1"
-                    onClick={handleGoCourse}
-                  >
-                    Ir al Curso
-                  </Button>
-                ) : (
-                  <Button className="button-login-r mt-1" onClick={handleComprar}>
-                  Comprar Curso
-                </Button>
-                )}
-              </>                
+                <>
+                  {p_data.allPayments.edges.filter(
+                    (element) =>
+                      element.node.course.id ===
+                        data.allCourses.edges[0].node.id &&
+                      element.node.user.email === user?.email
+                  ).length === 1 ? (
+                    <Button
+                      className="button-login-r mt-1"
+                      onClick={handleGoCourse}
+                    >
+                      Ir al Curso
+                    </Button>
+                  ) : (
+                    <Button
+                      className="button-login-r mt-1"
+                      onClick={handleComprar}
+                    >
+                      Comprar Curso
+                    </Button>
+                  )}
+                </>
               )}
               <BuyCursePopup
                 trigger={btnPopup}

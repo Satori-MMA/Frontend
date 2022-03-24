@@ -19,13 +19,13 @@ export const LessonRegister = () => {
   });
   const [
     mutateFunction,
-    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
+    { data: m_data},
   ] = useMutation(CREATE_LESSON);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [description, changeDescription] = useState({ field: "", valid: null });
   const [linkLesson, changelinkLesson] = useState({ field: "", valid: null });
-  const [validForm, changeValidForm] = useState(null);
+  const [validForm] = useState(null);
   const [dificultad, changeDificultad] = useState({ field: "", valid: null });
 
   const navigate = useNavigate();
@@ -34,12 +34,12 @@ export const LessonRegister = () => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
     }
+    else{
+      findLesson({ variables: { name: params.id } });
+    }
   }, []);
 
-  useEffect(() => {
-    findLesson({ variables: { name: params.id } });
-  }, []);
-
+ 
   useEffect(() => {
     if (m_data) {
       console.log(m_data);

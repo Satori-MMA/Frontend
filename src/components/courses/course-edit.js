@@ -9,12 +9,11 @@ import Input from "../register/input";
 import FIND_COURSE from "../../graphql/courses/FIND_COURSE";
 import ALL_CATEGORIES from "../../graphql/courses/ALL_CATEGORIES";
 import UPDATE_COURSE from "../../graphql/courses/UPDATE_COURSE";
-import { AiOutlineCloudUpload } from "react-icons/ai";
 import { LoadingSpin } from "../utilities/LoadingSpin";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 import { CloudinaryUploader } from "../utilities/CloudinaryUploader";
-import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
+
 
 export const CourseEdit = () => {
   const params = useParams();
@@ -25,12 +24,10 @@ export const CourseEdit = () => {
   });
   const {
     data: c_data,
-    error: c_error,
-    loading: c_loading,
   } = useQuery(ALL_CATEGORIES);
   const [
     mutateFunction,
-    { data: m_data, loading: m_loading, error: m_error, reset: m_reset },
+    { data: m_data},
   ] = useMutation(UPDATE_COURSE);
 
   const [id, setId] = useState();
@@ -59,10 +56,11 @@ export const CourseEdit = () => {
     if (user?.rolUser?.edges[0]?.node.rolName !== "TEACHER") {
       navigate("/");
     }
+    else{          
+      findCourse({ variables: { title: params.id } });
+    }
   }, []);
-  useEffect(() => {
-    findCourse({ variables: { title: params.id } });
-  }, []);
+
 
   useEffect(() => {
     if (isLoaded) {
@@ -106,7 +104,8 @@ export const CourseEdit = () => {
         }
       }
     } else {
-      if (data) {
+      console.log(data)
+      if (data !== undefined){
         console.log(data); 
         setId(data.allCourses.edges[0].node.id);
 
