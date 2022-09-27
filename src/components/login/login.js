@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { COLORS } from "../utilities/color";
+import logo from "../../Assets/Logo2.png";
 import LOGIN from "../../graphql/users/LOGIN";
 import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
@@ -34,6 +35,7 @@ export const Login = () => {
       console.log(user);
       navigate("/");
     } else {
+      // console.log("error");
       toast.error("Credenciales invalidas", { theme: "dark" });
     }
     reset();
@@ -60,10 +62,14 @@ export const Login = () => {
       <Container className="pt-4">
         <ToastContainer autoClose={4000} />
         <Row className="justify-content-md-center">
-          <Col lg={4} md={6} sm={12} className="pt m-auto shadow-sm rounded-lg">
-            <Form className="bg-ourBlack form-border">
+          <Col lg={4} md={6} sm={12} className="m-auto shadow-sm rounded-lg">
+            <Form className="bg-ourBlack form-border pt-1">
               <Row className="icon-user">
-                <FaUserCircle color={COLORS.carnelian} size={125} />
+                <img
+                  alt="Logo Satori"
+                  src={logo}
+                  className="d-inline-block align-top"
+                />{" "}
               </Row>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <InputGroup>
@@ -108,7 +114,7 @@ export const Login = () => {
               </Form.Group>
 
               <Button
-                className="button-login-r"
+                className="button-login-r mb-2"
                 id="login"
                 variant="success"
                 type="submit"
@@ -116,7 +122,6 @@ export const Login = () => {
               >
                 Iniciar Sesión
               </Button>
-
               <Button
                 className="button-login"
                 variant="outline-primary"

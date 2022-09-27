@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { setContext } from '@apollo/client/link/context';
+import { setContext } from "@apollo/client/link/context";
 import {
   ApolloClient,
   ApolloProvider,
@@ -12,23 +12,26 @@ import {
   createHttpLink,
 } from "@apollo/client";
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,
       authorization: token ? `jwt ${token}` : "",
-    }
-  }
+    },
+  };
 });
 const httpLink = createHttpLink({
   uri: "https://apisatorimma.herokuapp.com/graphql",
 });
+// const httpLink = createHttpLink({
+//   uri: "http://127.0.0.1:8000/graphql",
+// });
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink)
+  link: authLink.concat(httpLink),
 });
-ReactDOM.render(  
-  <ApolloProvider client={client}>    
+ReactDOM.render(
+  <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
   document.getElementById("root")

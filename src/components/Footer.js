@@ -13,11 +13,35 @@ export const Footer = () => {
             <p>
               <b className="text-imperialRed"> CONTACTANOS</b>
               <br /> <br />
-              Diagonal 16D #6E-80 <br />
-              Villa Olímpica, Pasto <br />
-              Nariño - Colombia <br />
-              Celular: (+57) 301 252 4990 <br />
-              roninsatorimma@gmail.com
+              <a
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://goo.gl/maps/jUnkBszRMcDTBz3TA"
+              >
+                Diagonal 16D #6E-80
+                <br />
+                Villa Olímpica, Pasto
+                <br />
+                Nariño - Colombia <br />
+              </a>
+              <a
+                className="footer-link"
+                href="https://wa.me/573012524990"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Celular: (+57) 301 252 4990{" "}
+              </a>
+              <br />
+              <a
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="mailto:roninsatorimma@gmail.com"
+              >
+                roninsatorimma@gmail.com
+              </a>
             </p>
           </Col>
           <Col sm className="mb-4">

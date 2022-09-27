@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../GlobalState";
 
 export const Register = () => {
-  const [mutateFunction, { data, loading, error, reset }] = useMutation(REGISTER);
+  const [mutateFunction, { data, loading, error, reset }] =
+    useMutation(REGISTER);
 
   const [name, changeName] = useState({ field: "", valid: null });
   const [lastName, changeLastName] = useState({ field: "", valid: null });
@@ -22,15 +23,14 @@ export const Register = () => {
   const [password, changePassword] = useState({ field: "", valid: null });
   const [validForm, changeValidForm] = useState(null);
   const expressions = {
-    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos    
+    longText: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.-./.=.?.&.:]{1,254}$/, // Letras, numeros, guion, guion bajo y acentos
     addres: /^[a-zA-ZñÑáéíóúÁÉÍÓÚZ0-9\s_.*+|°,#/-]{4,50}$/, // Letras, números, guion y guion_bajo
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 dígitos al menos una letra y un numero
+    password:
+      /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/, // 8 dígitos al menos una letra y un numero
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     phone: /^\d{7,14}$/, // 7 a 14 números.
   };
-
-
 
   const [user] = useGlobalState("user");
   let navigate = useNavigate();
@@ -41,26 +41,25 @@ export const Register = () => {
   }, []);
 
   if (loading) {
-    
-  };
+  }
 
   if (error) return `Submission error! ${error.message}`;
   function delay(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
+    return new Promise((resolve) => setTimeout(resolve, time));
   }
   if (typeof data != "undefined") {
     // console.log(data);
     if (data.userRegister.success) {
       // console.log("Correcto");
-      toast.success("Revisa tu correo para continuar con el registro")
+      toast.success("Revisa tu correo para continuar con el registro");
       delay(3000).then(() => navigate("/login"));
-
     } else {
-      // console.log(data.userRegister.errors);
-      toast.error(
-        "" +
-        data.userRegister.errors.email[0].message
-      );
+      console.log(data.userRegister.errors);
+      if (data.userRegister.errors.email !== undefined) {
+        toast.error("" + data.userRegister.errors.email[0].message);
+      } else if (data.userRegister.errors.password2 !== undefined) {
+      }
+      toast.error("" + data.userRegister.errors.password2[0].message);
     }
     reset();
   }
@@ -101,8 +100,6 @@ export const Register = () => {
         changeValidForm(false);
       }
     }
-   
-
   };
 
   return (
@@ -120,8 +117,8 @@ export const Register = () => {
           pauseOnHover
         />
         <Row id="data" className="justify-content-md-center">
-          <Col sm={8} className="pt m-auto shadow-sm rounded-lg" id="form">
-            <h3 className="text-center text-imperialRed">
+          <Col sm={8} className="pt-0 m-auto shadow-sm rounded-lg" id="form">
+            <h3 className="text-center text-imperialRed title-red">
               Crea tu cuenta gratis
             </h3>
             <p className="text-white mb-2">
@@ -204,7 +201,9 @@ export const Register = () => {
                   <ErrorMessage>
                     <p className="mb-2">
                       <MdError color="red" />
-                      <b>Error:</b> Por favor rellena el formulario correctamente, recuerda que tú nombre y contraseña deben ser diferentes!
+                      <b>Error:</b> Por favor rellena el formulario
+                      correctamente, recuerda que tú nombre y contraseña deben
+                      ser diferentes!
                     </p>
                   </ErrorMessage>
                 )}
